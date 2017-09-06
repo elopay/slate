@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;curl&quot;,&quot;ruby&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,7 +211,7 @@
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="curl">curl</a>
+              <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="ruby">ruby</a>
         </div>
         <div class="search">
@@ -280,12 +280,85 @@
  ],
 "success_email": {
   "subject_de": "test",
-  "body_de": "&lt;p&gt;Hallo %{first_name} %{last_name},&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;vielen Dank f&amp;uuml;r die Bestellung.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Produktname: %{product_name}&lt;/p&gt;&lt;p&gt;Betrag: %{amount}&lt;/p&gt;&lt;p&gt;Zahlung: %{recurring_type}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Bitte jetzt hier klicken:&lt;/p&gt;&lt;p&gt;%{next_button}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Sch&amp;ouml;ne Gr&amp;uuml;&amp;szlig;e,&lt;/p&gt;",
+  "body_de": "&lt;p&gt;Hallo %{first_name} %{last_name},&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;vielen Dank f&amp;uuml;r die Bestellung.&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;Produktname: %{product_name}&lt;/p&gt;
+              &lt;p&gt;Betrag: %{amount}&lt;/p&gt;
+              &lt;p&gt;Zahlung: %{recurring_type}&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;Bitte jetzt hier klicken:&lt;/p&gt;
+              &lt;p&gt;%{next_button}&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;Sch&amp;ouml;ne Gr&amp;uuml;&amp;szlig;e,&lt;/p&gt;",
   "subject_en": "test",
-  "body_en": "&lt;p&gt;Hello %{first_name} %{last_name},&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;thanks for your order.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Product name: %{product_name}&lt;/p&gt;&lt;p&gt;Amount: %{amount}&lt;/p&gt;&lt;p&gt;Plan: %{recurring_type}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Now click here:&lt;/p&gt;&lt;p&gt;%{next_button}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Best regards,&lt;/p&gt;"
-}
+  "body_en": "&lt;p&gt;Hello %{first_name} %{last_name},&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;thanks for your order.&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;Product name: %{product_name}&lt;/p&gt;
+              &lt;p&gt;Amount: %{amount}&lt;/p&gt;
+              &lt;p&gt;Plan: %{recurring_type}&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;Now click here:&lt;/p&gt;
+              &lt;p&gt;%{next_button}&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;Best regards,&lt;/p&gt;"
+  }
 }'</span>
-</code></pre><pre class="highlight ruby tab-ruby"><code> <span class="no">Ruby</span> <span class="n">code</span> <span class="n">here</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">post</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/payment_links'</span><span class="p">),</span>
+               <span class="p">{</span> <span class="s2">"q"</span> <span class="o">=&gt;</span> <span class="s2">"ruby"</span><span class="p">,</span> <span class="s2">"max"</span> <span class="o">=&gt;</span> <span class="s2">"50"</span><span class="p">,</span>
+                 <span class="p">{</span>
+                  <span class="s2">"key"</span><span class="ss">:"{your API key}"</span><span class="p">,</span>
+                  <span class="s2">"secret"</span><span class="ss">:"{API secret}"</span><span class="p">,</span> 
+                  <span class="s2">"name"</span><span class="ss">:"product name"</span><span class="p">,</span> 
+                  <span class="s2">"success_url"</span><span class="p">:</span> <span class="s2">"{success_url}"</span><span class="p">,</span> 
+                  <span class="s2">"cancel_url"</span><span class="p">:</span> <span class="s2">"{cancel_url}"</span><span class="p">,</span> 
+                  <span class="s2">"error_url"</span><span class="p">:</span> <span class="s2">"{error_url}"</span><span class="p">,</span> 
+                  <span class="s2">"ping_url"</span><span class="p">:</span> <span class="s2">"{ping_url}"</span><span class="p">,</span> 
+                  <span class="s2">"pricing_plans"</span><span class="p">:</span> <span class="p">[</span> 
+                    <span class="p">{</span> 
+                      <span class="s2">"form"</span><span class="p">:</span> <span class="s2">"one_time"</span><span class="p">,</span> 
+                      <span class="s2">"preferences"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"199.9"</span><span class="p">,</span> 
+                        <span class="s2">"old_price"</span><span class="p">:</span> <span class="s2">"200"</span>
+                       <span class="p">}</span>
+                     <span class="p">}</span>
+                   <span class="p">],</span>
+                  <span class="s2">"success_email"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"subject_de"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+                    <span class="s2">"body_de"</span><span class="p">:</span> <span class="s2">"&lt;p&gt;Hallo %{first_name} %{last_name},&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;vielen Dank f&amp;uuml;r die Bestellung.&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;Produktname: %{product_name}&lt;/p&gt;
+                                &lt;p&gt;Betrag: %{amount}&lt;/p&gt;
+                                &lt;p&gt;Zahlung: %{recurring_type}&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;Bitte jetzt hier klicken:&lt;/p&gt;
+                                &lt;p&gt;%{next_button}&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;Sch&amp;ouml;ne Gr&amp;uuml;&amp;szlig;e,&lt;/p&gt;"</span><span class="p">,</span>
+                    <span class="s2">"subject_en"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+                    <span class="s2">"body_en"</span><span class="p">:</span> <span class="s2">"&lt;p&gt;Hello %{first_name} %{last_name},&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;thanks for your order.&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;Product name: %{product_name}&lt;/p&gt;
+                                &lt;p&gt;Amount: %{amount}&lt;/p&gt;
+                                &lt;p&gt;Plan: %{recurring_type}&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;Now click here:&lt;/p&gt;
+                                &lt;p&gt;%{next_button}&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;Best regards,&lt;/p&gt;"</span>
+                    <span class="p">}</span>
+                  <span class="p">}</span> <span class="p">}.</span><span class="nf">to_json</span><span class="p">,</span>
+               <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"application/json"</span>
 </code></pre>
 <p>The elopage API allows to initiative payments and complete payments on its optimized payment interfaces. In order to process payments you first need to create a payment link. With the payment link creation you receive the &#39;url_to_pay&#39; parameter to which you must redirect the payer to complete payment. There after you can redirect the user back to your URL and forward information.</p>
 
@@ -498,7 +571,10 @@
 <p>Example usage:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://elopage.com/api/payment_links/{id}?key={youe API key}&amp;secret={API secret}"</span>
-</code></pre><pre class="highlight ruby tab-ruby"><code> <span class="no">Ruby</span> <span class="n">code</span> <span class="n">here</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/payment_links/{id}?key={youe API key}&amp;secret={API secret}'</span><span class="p">))</span>
 </code></pre><h3 id='get'>GET</h3>
 <p><code>https://elopage.com/api/payment_links/:id</code></p>
 <h3 id='parameter-2'>Parameter</h3>
@@ -650,7 +726,10 @@
 <p>Example usage:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://elopage.com/api/payments/{id}?key={youe API key}&amp;secret={API secret}"</span>
-</code></pre><pre class="highlight ruby tab-ruby"><code> <span class="no">Ruby</span> <span class="n">code</span> <span class="n">here</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/payments/{id}?key={youe API key}&amp;secret={API secret}'</span><span class="p">))</span>
 </code></pre>
 <p>Fetch transfer info by ID</p>
 <h3 id='get-2'>GET</h3>
@@ -1025,7 +1104,7 @@
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="curl">curl</a>
+                <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="ruby">ruby</a>
           </div>
       </div>
