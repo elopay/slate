@@ -2,7 +2,7 @@
 title: API Reference
 
 language_tabs:
-  - curl
+  - shell
   - ruby
 
 search: true
@@ -43,15 +43,88 @@ curl -X POST -H "Content-Type: application/json" "https://elopage.com/api/paymen
  ],
 "success_email": {
   "subject_de": "test",
-  "body_de": "<p>Hallo %{first_name} %{last_name},</p><p><br></p><p>vielen Dank f&uuml;r die Bestellung.</p><p><br></p><p>Produktname: %{product_name}</p><p>Betrag: %{amount}</p><p>Zahlung: %{recurring_type}</p><p><br></p><p>Bitte jetzt hier klicken:</p><p>%{next_button}</p><p><br></p><p>Sch&ouml;ne Gr&uuml;&szlig;e,</p>",
+  "body_de": "<p>Hallo %{first_name} %{last_name},</p>
+              <p><br></p>
+              <p>vielen Dank f&uuml;r die Bestellung.</p>
+              <p><br></p>
+              <p>Produktname: %{product_name}</p>
+              <p>Betrag: %{amount}</p>
+              <p>Zahlung: %{recurring_type}</p>
+              <p><br></p>
+              <p>Bitte jetzt hier klicken:</p>
+              <p>%{next_button}</p>
+              <p><br></p>
+              <p>Sch&ouml;ne Gr&uuml;&szlig;e,</p>",
   "subject_en": "test",
-  "body_en": "<p>Hello %{first_name} %{last_name},</p><p><br></p><p>thanks for your order.</p><p><br></p><p>Product name: %{product_name}</p><p>Amount: %{amount}</p><p>Plan: %{recurring_type}</p><p><br></p><p>Now click here:</p><p>%{next_button}</p><p><br></p><p>Best regards,</p>"
-}
+  "body_en": "<p>Hello %{first_name} %{last_name},</p>
+              <p><br></p>
+              <p>thanks for your order.</p>
+              <p><br></p>
+              <p>Product name: %{product_name}</p>
+              <p>Amount: %{amount}</p>
+              <p>Plan: %{recurring_type}</p>
+              <p><br></p>
+              <p>Now click here:</p>
+              <p>%{next_button}</p>
+              <p><br></p>
+              <p>Best regards,</p>"
+  }
 }'
 ```
 
 ```ruby
- Ruby code here
+require 'net/http'
+require 'uri'
+
+Net::HTTP.post URI('https://elopage.com/api/payment_links'),
+               { "q" => "ruby", "max" => "50",
+                 {
+                  "key":"{your API key}",
+                  "secret":"{API secret}", 
+                  "name":"product name", 
+                  "success_url": "{success_url}", 
+                  "cancel_url": "{cancel_url}", 
+                  "error_url": "{error_url}", 
+                  "ping_url": "{ping_url}", 
+                  "pricing_plans": [ 
+                    { 
+                      "form": "one_time", 
+                      "preferences": {
+                        "price": "199.9", 
+                        "old_price": "200"
+                       }
+                     }
+                   ],
+                  "success_email": {
+                    "subject_de": "test",
+                    "body_de": "<p>Hallo %{first_name} %{last_name},</p>
+                                <p><br></p>
+                                <p>vielen Dank f&uuml;r die Bestellung.</p>
+                                <p><br></p>
+                                <p>Produktname: %{product_name}</p>
+                                <p>Betrag: %{amount}</p>
+                                <p>Zahlung: %{recurring_type}</p>
+                                <p><br></p>
+                                <p>Bitte jetzt hier klicken:</p>
+                                <p>%{next_button}</p>
+                                <p><br></p>
+                                <p>Sch&ouml;ne Gr&uuml;&szlig;e,</p>",
+                    "subject_en": "test",
+                    "body_en": "<p>Hello %{first_name} %{last_name},</p>
+                                <p><br></p>
+                                <p>thanks for your order.</p>
+                                <p><br></p>
+                                <p>Product name: %{product_name}</p>
+                                <p>Amount: %{amount}</p>
+                                <p>Plan: %{recurring_type}</p>
+                                <p><br></p>
+                                <p>Now click here:</p>
+                                <p>%{next_button}</p>
+                                <p><br></p>
+                                <p>Best regards,</p>"
+                    }
+                  } }.to_json,
+               "Content-Type" => "application/json"
 ```
 
 The elopage API allows to initiative payments and complete payments on its optimized payment interfaces. In order to process payments you first need to create a payment link. With the payment link creation you receive the 'url_to_pay' parameter to which you must redirect the payer to complete payment. There after you can redirect the user back to your URL and forward information.
@@ -123,7 +196,10 @@ curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/payment
 ```
 
 ```ruby
- Ruby code here
+require 'net/http'
+require 'uri'
+
+Net::HTTP.get(URI('https://elopage.com/api/payment_links/{id}?key={youe API key}&secret={API secret}'))
 ```
 
 ### GET
@@ -181,7 +257,10 @@ curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/payment
 ```
 
 ```ruby
- Ruby code here
+require 'net/http'
+require 'uri'
+
+Net::HTTP.get(URI('https://elopage.com/api/payments/{id}?key={youe API key}&secret={API secret}'))
 ```
 
 Fetch transfer info by ID
