@@ -4,7 +4,7 @@ title: API Reference
 language_tabs:
   - shell
   - ruby
-
+  - python
 search: true
 ---
 
@@ -23,20 +23,20 @@ Create payment links, get paid, find and search transaction ID / payment IDs and
 > Example usage:
 
 ```shell
-curl -X POST -H "Content-Type: application/json" "https://elopage.com/api/payment_links" 
+curl -X POST -H "Content-Type: application/json" "https://elopage.com/api/payment_links"
 -d '{
 "key":"{your API key}",
-"secret":"{API secret}", 
-"name":"product name", 
-"success_url": "{success_url}", 
-"cancel_url": "{cancel_url}", 
-"error_url": "{error_url}", 
-"ping_url": "{ping_url}", 
-"pricing_plans": [ 
-  { 
-    "form": "one_time", 
+"secret":"{API secret}",
+"name":"product name",
+"success_url": "{success_url}",
+"cancel_url": "{cancel_url}",
+"error_url": "{error_url}",
+"ping_url": "{ping_url}",
+"pricing_plans": [
+  {
+    "form": "one_time",
     "preferences": {
-      "price": "199.9", 
+      "price": "199.9",
       "old_price": "200"
      }
    }
@@ -72,6 +72,63 @@ curl -X POST -H "Content-Type: application/json" "https://elopage.com/api/paymen
 }'
 ```
 
+```python
+require 'net/http'
+require 'uri'
+
+Net::HTTP.post URI('https://elopage.com/api/payment_links'),
+               { "q" => "ruby", "max" => "50",
+                 {
+                  "key":"{your API key}",
+                  "secret":"{API secret}",
+                  "name":"product name",
+                  "success_url": "{success_url}",
+                  "cancel_url": "{cancel_url}",
+                  "error_url": "{error_url}",
+                  "ping_url": "{ping_url}",
+                  "pricing_plans": [
+                    {
+                      "form": "one_time",
+                      "preferences": {
+                        "price": "199.9",
+                        "old_price": "200"
+                       }
+                     }
+                   ],
+                  "success_email": {
+                    "subject_de": "test",
+                    "body_de": "<p>Hallo %{first_name} %{last_name},</p>
+                                <p><br></p>
+                                <p>vielen Dank f&uuml;r die Bestellung.</p>
+                                <p><br></p>
+                                <p>Produktname: %{product_name}</p>
+                                <p>Betrag: %{amount}</p>
+                                <p>Zahlung: %{recurring_type}</p>
+                                <p><br></p>
+                                <p>Bitte jetzt hier klicken:</p>
+                                <p>%{next_button}</p>
+                                <p><br></p>
+                                <p>Sch&ouml;ne Gr&uuml;&szlig;e,</p>",
+                    "subject_en": "test",
+                    "body_en": "<p>Hello %{first_name} %{last_name},</p>
+                                <p><br></p>
+                                <p>thanks for your order.</p>
+                                <p><br></p>
+                                <p>Product name: %{product_name}</p>
+                                <p>Amount: %{amount}</p>
+                                <p>Plan: %{recurring_type}</p>
+                                <p><br></p>
+                                <p>Now click here:</p>
+                                <p>%{next_button}</p>
+                                <p><br></p>
+                                <p>Best regards,</p>"
+                    }
+                  } }.to_json,
+               "Content-Type" => "application/json"
+```
+
+
+
 ```ruby
 require 'net/http'
 require 'uri'
@@ -80,17 +137,17 @@ Net::HTTP.post URI('https://elopage.com/api/payment_links'),
                { "q" => "ruby", "max" => "50",
                  {
                   "key":"{your API key}",
-                  "secret":"{API secret}", 
-                  "name":"product name", 
-                  "success_url": "{success_url}", 
-                  "cancel_url": "{cancel_url}", 
-                  "error_url": "{error_url}", 
-                  "ping_url": "{ping_url}", 
-                  "pricing_plans": [ 
-                    { 
-                      "form": "one_time", 
+                  "secret":"{API secret}",
+                  "name":"product name",
+                  "success_url": "{success_url}",
+                  "cancel_url": "{cancel_url}",
+                  "error_url": "{error_url}",
+                  "ping_url": "{ping_url}",
+                  "pricing_plans": [
+                    {
+                      "form": "one_time",
                       "preferences": {
-                        "price": "199.9", 
+                        "price": "199.9",
                         "old_price": "200"
                        }
                      }
