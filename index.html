@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -213,6 +213,7 @@
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="python">python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -260,20 +261,20 @@
 <blockquote>
 <p>Example usage:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://elopage.com/api/payment_links"</span> 
+<pre class="highlight shell tab-shell"><code>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://elopage.com/api/payment_links"</span>
 -d <span class="s1">'{
 "key":"{your API key}",
-"secret":"{API secret}", 
-"name":"product name", 
-"success_url": "{success_url}", 
-"cancel_url": "{cancel_url}", 
-"error_url": "{error_url}", 
-"ping_url": "{ping_url}", 
-"pricing_plans": [ 
-  { 
-    "form": "one_time", 
+"secret":"{API secret}",
+"name":"product name",
+"success_url": "{success_url}",
+"cancel_url": "{cancel_url}",
+"error_url": "{error_url}",
+"ping_url": "{ping_url}",
+"pricing_plans": [
+  {
+    "form": "one_time",
     "preferences": {
-      "price": "199.9", 
+      "price": "199.9",
       "old_price": "200"
      }
    }
@@ -307,6 +308,58 @@
               &lt;p&gt;Best regards,&lt;/p&gt;"
   }
 }'</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">require</span> <span class="s">'net/http'</span>
+<span class="n">require</span> <span class="s">'uri'</span>
+
+<span class="n">Net</span><span class="p">::</span><span class="n">HTTP</span><span class="o">.</span><span class="n">post</span> <span class="n">URI</span><span class="p">(</span><span class="s">'https://elopage.com/api/payment_links'</span><span class="p">),</span>
+               <span class="p">{</span> <span class="s">"q"</span> <span class="o">=&gt;</span> <span class="s">"ruby"</span><span class="p">,</span> <span class="s">"max"</span> <span class="o">=&gt;</span> <span class="s">"50"</span><span class="p">,</span>
+                 <span class="p">{</span>
+                  <span class="s">"key"</span><span class="p">:</span><span class="s">"{your API key}"</span><span class="p">,</span>
+                  <span class="s">"secret"</span><span class="p">:</span><span class="s">"{API secret}"</span><span class="p">,</span>
+                  <span class="s">"name"</span><span class="p">:</span><span class="s">"product name"</span><span class="p">,</span>
+                  <span class="s">"success_url"</span><span class="p">:</span> <span class="s">"{success_url}"</span><span class="p">,</span>
+                  <span class="s">"cancel_url"</span><span class="p">:</span> <span class="s">"{cancel_url}"</span><span class="p">,</span>
+                  <span class="s">"error_url"</span><span class="p">:</span> <span class="s">"{error_url}"</span><span class="p">,</span>
+                  <span class="s">"ping_url"</span><span class="p">:</span> <span class="s">"{ping_url}"</span><span class="p">,</span>
+                  <span class="s">"pricing_plans"</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                      <span class="s">"form"</span><span class="p">:</span> <span class="s">"one_time"</span><span class="p">,</span>
+                      <span class="s">"preferences"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s">"price"</span><span class="p">:</span> <span class="s">"199.9"</span><span class="p">,</span>
+                        <span class="s">"old_price"</span><span class="p">:</span> <span class="s">"200"</span>
+                       <span class="p">}</span>
+                     <span class="p">}</span>
+                   <span class="p">],</span>
+                  <span class="s">"success_email"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s">"subject_de"</span><span class="p">:</span> <span class="s">"test"</span><span class="p">,</span>
+                    <span class="s">"body_de"</span><span class="p">:</span> <span class="s">"&lt;p&gt;Hallo </span><span class="si">%</span><span class="s">{first_name} </span><span class="si">%</span><span class="s">{last_name},&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;vielen Dank f&amp;uuml;r die Bestellung.&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;Produktname: </span><span class="si">%</span><span class="s">{product_name}&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;Betrag: </span><span class="si">%</span><span class="s">{amount}&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;Zahlung: </span><span class="si">%</span><span class="s">{recurring_type}&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;Bitte jetzt hier klicken:&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;</span><span class="si">%</span><span class="s">{next_button}&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;Sch&amp;ouml;ne Gr&amp;uuml;&amp;szlig;e,&lt;/p&gt;"</span><span class="p">,</span>
+                    <span class="s">"subject_en"</span><span class="p">:</span> <span class="s">"test"</span><span class="p">,</span>
+                    <span class="s">"body_en"</span><span class="p">:</span> <span class="s">"&lt;p&gt;Hello </span><span class="si">%</span><span class="s">{first_name} </span><span class="si">%</span><span class="s">{last_name},&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;thanks for your order.&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;Product name: </span><span class="si">%</span><span class="s">{product_name}&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;Amount: </span><span class="si">%</span><span class="s">{amount}&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;Plan: </span><span class="si">%</span><span class="s">{recurring_type}&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;Now click here:&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;</span><span class="si">%</span><span class="s">{next_button}&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="err">
+</span><span class="s">                                &lt;p&gt;Best regards,&lt;/p&gt;"</span>
+                    <span class="p">}</span>
+                  <span class="p">}</span> <span class="p">}</span><span class="o">.</span><span class="n">to_json</span><span class="p">,</span>
+               <span class="s">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s">"application/json"</span>
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
 <span class="nb">require</span> <span class="s1">'uri'</span>
 
@@ -314,17 +367,17 @@
                <span class="p">{</span> <span class="s2">"q"</span> <span class="o">=&gt;</span> <span class="s2">"ruby"</span><span class="p">,</span> <span class="s2">"max"</span> <span class="o">=&gt;</span> <span class="s2">"50"</span><span class="p">,</span>
                  <span class="p">{</span>
                   <span class="s2">"key"</span><span class="ss">:"{your API key}"</span><span class="p">,</span>
-                  <span class="s2">"secret"</span><span class="ss">:"{API secret}"</span><span class="p">,</span> 
-                  <span class="s2">"name"</span><span class="ss">:"product name"</span><span class="p">,</span> 
-                  <span class="s2">"success_url"</span><span class="p">:</span> <span class="s2">"{success_url}"</span><span class="p">,</span> 
-                  <span class="s2">"cancel_url"</span><span class="p">:</span> <span class="s2">"{cancel_url}"</span><span class="p">,</span> 
-                  <span class="s2">"error_url"</span><span class="p">:</span> <span class="s2">"{error_url}"</span><span class="p">,</span> 
-                  <span class="s2">"ping_url"</span><span class="p">:</span> <span class="s2">"{ping_url}"</span><span class="p">,</span> 
-                  <span class="s2">"pricing_plans"</span><span class="p">:</span> <span class="p">[</span> 
-                    <span class="p">{</span> 
-                      <span class="s2">"form"</span><span class="p">:</span> <span class="s2">"one_time"</span><span class="p">,</span> 
+                  <span class="s2">"secret"</span><span class="ss">:"{API secret}"</span><span class="p">,</span>
+                  <span class="s2">"name"</span><span class="ss">:"product name"</span><span class="p">,</span>
+                  <span class="s2">"success_url"</span><span class="p">:</span> <span class="s2">"{success_url}"</span><span class="p">,</span>
+                  <span class="s2">"cancel_url"</span><span class="p">:</span> <span class="s2">"{cancel_url}"</span><span class="p">,</span>
+                  <span class="s2">"error_url"</span><span class="p">:</span> <span class="s2">"{error_url}"</span><span class="p">,</span>
+                  <span class="s2">"ping_url"</span><span class="p">:</span> <span class="s2">"{ping_url}"</span><span class="p">,</span>
+                  <span class="s2">"pricing_plans"</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                      <span class="s2">"form"</span><span class="p">:</span> <span class="s2">"one_time"</span><span class="p">,</span>
                       <span class="s2">"preferences"</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"199.9"</span><span class="p">,</span> 
+                        <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"199.9"</span><span class="p">,</span>
                         <span class="s2">"old_price"</span><span class="p">:</span> <span class="s2">"200"</span>
                        <span class="p">}</span>
                      <span class="p">}</span>
@@ -1106,6 +1159,7 @@
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="ruby">ruby</a>
+                <a href="#" data-language-name="python">python</a>
           </div>
       </div>
     </div>
