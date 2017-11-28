@@ -23,20 +23,20 @@ Create payment links, get paid, find and search transaction ID / payment IDs and
 > Example usage:
 
 ```shell
-curl -X POST -H "Content-Type: application/json" "https://elopage.com/api/payment_links" 
+curl -X POST -H "Content-Type: application/json" "https://elopage.com/api/payment_links"
 -d '{
 "key":"{your API key}",
-"secret":"{API secret}", 
-"name":"product name", 
-"success_url": "{success_url}", 
-"cancel_url": "{cancel_url}", 
-"error_url": "{error_url}", 
-"ping_url": "{ping_url}", 
-"pricing_plans": [ 
-  { 
-    "form": "one_time", 
+"secret":"{API secret}",
+"name":"product name",
+"success_url": "{success_url}",
+"cancel_url": "{cancel_url}",
+"error_url": "{error_url}",
+"ping_url": "{ping_url}",
+"pricing_plans": [
+  {
+    "form": "one_time",
     "preferences": {
-      "price": "199.9", 
+      "price": "199.9",
       "old_price": "200"
      }
    }
@@ -80,17 +80,17 @@ Net::HTTP.post URI('https://elopage.com/api/payment_links'),
                { "q" => "ruby", "max" => "50",
                  {
                   "key":"{your API key}",
-                  "secret":"{API secret}", 
-                  "name":"product name", 
-                  "success_url": "{success_url}", 
-                  "cancel_url": "{cancel_url}", 
-                  "error_url": "{error_url}", 
-                  "ping_url": "{ping_url}", 
-                  "pricing_plans": [ 
-                    { 
-                      "form": "one_time", 
+                  "secret":"{API secret}",
+                  "name":"product name",
+                  "success_url": "{success_url}",
+                  "cancel_url": "{cancel_url}",
+                  "error_url": "{error_url}",
+                  "ping_url": "{ping_url}",
+                  "pricing_plans": [
+                    {
+                      "form": "one_time",
                       "preferences": {
-                        "price": "199.9", 
+                        "price": "199.9",
                         "old_price": "200"
                        }
                      }
