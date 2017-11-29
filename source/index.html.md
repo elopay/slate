@@ -2,7 +2,7 @@
 title: API Reference
 
 language_tabs:
-  - shell
+  - curl
   - ruby
 
 search: true
@@ -14,16 +14,16 @@ Process payments easily with the elopage API and collect amounts in your account
 
 # Get started now
 
-Create payment links, get paid, find and search transaction ID / payment IDs and more is following. For questions please contact support@elopage.com.
+Create sales pages, get paid, find and search transaction ID / payment IDs and more is following. For questions please contact support@elopage.com.
 
-# PaymentLinks
+# SalesPages
 
-## Create payment link
+## Create sales page
 
 > Example usage:
 
-```shell
-curl -X POST -H "Content-Type: application/json" "https://elopage.com/api/payment_links"
+```curl
+curl -X POST -H "Content-Type: application/json" "https://elopage.com/api/sales_pages"
 -d '{
 "key":"{your API key}",
 "secret":"{API secret}",
@@ -76,7 +76,7 @@ curl -X POST -H "Content-Type: application/json" "https://elopage.com/api/paymen
 require 'net/http'
 require 'uri'
 
-Net::HTTP.post URI('https://elopage.com/api/payment_links'),
+Net::HTTP.post URI('https://elopage.com/api/sales_pages'),
                { "q" => "ruby", "max" => "50",
                  {
                   "key":"{your API key}",
@@ -133,7 +133,7 @@ The elopage API allows to initiative payments and complete payments on its optim
 
 ### POST
 
-`https://elopage.com/api/payment_links`
+`https://elopage.com/api/sales_pages`
 
 ### Parameter
 
@@ -191,20 +191,20 @@ Fetch payment link info by payment link ID
 
 > Example usage:
 
-```shell
-curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/payment_links/{id}?key={youe API key}&secret={API secret}"
+```curl
+curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/sales_pages/{id}?key={your API key}&secret={API secret}"
 ```
 
 ```ruby
 require 'net/http'
 require 'uri'
 
-Net::HTTP.get(URI('https://elopage.com/api/payment_links/{id}?key={youe API key}&secret={API secret}'))
+Net::HTTP.get(URI('https://elopage.com/api/sales_pages/{id}?key={your API key}&secret={API secret}'))
 ```
 
 ### GET
 
-`https://elopage.com/api/payment_links/:id`
+`https://elopage.com/api/sales_pages/:id`
 
 
 ### Parameter
@@ -252,15 +252,15 @@ UserNotFound | The key of the User was not found.
 
 > Example usage:
 
-```shell
-curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/payments/{id}?key={youe API key}&secret={API secret}"
+```curl
+curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/payments/{id}?key={your API key}&secret={API secret}"
 ```
 
 ```ruby
 require 'net/http'
 require 'uri'
 
-Net::HTTP.get(URI('https://elopage.com/api/payments/{id}?key={youe API key}&secret={API secret}'))
+Net::HTTP.get(URI('https://elopage.com/api/payments/{id}?key={your API key}&secret={API secret}'))
 ```
 
 Fetch transfer info by ID
