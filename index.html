@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;]">
+  <body class="index" data-languages="[&quot;curl&quot;,&quot;ruby&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,7 +211,7 @@
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="curl">curl</a>
               <a href="#" data-language-name="ruby">ruby</a>
         </div>
         <div class="search">
@@ -226,10 +226,10 @@
             <a href="#get-started-now" class="toc-h1 toc-link" data-title="Get started now">Get started now</a>
           </li>
           <li>
-            <a href="#paymentlinks" class="toc-h1 toc-link" data-title="PaymentLinks">PaymentLinks</a>
+            <a href="#salespages" class="toc-h1 toc-link" data-title="SalesPages">SalesPages</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#create-payment-link" class="toc-h2 toc-link" data-title="Create payment link">Create payment link</a>
+                    <a href="#create-sales-page" class="toc-h2 toc-link" data-title="Create sales page">Create sales page</a>
                   </li>
                   <li>
                     <a href="#get-payment-link-info" class="toc-h2 toc-link" data-title="Get payment link info">Get payment link info</a>
@@ -255,13 +255,13 @@
         <h1 id='elopage-api-beta'>elopage API (beta)</h1>
 <p>Process payments easily with the elopage API and collect amounts in your account - payouts only via dashboard</p>
 <h1 id='get-started-now'>Get started now</h1>
-<p>Create payment links, get paid, find and search transaction ID / payment IDs and more is following. For questions please contact support@elopage.com.</p>
-<h1 id='paymentlinks'>PaymentLinks</h1><h2 id='create-payment-link'>Create payment link</h2>
+<p>Create sales pages, get paid, find and search transaction ID / payment IDs and more is following. For questions please contact support@elopage.com.</p>
+<h1 id='salespages'>SalesPages</h1><h2 id='create-sales-page'>Create sales page</h2>
 <blockquote>
 <p>Example usage:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://elopage.com/api/payment_links"</span>
--d <span class="s1">'{
+<pre class="highlight plaintext"><code>curl -X POST -H "Content-Type: application/json" "https://elopage.com/api/sales_pages"
+-d '{
 "key":"{your API key}",
 "secret":"{API secret}",
 "name":"product name",
@@ -306,11 +306,11 @@
               &lt;p&gt;&lt;br&gt;&lt;/p&gt;
               &lt;p&gt;Best regards,&lt;/p&gt;"
   }
-}'</span>
+}'
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
 <span class="nb">require</span> <span class="s1">'uri'</span>
 
-<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">post</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/payment_links'</span><span class="p">),</span>
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">post</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/sales_pages'</span><span class="p">),</span>
                <span class="p">{</span> <span class="s2">"q"</span> <span class="o">=&gt;</span> <span class="s2">"ruby"</span><span class="p">,</span> <span class="s2">"max"</span> <span class="o">=&gt;</span> <span class="s2">"50"</span><span class="p">,</span>
                  <span class="p">{</span>
                   <span class="s2">"key"</span><span class="ss">:"{your API key}"</span><span class="p">,</span>
@@ -364,7 +364,7 @@
 
 <aside class="warning">WARNING: please do not use this payment_link as created product - you can create payment_link for only one payment, and after the payment it won't be avaliable</aside>
 <h3 id='post'>POST</h3>
-<p><code>https://elopage.com/api/payment_links</code></p>
+<p><code>https://elopage.com/api/sales_pages</code></p>
 <h3 id='parameter'>Parameter</h3>
 <table><thead>
 <tr>
@@ -570,13 +570,13 @@
 <blockquote>
 <p>Example usage:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://elopage.com/api/payment_links/{id}?key={youe API key}&amp;secret={API secret}"</span>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/sales_pages/{id}?key={your API key}&amp;secret={API secret}"
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
 <span class="nb">require</span> <span class="s1">'uri'</span>
 
-<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/payment_links/{id}?key={youe API key}&amp;secret={API secret}'</span><span class="p">))</span>
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/sales_pages/{id}?key={your API key}&amp;secret={API secret}'</span><span class="p">))</span>
 </code></pre><h3 id='get'>GET</h3>
-<p><code>https://elopage.com/api/payment_links/:id</code></p>
+<p><code>https://elopage.com/api/sales_pages/:id</code></p>
 <h3 id='parameter-2'>Parameter</h3>
 <table><thead>
 <tr>
@@ -725,11 +725,11 @@
 <blockquote>
 <p>Example usage:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://elopage.com/api/payments/{id}?key={youe API key}&amp;secret={API secret}"</span>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/payments/{id}?key={your API key}&amp;secret={API secret}"
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
 <span class="nb">require</span> <span class="s1">'uri'</span>
 
-<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/payments/{id}?key={youe API key}&amp;secret={API secret}'</span><span class="p">))</span>
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/payments/{id}?key={your API key}&amp;secret={API secret}'</span><span class="p">))</span>
 </code></pre>
 <p>Fetch transfer info by ID</p>
 <h3 id='get-2'>GET</h3>
@@ -1104,7 +1104,7 @@
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="curl">curl</a>
                 <a href="#" data-language-name="ruby">ruby</a>
           </div>
       </div>
