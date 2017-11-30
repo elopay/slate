@@ -1,0 +1,95 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/lord/img/master/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
+  <br>
+  <a href="https://travis-ci.org/lord/slate"><img src="https://travis-ci.org/lord/slate.svg?branch=master" alt="Build Status"></a>
+</p>
+
+<p align="center">Slate helps you create beautiful, intelligent, responsive API documentation.</p>
+
+<p align="center"><img src="https://raw.githubusercontent.com/lord/img/master/screenshot-slate.png" width=700 alt="Screenshot of Example Documentation created with Slate"></p>
+
+<p align="center"><em>The example above was created with Slate. Check it out at <a href="https://lord.github.io/slate">lord.github.io/slate</a>.</em></p>
+<h2 id='features'>Features</h2>
+<ul>
+<li><p><strong>Clean, intuitive design</strong> — With Slate, the description of your API is on the left side of your documentation, and all the code examples are on the right side. Inspired by <a href="https://stripe.com/docs/api">Stripe&#39;s</a> and <a href="https://developer.paypal.com/webapps/developer/docs/api/">PayPal&#39;s</a> API docs. Slate is responsive, so it looks great on tablets, phones, and even in print.</p></li>
+<li><p><strong>Everything on a single page</strong> — Gone are the days when your users had to search through a million pages to find what they wanted. Slate puts the entire documentation on a single page. We haven&#39;t sacrificed linkability, though. As you scroll, your browser&#39;s hash will update to the nearest header, so linking to a particular point in the documentation is still natural and easy.</p></li>
+<li><p><strong>Slate is just Markdown</strong> — When you write docs with Slate, you&#39;re just writing Markdown, which makes it simple to edit and understand. Everything is written in Markdown — even the code samples are just Markdown code blocks.</p></li>
+<li><p><strong>Write code samples in multiple languages</strong> — If your API has bindings in multiple programming languages, you can easily put in tabs to switch between them. In your document, you&#39;ll distinguish different languages by specifying the language name at the top of each code block, just like with GitHub Flavored Markdown.</p></li>
+<li><p><strong>Out-of-the-box syntax highlighting</strong> for <a href="https://github.com/jneen/rouge/wiki/List-of-supported-languages-and-lexers">over 100 languages</a>, no configuration required.</p></li>
+<li><p><strong>Automatic, smoothly scrolling table of contents</strong> on the far left of the page. As you scroll, it displays your current position in the document. It&#39;s fast, too. We&#39;re using Slate at TripIt to build documentation for our new API, where our table of contents has over 180 entries. We&#39;ve made sure that the performance remains excellent, even for larger documents.</p></li>
+<li><p><strong>Let your users update your documentation for you</strong> — By default, your Slate-generated documentation is hosted in a public GitHub repository. Not only does this mean you get free hosting for your docs with GitHub Pages, but it also makes it simple for other developers to make pull requests to your docs if they find typos or other problems. Of course, if you don&#39;t want to use ], you&#39;re also welcome to host your docs elsewhere.</p></li>
+<li><p><strong>RTL Support</strong> Full right-to-left layout for RTL languages such as Arabic, Persian (Farsi), Hebrew etc.</p></li>
+</ul>
+
+<p>Getting started with Slate is super easy! Simply fork this repository and follow the instructions below. Or, if you&#39;d like to check out what Slate is capable of, take a look at the <a href="http://lord.github.io/slate">sample docs</a>.</p>
+<h2 id='getting-started-with-slate'>Getting Started with Slate</h2><h3 id='prerequisites'>Prerequisites</h3>
+<p>You&#39;re going to need:</p>
+
+<ul>
+<li><strong>Linux or OS X</strong> — Windows may work, but is unsupported.</li>
+<li><strong>Ruby, version 2.3.1 or newer</strong></li>
+<li><strong>Bundler</strong> — If Ruby is already installed, but the <code>bundle</code> command doesn&#39;t work, just run <code>gem install bundler</code> in a terminal.</li>
+</ul>
+<h3 id='getting-set-up'>Getting Set Up</h3>
+<ol>
+<li>Fork this repository on GitHub.</li>
+<li>Clone <em>your forked repository</em> (not our original one) to your hard drive with <code>git clone https://github.com/YOURUSERNAME/slate.git</code></li>
+<li><code>cd slate</code></li>
+<li>Initialize and start Slate. You can either do this locally, or with Vagrant:</li>
+</ol>
+<pre class="highlight shell tab-shell"><code><span class="c"># either run this to run locally</span>
+bundle install
+bundle <span class="nb">exec </span>middleman server
+
+<span class="c"># OR run this to run with vagrant</span>
+vagrant up
+</code></pre>
+<p>You can now see the docs at http://localhost:4567. Whoa! That was fast!</p>
+
+<p>Now that Slate is all set up on your machine, you&#39;ll probably want to learn more about <a href="https://github.com/lord/slate/wiki/Markdown-Syntax">editing Slate markdown</a>, or <a href="https://github.com/lord/slate/wiki/Deploying-Slate">how to publish your docs</a>.</p>
+
+<p>If you&#39;d prefer to use Docker, instructions are available <a href="https://github.com/lord/slate/wiki/Docker">in the wiki</a>.</p>
+<h3 id='note-on-javascript-runtime'>Note on JavaScript Runtime</h3>
+<p>For those who don&#39;t have JavaScript runtime or are experiencing JavaScript runtime issues with ExecJS, it is recommended to add the <a href="https://github.com/cowboyd/therubyracer">rubyracer gem</a> to your gemfile and run <code>bundle</code> again.</p>
+<h2 id='companies-using-slate'>Companies Using Slate</h2>
+<ul>
+<li><a href="https://api.nasa.gov">NASA</a></li>
+<li><a href="https://docs.cloudant.com/api.html">IBM</a></li>
+<li><a href="http://developers.cimediacloud.com">Sony</a></li>
+<li><a href="https://bestbuyapis.github.io/api-documentation/">Best Buy</a></li>
+<li><a href="https://docs.travis-ci.com/api/">Travis-CI</a></li>
+<li><a href="https://developers.greenhouse.io/harvest.html">Greenhouse</a></li>
+<li><a href="http://woocommerce.github.io/woocommerce-rest-api-docs/">Woocommerce</a></li>
+<li><a href="http://appium.io/slate/en/master">Appium</a></li>
+<li><a href="https://docs.dwolla.com/">Dwolla</a></li>
+<li><a href="https://clearbit.com/docs">Clearbit</a></li>
+<li><a href="https://developers.coinbase.com/api">Coinbase</a></li>
+<li><a href="http://developer.parrot.com/docs/bebop/">Parrot Drones</a></li>
+<li><a href="http://docs.fidor.de/">Fidor Bank</a></li>
+<li><a href="https://docs.scaleapi.com/">Scale</a></li>
+</ul>
+
+<p>You can view more in <a href="https://github.com/lord/slate/wiki/Slate-in-the-Wild">the list on the wiki</a>.</p>
+<h2 id='need-help-found-a-bug'>Need Help? Found a bug?</h2>
+<p><a href="https://github.com/lord/slate/issues">Submit an issue</a> to the Slate GitHub if you need any help. And, of course, feel free to submit pull requests with bug fixes or changes.</p>
+<h2 id='contributors'>Contributors</h2>
+<p>Slate was built by <a href="https://lord.io">Robert Lord</a> while interning at <a href="https://www.tripit.com/">TripIt</a>.</p>
+
+<p>Thanks to the following people who have submitted major pull requests:</p>
+
+<ul>
+<li><a href="https://github.com/chrissrogers">@chrissrogers</a></li>
+<li><a href="https://github.com/bootstraponline">@bootstraponline</a></li>
+<li><a href="https://github.com/realityking">@realityking</a></li>
+<li><a href="https://github.com/cvkef">@cvkef</a></li>
+</ul>
+
+<p>Also, thanks to <a href="http://saucelabs.com">Sauce Labs</a> for sponsoring the development of the responsive styles.</p>
+<h2 id='special-thanks'>Special Thanks</h2>
+<ul>
+<li><a href="https://github.com/middleman/middleman">Middleman</a></li>
+<li><a href="https://github.com/gfranko/jquery.tocify.js">jquery.tocify.js</a></li>
+<li><a href="https://github.com/middleman/middleman-syntax">middleman-syntax</a></li>
+<li><a href="https://github.com/edgecase/middleman-gh-pages">middleman-gh-pages</a></li>
+<li><a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a></li>
+</ul>
