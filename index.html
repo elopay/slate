@@ -1,0 +1,1113 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+    <link href="images/favicon.ico" rel="icon" type="image/ico" />
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;curl&quot;,&quot;ruby&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="curl">curl</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc" class="toc-list-h1">
+          <li>
+            <a href="#elopage-api-beta" class="toc-h1 toc-link" data-title="elopage API (beta)">elopage API (beta)</a>
+          </li>
+          <li>
+            <a href="#get-started-now" class="toc-h1 toc-link" data-title="Get started now">Get started now</a>
+          </li>
+          <li>
+            <a href="#salespages" class="toc-h1 toc-link" data-title="SalesPages">SalesPages</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-sales-page" class="toc-h2 toc-link" data-title="Create sales page">Create sales page</a>
+                  </li>
+                  <li>
+                    <a href="#get-payment-link-info" class="toc-h2 toc-link" data-title="Get payment link info">Get payment link info</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#payments" class="toc-h1 toc-link" data-title="Payments">Payments</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-payment-info" class="toc-h2 toc-link" data-title="Get payment info">Get payment info</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#thanks-for-using-the-elopage-api" class="toc-h1 toc-link" data-title="Thanks for using the elopage API!">Thanks for using the elopage API!</a>
+          </li>
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='elopage-api-beta'>elopage API (beta)</h1>
+<p>Process payments easily with the elopage API and collect amounts in your account - payouts only via dashboard</p>
+<h1 id='get-started-now'>Get started now</h1>
+<p>Create sales pages, get paid, find and search transaction ID / payment IDs and more is following. For questions please contact support@elopage.com.</p>
+<h1 id='salespages'>SalesPages</h1><h2 id='create-sales-page'>Create sales page</h2>
+<blockquote>
+<p>Example usage:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl -X POST -H "Content-Type: application/json" "https://elopage.com/api/sales_pages"
+-d '{
+"key":"{your API key}",
+"secret":"{API secret}",
+"name":"product name",
+"success_url": "{success_url}",
+"cancel_url": "{cancel_url}",
+"error_url": "{error_url}",
+"ping_url": "{ping_url}",
+"pricing_plans": [
+  {
+    "form": "one_time",
+    "preferences": {
+      "price": "199.9",
+      "old_price": "200"
+     }
+   }
+ ],
+"success_email": {
+  "subject_de": "test",
+  "body_de": "&lt;p&gt;Hallo %{first_name} %{last_name},&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;vielen Dank f&amp;uuml;r die Bestellung.&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;Produktname: %{product_name}&lt;/p&gt;
+              &lt;p&gt;Betrag: %{amount}&lt;/p&gt;
+              &lt;p&gt;Zahlung: %{recurring_type}&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;Bitte jetzt hier klicken:&lt;/p&gt;
+              &lt;p&gt;%{next_button}&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;Sch&amp;ouml;ne Gr&amp;uuml;&amp;szlig;e,&lt;/p&gt;",
+  "subject_en": "test",
+  "body_en": "&lt;p&gt;Hello %{first_name} %{last_name},&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;thanks for your order.&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;Product name: %{product_name}&lt;/p&gt;
+              &lt;p&gt;Amount: %{amount}&lt;/p&gt;
+              &lt;p&gt;Plan: %{recurring_type}&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;Now click here:&lt;/p&gt;
+              &lt;p&gt;%{next_button}&lt;/p&gt;
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+              &lt;p&gt;Best regards,&lt;/p&gt;"
+  }
+}'
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">post</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/sales_pages'</span><span class="p">),</span>
+               <span class="p">{</span> <span class="s2">"q"</span> <span class="o">=&gt;</span> <span class="s2">"ruby"</span><span class="p">,</span> <span class="s2">"max"</span> <span class="o">=&gt;</span> <span class="s2">"50"</span><span class="p">,</span>
+                 <span class="p">{</span>
+                  <span class="s2">"key"</span><span class="ss">:"{your API key}"</span><span class="p">,</span>
+                  <span class="s2">"secret"</span><span class="ss">:"{API secret}"</span><span class="p">,</span>
+                  <span class="s2">"name"</span><span class="ss">:"product name"</span><span class="p">,</span>
+                  <span class="s2">"success_url"</span><span class="p">:</span> <span class="s2">"{success_url}"</span><span class="p">,</span>
+                  <span class="s2">"cancel_url"</span><span class="p">:</span> <span class="s2">"{cancel_url}"</span><span class="p">,</span>
+                  <span class="s2">"error_url"</span><span class="p">:</span> <span class="s2">"{error_url}"</span><span class="p">,</span>
+                  <span class="s2">"ping_url"</span><span class="p">:</span> <span class="s2">"{ping_url}"</span><span class="p">,</span>
+                  <span class="s2">"pricing_plans"</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                      <span class="s2">"form"</span><span class="p">:</span> <span class="s2">"one_time"</span><span class="p">,</span>
+                      <span class="s2">"preferences"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"199.9"</span><span class="p">,</span>
+                        <span class="s2">"old_price"</span><span class="p">:</span> <span class="s2">"200"</span>
+                       <span class="p">}</span>
+                     <span class="p">}</span>
+                   <span class="p">],</span>
+                  <span class="s2">"success_email"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"subject_de"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+                    <span class="s2">"body_de"</span><span class="p">:</span> <span class="s2">"&lt;p&gt;Hallo %{first_name} %{last_name},&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;vielen Dank f&amp;uuml;r die Bestellung.&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;Produktname: %{product_name}&lt;/p&gt;
+                                &lt;p&gt;Betrag: %{amount}&lt;/p&gt;
+                                &lt;p&gt;Zahlung: %{recurring_type}&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;Bitte jetzt hier klicken:&lt;/p&gt;
+                                &lt;p&gt;%{next_button}&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;Sch&amp;ouml;ne Gr&amp;uuml;&amp;szlig;e,&lt;/p&gt;"</span><span class="p">,</span>
+                    <span class="s2">"subject_en"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+                    <span class="s2">"body_en"</span><span class="p">:</span> <span class="s2">"&lt;p&gt;Hello %{first_name} %{last_name},&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;thanks for your order.&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;Product name: %{product_name}&lt;/p&gt;
+                                &lt;p&gt;Amount: %{amount}&lt;/p&gt;
+                                &lt;p&gt;Plan: %{recurring_type}&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;Now click here:&lt;/p&gt;
+                                &lt;p&gt;%{next_button}&lt;/p&gt;
+                                &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                &lt;p&gt;Best regards,&lt;/p&gt;"</span>
+                    <span class="p">}</span>
+                  <span class="p">}</span> <span class="p">}.</span><span class="nf">to_json</span><span class="p">,</span>
+               <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"application/json"</span>
+</code></pre>
+<p>The elopage API allows to initiative payments and complete payments on its optimized payment interfaces. In order to process payments you first need to create a payment link. With the payment link creation you receive the &#39;url_to_pay&#39; parameter to which you must redirect the payer to complete payment. There after you can redirect the user back to your URL and forward information.</p>
+
+<aside class="warning">WARNING: please do not use this payment_link as created product - you can create payment_link for only one payment, and after the payment it won't be avaliable</aside>
+<h3 id='post'>POST</h3>
+<p><code>https://elopage.com/api/sales_pages</code></p>
+<h3 id='parameter'>Parameter</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>secret</td>
+<td>String</td>
+<td>elopage API secret which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Your personal elopage API key which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>What is the payer paying for? Name the payment by entering a product name, plan name or similar. This name will be visible to your payer during the checkout process.</td>
+</tr>
+<tr>
+<td>success_url</td>
+<td>String</td>
+<td>URL to which the payer or payer will be redirected after successfully completing payment. Attention: Payments with some payment methods require time to process. Due to this reason you must attach parameters to the redirection URLs to fetch updates of payment IDs. First is Payment ID <code>payment_id</code> which you can you fetch in order to receive the payment status <code>/api/payments/:id</code>.</td>
+</tr>
+<tr>
+<td>cancel_url</td>
+<td>String</td>
+<td>URL to which payer is redirected to in case payment process was cancelled by payer.</td>
+</tr>
+<tr>
+<td>error_url</td>
+<td>String</td>
+<td>URL to which payer is redirected in case of errors during payment process (e.g. Bad credit card info, rejected by pop etc.)</td>
+</tr>
+<tr>
+<td>ping_url</td>
+<td>String</td>
+<td>elopage API sends POST request to this URL if payment for payment of product/name once it changes status to successful (e.g. bank wire updates). Also we will add transation id and payment id to POST request.</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Decimal</td>
+<td>Will be deprecated after 01.01.2018 use pricing_plans instead</td>
+</tr>
+<tr>
+<td>recurring_prices</td>
+<td>Object</td>
+<td>Will be deprecated after 01.01.2018 including all its subparams - use pricing_plans instead</td>
+</tr>
+<tr>
+<td>pricing_plans</td>
+<td>Array</td>
+<td>Array of objects which represents pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plans: <code>[{ &quot;form&quot;: &quot;one_time&quot;, &quot;preferences&quot;: { &quot;price&quot;: &quot;199.9&quot;, &quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plans: <code>[{ &quot;form&quot;: &quot;subscription&quot;, &quot;preferences&quot;: { &quot;first_interval&quot;: &quot;1w&quot;, &quot;first_amount&quot;: &quot;20.0&quot;, &quot;next_interval&quot;: &quot;1m&quot;, &quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;splited&#39; example (installment) pricing_plans: <code>[{ &quot;form&quot;: &quot;splited&quot;, &quot;preferences&quot;: { &quot;payments_count&quot;: &quot;5&quot;, &quot;first_interval&quot;: &quot;1w&quot;, &quot;first_amount&quot;: &quot;20.0&quot;, &quot;next_interval&quot;: &quot;1m&quot;, &quot;next_amount&quot;: &quot;10.0&quot;, &quot;spliting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;splited&#39; example (limited_subscription) pricing_plans: <code>[{ &quot;form&quot;: &quot;splited&quot;, &quot;preferences&quot;: { &quot;payments_count&quot;: &quot;5&quot;, &quot;first_interval&quot;: &quot;1w&quot;, &quot;first_amount&quot;: &quot;20.0&quot;, &quot;next_interval&quot;: &quot;1m&quot;, &quot;next_amount&quot;: &quot;10.0&quot;, &quot;spliting_type&quot;: &quot;limited_subscription&quot; } }]</code></td>
+</tr>
+<tr>
+<td>form</td>
+<td>String</td>
+<td>Allowed values: <code>&quot;one_time&quot;</code>, <code>&quot;subscription&quot;</code>, <code>&quot;splited&quot;</code></td>
+</tr>
+<tr>
+<td>preferences</td>
+<td>Object</td>
+<td>preferences object is differs for pricing forms</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; price</td>
+<td>Decimal</td>
+<td>price by current pricing plan (only for one_time pricing plan)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; old_price</td>
+<td>Decimal</td>
+<td>old product price (only for one_time pricing plan)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; payments_count</td>
+<td>Integer</td>
+<td>total count of payments (required for pricing plan form: splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; first_interval</td>
+<td>String</td>
+<td>first payment interval (required for pricing plan form: subscription/splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; first_amount</td>
+<td>Decimal</td>
+<td>first payment amount (required for pricing plan form: subscription/splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; next_interval</td>
+<td>String</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; next_amount</td>
+<td>Decimal</td>
+<td>next payment amount (required for pricing plan form: subscription/splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; spliting_type</td>
+<td>String</td>
+<td>spliting type (required for pricing plan form: splited); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payment payer will get seperate invoice <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
+</tr>
+<tr>
+<td>forward</td>
+<td>Object</td>
+<td>we can forward params with url_to_pay to prefill payment form, check this blog <a href="http://blog.elopage.com/hilfebereich/was-bedeutet-die-url-parameter-weiterleitung/">post</a></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; first_name</td>
+<td>String</td>
+<td>first name of payer</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; last_name</td>
+<td>String</td>
+<td>last name of payer</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; email</td>
+<td>String</td>
+<td>email of payer</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; coupon</td>
+<td>String</td>
+<td>coupon to automatically apply</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; campaign_id</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>success_email</td>
+<td>Object</td>
+<td>Sucess email object contains data for custom email which is sent to payer on newly created payment for the product, if <code>success_email</code> is not specified then by default will be used standart template.<br> In custom email you are able to create email body with your own html code in <code>body_en/body_de</code> parameter, also you can specify the place of several variables in your html, which values are generated dynamically:<br> <code>first_name</code> - payer first name, <code>last_name</code> - payer last name, <code>product_name</code> - name of the product, <code>amount</code> - amount for the payment, <code>recurring_type</code> - type for recurring payments, <code>next_button</code> - button to continue with the payment process</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; subject_en</td>
+<td>String</td>
+<td>Subjet of the email for en locale version</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; subject_de</td>
+<td>String</td>
+<td>Subjet of the email for de locale version</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; body_en</td>
+<td>String</td>
+<td>Body of the email for en locale version</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; body_de</td>
+<td>String</td>
+<td>Body of the email for de locale version</td>
+</tr>
+</tbody></table>
+<h3 id='success-200'>Success 200</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Number</td>
+<td>Payment Link ID.</td>
+</tr>
+<tr>
+<td>url_to_pay</td>
+<td>String</td>
+<td>Payment Link URL to which payer must be redirected</td>
+</tr>
+</tbody></table>
+<h3 id='error-4xx'>Error 4xx</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NoAccessRight</td>
+<td>Only authenticated sellers can access the data.</td>
+</tr>
+<tr>
+<td>UserNotFound</td>
+<td>The key of the user was not found.</td>
+</tr>
+</tbody></table>
+<h2 id='get-payment-link-info'>Get payment link info</h2>
+<p>Fetch payment link info by payment link ID</p>
+
+<blockquote>
+<p>Example usage:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/sales_pages/{id}?key={your API key}&amp;secret={API secret}"
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/sales_pages/{id}?key={your API key}&amp;secret={API secret}'</span><span class="p">))</span>
+</code></pre><h3 id='get'>GET</h3>
+<p><code>https://elopage.com/api/sales_pages/:id</code></p>
+<h3 id='parameter-2'>Parameter</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>secret</td>
+<td>String</td>
+<td>elopage API secret which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Your personal Elopage API key, you can find or generate them inside your Elopage cabinet: Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Number</td>
+<td>Payment link ID</td>
+</tr>
+</tbody></table>
+<h3 id='success-200-2'>Success 200</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url_to_pay</td>
+<td>String</td>
+<td>Payment Link URL to which payer must be redirected</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>What is the payer paying for? Name the payment by entering a product name, plan name or similar. This name will be visible to your payer during the checkout process.</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Decimal</td>
+<td>The final price or amount you want to charge your payer incl. taxes, fees etc.</td>
+</tr>
+<tr>
+<td>free</td>
+<td>Boolean</td>
+<td>Payment link for a free product</td>
+</tr>
+<tr>
+<td>success_url</td>
+<td>String</td>
+<td>URL to which the payer or payer will be redirected after successfully completing payment. Attention: Payments with some payment methods require time to process. Due to this reason you must attach parameters to the redirection URLs to fetch updates of payment IDs. First is Payment ID <code>payment_id</code> which you can you fetch in order to receive the payment status <code>/api/payments/:id</code>.</td>
+</tr>
+<tr>
+<td>cancel_url</td>
+<td>String</td>
+<td>URL to which payer is redirected to in case payment process was cancelled by payer.</td>
+</tr>
+<tr>
+<td>error_url</td>
+<td>String</td>
+<td>URL to which payer is redirected in case of errors during payment process (e.g. Bad credit card info, rejected by pop etc.)</td>
+</tr>
+<tr>
+<td>ping_url</td>
+<td>String</td>
+<td>elopage API sends POST request to this URL if payment for payment of product/name once it changes status to successful (e.g. bank wire updates).</td>
+</tr>
+<tr>
+<td>pricing_plans</td>
+<td>Array</td>
+<td>Array of objects which represents pricing plans of the product (at least one object required)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;form</td>
+<td>String</td>
+<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splited&quot;</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;preferences</td>
+<td>Object</td>
+<td>preferences object is differs for pricing forms</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;price</td>
+<td>Decimal</td>
+<td>price by current pricing plan</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;old_price</td>
+<td>Decimal</td>
+<td>old product price</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;payments_count</td>
+<td>Integer</td>
+<td>total count of payments (required for pricing plan form: splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;first_interval</td>
+<td>String</td>
+<td>first payment interval (required for pricing plan form: subscription/splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;first_amount</td>
+<td>Decimal</td>
+<td>first payment amount (required for pricing plan form: subscription/splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;next_interval</td>
+<td>String</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;next_amount</td>
+<td>Decimal</td>
+<td>next payment amount (required for pricing plan form: subscription/splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;spliting_type</td>
+<td>String</td>
+<td>spliting type (required for pricing plan form: splited); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
+</tr>
+</tbody></table>
+<h3 id='error-4xx-2'>Error 4xx</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NoAccessRight</td>
+<td>Only authenticated Sellers can access the data.</td>
+</tr>
+<tr>
+<td>UserNotFound</td>
+<td>The key of the User was not found.</td>
+</tr>
+</tbody></table>
+<h1 id='payments'>Payments</h1><h2 id='get-payment-info'>Get payment info</h2>
+<blockquote>
+<p>Example usage:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/payments/{id}?key={your API key}&amp;secret={API secret}"
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/payments/{id}?key={your API key}&amp;secret={API secret}'</span><span class="p">))</span>
+</code></pre>
+<p>Fetch transfer info by ID</p>
+<h3 id='get-2'>GET</h3>
+<p><code>https://elopage.com/api/payments/:id</code></p>
+<h3 id='parameter-3'>Parameter</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>secret</td>
+<td>String</td>
+<td>Elopage API secret, you can find them inside your Elopage cabinet: Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Your personal elopage API key which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Number</td>
+<td>Payment ID is sent with the success_url redirection after payment</td>
+</tr>
+</tbody></table>
+<h3 id='success-200-3'>Success 200</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>payer</td>
+<td>Object</td>
+<td>payer object</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;email</td>
+<td>String</td>
+<td>payer email</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;first_name</td>
+<td>String</td>
+<td>payer first name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;last_name</td>
+<td>String</td>
+<td>payer last name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;country</td>
+<td>String</td>
+<td>payer country</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;city</td>
+<td>String</td>
+<td>payer city</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;street</td>
+<td>String</td>
+<td>payer street</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;zip</td>
+<td>String</td>
+<td>payer zip</td>
+</tr>
+<tr>
+<td>publisher</td>
+<td>Object</td>
+<td>publisher object</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;id</td>
+<td>Integer</td>
+<td>publisher id</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;email</td>
+<td>String</td>
+<td>publisher email</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;first_name</td>
+<td>String</td>
+<td>publisher first name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;last_name</td>
+<td>String</td>
+<td>publisher last name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;street</td>
+<td>String</td>
+<td>publisher street</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;zip</td>
+<td>String</td>
+<td>publisher zip</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;city</td>
+<td>String</td>
+<td>publisher city</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;country</td>
+<td>String</td>
+<td>publisher country</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;phone</td>
+<td>String</td>
+<td>publisher phone</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;company</td>
+<td>String</td>
+<td>publisher company</td>
+</tr>
+<tr>
+<td>product</td>
+<td>Object</td>
+<td>product object</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;id</td>
+<td>Integer</td>
+<td>product id</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;slug</td>
+<td>String</td>
+<td>product slug</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;name</td>
+<td>String</td>
+<td>product name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;type</td>
+<td>String</td>
+<td>product type</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;price</td>
+<td>Decimal</td>
+<td>product price</td>
+</tr>
+<tr>
+<td>pricing_plans</td>
+<td>Array</td>
+<td>Array of objects which represents pricing plans of the product (at least one object required)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;form</td>
+<td>String</td>
+<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splited&quot;</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;preferences</td>
+<td>Object</td>
+<td>preferences object is differs for pricing forms</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;price</td>
+<td>Decimal</td>
+<td>price by current pricing plan</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;old_price</td>
+<td>Decimal</td>
+<td>old product price</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;payments_count</td>
+<td>Integer</td>
+<td>total count of payments (required for pricing plan form: splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;first_interval</td>
+<td>String</td>
+<td>first payment interval (required for pricing plan form: subscription/splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;first_amount</td>
+<td>Decimal</td>
+<td>first payment amount (required for pricing plan form: subscription/splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;next_interval</td>
+<td>String</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;next_amount</td>
+<td>Decimal</td>
+<td>next payment amount (required for pricing plan form: subscription/splited)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;spliting_type</td>
+<td>String</td>
+<td>spliting type (required for pricing plan form: installment); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
+</tr>
+<tr>
+<td>event</td>
+<td>Object</td>
+<td>event object</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;id</td>
+<td>Integer</td>
+<td>event id</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;name</td>
+<td>String</td>
+<td>event name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;price</td>
+<td>Decimal</td>
+<td>event price</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;location_short</td>
+<td>String</td>
+<td>event location_short</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;location_long</td>
+<td>String</td>
+<td>event location_long</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;current_code</td>
+<td>String</td>
+<td>event current_code</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;code_prefix</td>
+<td>String</td>
+<td>event code_prefix</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;date</td>
+<td>String</td>
+<td>event date</td>
+</tr>
+<tr>
+<td>tickets</td>
+<td>Object</td>
+<td>tickets object</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;count</td>
+<td>Integer</td>
+<td>tickets count</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;codes</td>
+<td>Array</td>
+<td>tickets codes</td>
+</tr>
+<tr>
+<td>revenue</td>
+<td>Decimal</td>
+<td>revenue</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Decimal</td>
+<td>amount</td>
+</tr>
+<tr>
+<td>fee</td>
+<td>Decimal</td>
+<td>fee</td>
+</tr>
+<tr>
+<td>bill_number</td>
+<td>String</td>
+<td>bill_number</td>
+</tr>
+<tr>
+<td>campaign_id</td>
+<td>String</td>
+<td>campaign_id</td>
+</tr>
+<tr>
+<td>coupon_code</td>
+<td>String</td>
+<td>code of coupon if applied</td>
+</tr>
+<tr>
+<td>shift_in_days</td>
+<td>Integer</td>
+<td>shift_in_days</td>
+</tr>
+<tr>
+<td>payment_method</td>
+<td>String</td>
+<td>card, bank_account, paypal, sofort, bank_wire or free</td>
+</tr>
+<tr>
+<td>state</td>
+<td>String</td>
+<td>waiting, successful, success_av, canceled or error</td>
+</tr>
+<tr>
+<td>created_date</td>
+<td>String</td>
+<td>created_date</td>
+</tr>
+<tr>
+<td>success_date</td>
+<td>String</td>
+<td>success_date with time</td>
+</tr>
+<tr>
+<td>success_date_short</td>
+<td>String</td>
+<td>success_date without time</td>
+</tr>
+<tr>
+<td>tickets_count</td>
+<td>Integer</td>
+<td>tickets count - Warning! Deprecated. Please use tickets[count] instead.</td>
+</tr>
+<tr>
+<td>event_id</td>
+<td>Integer</td>
+<td>tickets count - Warning! Deprecated. Please use event[id] instead.</td>
+</tr>
+<tr>
+<td>invoice_link</td>
+<td>String</td>
+<td>link to download invoice, you should setup invoice generation inside cabinet.</td>
+</tr>
+</tbody></table>
+<h3 id='error-4xx-3'>Error 4xx</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NoAccessRight</td>
+<td>Only authenticated Sellers can access the data.</td>
+</tr>
+<tr>
+<td>UserNotFound</td>
+<td>The key of the User was not found.</td>
+</tr>
+</tbody></table>
+<h1 id='thanks-for-using-the-elopage-api'>Thanks for using the elopage API!</h1>
+<p>As we are currently in the beta version we are looking forward to your feedback and support requests. Please contact us via support@elopage.com. Thank you!</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="curl">curl</a>
+                <a href="#" data-language-name="ruby">ruby</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
