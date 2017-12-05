@@ -2,13 +2,13 @@
 title: API Reference
 
 language_tabs:
-  - curl
-  - ruby
+  - shell: Curl
+  - ruby: Ruby
 
 search: true
 ---
 
-# elopage API (beta)
+# Elopage API (beta)
 
 Process payments easily with the elopage API and collect amounts in your account - payouts only via dashboard
 
@@ -22,16 +22,16 @@ Create sales pages, get paid, find and search transaction ID / payment IDs and m
 
 > Example usage:
 
-```curl
+```shell
 curl -X POST -H "Content-Type: application/json" "https://elopage.com/api/sales_pages"
 -d '{
-"key":"{your API key}",
-"secret":"{API secret}",
+"key":"{api_key}",
+"secret":"{api_secret}",
 "name":"product name",
 "success_url": "{success_url}",
 "cancel_url": "{cancel_url}",
 "error_url": "{error_url}",
-"ping_url": "{ping_url}",
+"webhook_url": "{webhook_url}",
 "pricing_plans": [
   {
     "form": "one_time",
@@ -79,13 +79,13 @@ require 'uri'
 Net::HTTP.post URI('https://elopage.com/api/sales_pages'),
                { "q" => "ruby", "max" => "50",
                  {
-                  "key":"{your API key}",
-                  "secret":"{API secret}",
+                  "key":"{api_key}",
+                  "secret":"{api_secret}",
                   "name":"product name",
                   "success_url": "{success_url}",
                   "cancel_url": "{cancel_url}",
                   "error_url": "{error_url}",
-                  "ping_url": "{ping_url}",
+                  "webhook_url": "{webhook_url}",
                   "pricing_plans": [
                     {
                       "form": "one_time",
@@ -127,9 +127,7 @@ Net::HTTP.post URI('https://elopage.com/api/sales_pages'),
                "Content-Type" => "application/json"
 ```
 
-The elopage API allows to initiative payments and complete payments on its optimized payment interfaces. In order to process payments you first need to create a payment link. With the payment link creation you receive the 'url_to_pay' parameter to which you must redirect the payer to complete payment. There after you can redirect the user back to your URL and forward information.
-
-<aside class="warning">WARNING: please do not use this payment_link as created product - you can create payment_link for only one payment, and after the payment it won't be avaliable</aside>
+The elopage API allows to initiative payments and complete payments on its optimized payment interfaces. In order to process payments you first need to create a payment link. With the payment link creation you receive the 'url_to_pay' parameter to which you must redirect the payer to complete payment. There after you can redirect the user back to your URL and forward information. After payer proceed with payment, or after the payment state changes from pending/waiting to success/error, you will get webhook to the 'webhook_url', which you sent to sales page referenced to this payment.
 
 ### POST
 
@@ -137,28 +135,28 @@ The elopage API allows to initiative payments and complete payments on its optim
 
 ### Parameter
 
-Field | Type | Description
------ | ---- | -----------
-secret | String | elopage API secret which can be generated and found in the sellers dashboard under Settings > Integrations
+Field       | Type | Description
+----------- | --- | -----------
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
 key | String | Your personal elopage API key which can be generated and found in the sellers dashboard under Settings > Integrations
 name | String | What is the payer paying for? Name the payment by entering a product name, plan name or similar. This name will be visible to your payer during the checkout process.
 success_url | String | URL to which the payer or payer will be redirected after successfully completing payment. Attention: Payments with some payment methods require time to process. Due to this reason you must attach parameters to the redirection URLs to fetch updates of payment IDs. First is Payment ID `payment_id` which you can you fetch in order to receive the payment status `/api/payments/:id`.
 cancel_url | String | URL to which payer is redirected to in case payment process was cancelled by payer.
 error_url | String | URL to which payer is redirected in case of errors during payment process (e.g. Bad credit card info, rejected by pop etc.)
-ping_url | String | elopage API sends POST request to this URL if payment for payment of product/name once it changes status to successful (e.g. bank wire updates). Also we will add transation id and payment id to POST request.
+webhook_url | String | elopage API sends POST request to this URL if payment for payment of product/name once it changes status to successful (e.g. bank wire updates). Also we will add transation id and payment id to POST request.
 price | Decimal | Will be deprecated after 01.01.2018 use pricing_plans instead
 recurring_prices | Object | Will be deprecated after 01.01.2018 including all its subparams - use pricing_plans instead
-pricing_plans | Array | Array of objects which represents pricing plans of the product (at least one object required): <br> 'one_time' example pricing_plans: `[{ "form": "one_time", "preferences": { "price": "199.9", "old_price": "200" } }]`<br> 'subscription' example pricing_plans: `[{ "form": "subscription", "preferences": { "first_interval": "1w", "first_amount": "20.0", "next_interval": "1m", "next_amount": "10.0" } }]`<br> 'splited' example (installment) pricing_plans: `[{ "form": "splited", "preferences": { "payments_count": "5", "first_interval": "1w", "first_amount": "20.0", "next_interval": "1m", "next_amount": "10.0", "spliting_type": "installment" } }]`<br> 'splited' example (limited_subscription) pricing_plans: `[{ "form": "splited", "preferences": { "payments_count": "5", "first_interval": "1w", "first_amount": "20.0", "next_interval": "1m", "next_amount": "10.0", "spliting_type": "limited_subscription" } }]`
-form | String | Allowed values: `"one_time"`, `"subscription"`, `"splited"`
-preferences | Object | preferences object is differs for pricing forms
-&nbsp;&nbsp; price | Decimal | price by current pricing plan (only for one_time pricing plan)
-&nbsp;&nbsp; old_price | Decimal | old product price (only for one_time pricing plan)
-&nbsp;&nbsp; payments_count | Integer | total count of payments (required for pricing plan form: splited)
-&nbsp;&nbsp; first_interval | String | first payment interval (required for pricing plan form: subscription/splited)
-&nbsp;&nbsp; first_amount | Decimal | first payment amount (required for pricing plan form: subscription/splited)
-&nbsp;&nbsp; next_interval | String | next payment interval startdate (required for pricing plan form: subscription/splited)
-&nbsp;&nbsp; next_amount | Decimal | next payment amount (required for pricing plan form: subscription/splited)
-&nbsp;&nbsp; spliting_type | String | spliting type (required for pricing plan form: splited); notes: "installment" - one invoice for all payments, "limited_subscription" - for each payment payer will get seperate invoice <br> Allowed values: `["installment", "limited_subscription"]`
+pricing_plans | Array | Array of objects which represents pricing plans of the product (at least one object required): <br> 'one_time' example pricing_plans: `[{ "form": "one_time", "preferences": { "price": "199.9", "old_price": "200" } }]`<br> 'subscription' example pricing_plans: `[{ "form": "subscription", "preferences": { "first_interval": "1w", "first_amount": "20.0", "next_interval": "1m", "next_amount": "10.0" } }]`<br> 'splited' example (installment) pricing_plans: `[{ "form": "splited", "preferences": { "p_count": "5", "first_interval": "1w", "first_amount": "20.0", "next_interval": "1m", "next_amount": "10.0", "spliting_type": "installment" } }]`<br> 'splited' example (limited_subscription) pricing_plans: `[{ "form": "splited", "preferences": { "p_count": "5", "first_interval": "1w", "first_amount": "20.0", "next_interval": "1m", "next_amount": "10.0", "spliting_type": "limited_subscription" } }]` Warning! maximum pricing plans allowed for one sales page is 5
+&nbsp;&nbsp; form | String | Allowed values: `"one_time"`, `"subscription"`, `"splited"`
+&nbsp;&nbsp; preferences | Object | preferences object is differs for pricing forms
+&nbsp;&nbsp;&nbsp;&nbsp; price | Decimal | price by current pricing plan (only for one_time pricing plan)
+&nbsp;&nbsp;&nbsp;&nbsp; old_price | Decimal | old product price (only for one_time pricing plan)
+&nbsp;&nbsp;&nbsp;&nbsp; p_count | Integer | total count of payments (required for pricing plan form: splited)
+&nbsp;&nbsp;&nbsp;&nbsp; first_interval | String | first payment interval (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;&nbsp;&nbsp; first_amount | Decimal | first payment amount (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;&nbsp;&nbsp; next_interval | String | next payment interval startdate (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;&nbsp;&nbsp; next_amount | Decimal | next payment amount (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;&nbsp;&nbsp; spliting_type | String | spliting type (required for pricing plan form: splited); notes: "installment" - one invoice for all payments, "limited_subscription" - for each payment payer will get seperate invoice <br> Allowed values: `["installment", "limited_subscription"]`
 forward | Object | we can forward params with url_to_pay to prefill payment form, check this blog [post](http://blog.elopage.com/hilfebereich/was-bedeutet-die-url-parameter-weiterleitung/)
 &nbsp;&nbsp; first_name | String | first name of payer
 &nbsp;&nbsp; last_name | String | last name of payer
@@ -191,15 +189,15 @@ Fetch payment link info by payment link ID
 
 > Example usage:
 
-```curl
-curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/sales_pages/{id}?key={your API key}&secret={API secret}"
+```shell
+curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/sales_pages/{id}?key={api_key}&secret={api_secret}"
 ```
 
 ```ruby
 require 'net/http'
 require 'uri'
 
-Net::HTTP.get(URI('https://elopage.com/api/sales_pages/{id}?key={your API key}&secret={API secret}'))
+Net::HTTP.get(URI('https://elopage.com/api/sales_pages/{id}?key={api_key}&secret={api_secret}'))
 ```
 
 ### GET
@@ -211,7 +209,7 @@ Net::HTTP.get(URI('https://elopage.com/api/sales_pages/{id}?key={your API key}&s
 
 Field | Type | Description
 ----- | ---- | -----------
-secret | String | elopage API secret which can be generated and found in the sellers dashboard under Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
 key | String | Your personal Elopage API key, you can find or generate them inside your Elopage cabinet: Settings > Integrations
 id | Number | Payment link ID
 
@@ -226,13 +224,13 @@ free | Boolean | Payment link for a free product
 success_url | String | URL to which the payer or payer will be redirected after successfully completing payment. Attention: Payments with some payment methods require time to process. Due to this reason you must attach parameters to the redirection URLs to fetch updates of payment IDs. First is Payment ID `payment_id` which you can you fetch in order to receive the payment status `/api/payments/:id`.
 cancel_url | String | URL to which payer is redirected to in case payment process was cancelled by payer.
 error_url | String | URL to which payer is redirected in case of errors during payment process (e.g. Bad credit card info, rejected by pop etc.)
-ping_url | String | elopage API sends POST request to this URL if payment for payment of product/name once it changes status to successful (e.g. bank wire updates).
+webhook_url | String | elopage API sends POST request to this URL if payment for payment of product/name once it changes status to successful (e.g. bank wire updates).
 pricing_plans | Array | Array of objects which represents pricing plans of the product (at least one object required)
 &nbsp;&nbsp;form | String | Allowed values: `"one_time", "subscription", "splited"`
 &nbsp;&nbsp;preferences | Object | preferences object is differs for pricing forms
 &nbsp;&nbsp;&nbsp;&nbsp;price | Decimal | price by current pricing plan
 &nbsp;&nbsp;&nbsp;&nbsp;old_price | Decimal | old product price
-&nbsp;&nbsp;&nbsp;&nbsp;payments_count | Integer | total count of payments (required for pricing plan form: splited)
+&nbsp;&nbsp;&nbsp;&nbsp;p_count | Integer | total count of payments (required for pricing plan form: splited)
 &nbsp;&nbsp;&nbsp;&nbsp;first_interval | String | first payment interval (required for pricing plan form: subscription/splited)
 &nbsp;&nbsp;&nbsp;&nbsp;first_amount | Decimal | first payment amount (required for pricing plan form: subscription/splited)
 &nbsp;&nbsp;&nbsp;&nbsp;next_interval | String | next payment interval startdate (required for pricing plan form: subscription/splited)
@@ -246,21 +244,252 @@ Name | Description
 NoAccessRight | Only authenticated Sellers can access the data.
 UserNotFound | The key of the User was not found.
 
+# Pricing plans
+Pricing plan are being created with sales page, but you can still create, view or delete pricing plans.
+
+## Get pricing plan
+> Example usage:
+
+```shell
+curl -X GET -H 'https://elopage.com/api/pricing_plans/{id}?key={api_key}&secret={api_secret}'
+```
+
+```ruby
+  require 'uri'
+  require 'net/http'
+
+  Net::HTTP.get(URI("https://elopage.com/api/pricing_plans/{id}?key={api_key}&secret={api_secret}"))
+```
+Fetch pricing plan info by ID
+
+### GET
+
+`https://elopage.com/api/pricing_plans/:id`
+
+### Parameter
+
+Field | Type | Description
+----- | ---- | -----------
+secret | String | Elopage api_secret, you can find them inside your Elopage cabinet: Settings > Integrations
+key | String | Your personal elopage API key which can be generated and found in the sellers dashboard under Settings > Integrations
+id | Number | Pricing plan ID is sent with the get payment link info request
+
+
+### Success 200
+
+Field | Type | Description
+----- | ---- | -----------
+id    | Integer | Pricing plan id
+form | String | Allowed values: `"one_time", "subscription", "splited"`
+preferences | Object | preferences object is differs for pricing forms
+&nbsp;&nbsp;price | Decimal | price by current pricing plan
+&nbsp;&nbsp;old_price | Decimal | old product price
+&nbsp;&nbsp;p_count | Integer | total count of payments (required for pricing plan form: splited)
+&nbsp;&nbsp;first_interval | String | first payment interval (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;first_amount | Decimal | first payment amount (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;next_interval | String | next payment interval startdate (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;next_amount | Decimal | next payment amount (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;spliting_type | String | spliting type (required for pricing plan form: splited); notes: "installment" - one invoice for all payments, "limited_subscription" - for each payments payer will get seperate invoice <br> Allowed values: ["installment", "limited_subscription"]
+
+
+### Error 4xx
+
+Name | Description
+---- | -----------
+NoAccessRight | Only authenticated Sellers can access the data.
+UserNotFound | The key of the User was not found.
+
+
+## Create pricing plan
+Create pricing plan by sending POST request with parameters to the server.
+> Example usage:
+
+```shell
+curl -X POST \
+  https://elopage.com/api/pricing_plans \
+  -d '{
+	"key": "bd2e2dc162e457ec9ded756d8e03927d",
+	"secret": "xYLxwnzZpCfYAHCoU2zo_g7EugyVgsuqmzGC6myS8_2R5ZrUMg1qz6erbyyjSu",
+	"sales_page_id": 1086,
+	"pricing_plan": {
+		"form": "splited",
+		"preferences": {
+			"p_count": 2,
+			"first_amount": 0.5,
+			"next_amount": 2
+		}
+	}
+}'
+```
+
+```ruby
+require 'net/http'
+require 'uri'
+require 'json'
+
+uri = URI.parse("https://elopage.com/api/pricing_plans")
+request = Net::HTTP::Post.new(uri)
+request.body = JSON.dump({
+  "key" => "bd2e2dc162e457ec9ded756d8e03927d",
+  "secret" => "xYLxwnzZpCfYAHCoU2zo_g7EugyVgsuqmzGC6myS8_2R5ZrUMg1qz6erbyyjSu",
+  "sales_page_id" => 1086,
+  "pricing_plan" => {
+    "form" => "splited",
+    "preferences" => {
+      "p_count" => 2,
+      "first_amount" => 0.5,
+      "next_amount" => 2
+    }
+  }
+})
+
+req_options = {
+  use_ssl: uri.scheme == "https",
+}
+
+response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+  http.request(request)
+end
+```
+
+### POST
+`https://elopage.com/api/pricing_plans`
+
+### Parameter
+
+Field | Type | Description
+----- | ---- | -----------
+sales_page_id | Integer | ID of sales page, for which you create this pricing plan
+pricing_plan | Object | Pricing plan object
+&nbsp;&nbsp;form | String | Allowed values: `"one_time", "subscription", "splited"`
+&nbsp;&nbsp;preferences | Object | preferences object is differs for pricing forms
+&nbsp;&nbsp;&nbsp;&nbsp;price | Decimal | price by current pricing plan
+&nbsp;&nbsp;&nbsp;&nbsp;old_price | Decimal | old product price
+&nbsp;&nbsp;&nbsp;&nbsp;p_count | Integer | total count of payments (required for pricing plan form: splited)
+&nbsp;&nbsp;&nbsp;&nbsp;first_interval | String | first payment interval (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;&nbsp;&nbsp;first_amount | Decimal | first payment amount (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;&nbsp;&nbsp;next_interval | String | next payment interval startdate (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;&nbsp;&nbsp;next_amount | Decimal | next payment amount (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;&nbsp;&nbsp;spliting_type | String | spliting type (required for pricing plan form: splited); notes: "installment" - one invoice for all payments, "limited_subscription" - for each payments payer will get seperate invoice <br> Allowed values: ["installment", "limited_subscription"]
+
+### Success 200
+
+Field | Type | Description
+----- | ---- | -----------
+id | Integer | Created pricing plan ID
+form | String | Allowed values: `"one_time", "subscription", "splited"`
+preferences | Object | preferences object is differs for pricing forms
+&nbsp;&nbsp;price | Decimal | price by current pricing plan
+&nbsp;&nbsp;old_price | Decimal | old product price
+&nbsp;&nbsp;p_count | Integer | total count of payments (required for pricing plan form: splited)
+&nbsp;&nbsp;first_interval | String | first payment interval (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;first_amount | Decimal | first payment amount (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;next_interval | String | next payment interval startdate (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;next_amount | Decimal | next payment amount (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;spliting_type | String | spliting type (required for pricing plan form: splited); notes: "installment" - one invoice for all payments, "limited_subscription" - for each payments payer will get seperate invoice <br> Allowed values: ["installment", "limited_subscription"]
+
+### Error 4xx
+
+Name | Description
+---- | -----------
+NoAccessRight | Only authenticated Sellers can access the data.
+UserNotFound | The key of the User was not found.
+
+
+## Delete pricing plan
+Delete pricing plan
+> Example usage:
+
+```shell
+curl -X DELETE \
+  https://elopage.com/api/pricing_plans/:id \
+  -d '{
+	"key": "api_key",
+	"secret": "api_secret"
+}'
+```
+
+```ruby
+
+require 'net/http'
+require 'uri'
+require 'json'
+
+uri = URI.parse("https://elopage.com/api/pricing_plans/:id")
+request = Net::HTTP::Delete.new(uri)
+request.body = JSON.dump({
+  "key" => "api_key",
+  "secret" => "api_secret"
+})
+
+req_options = {
+  use_ssl: uri.scheme == "https",
+}
+
+response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+  http.request(request)
+end
+```
+
+### DELETE
+`https://elopage.com/api/pricing_plans/:id`
+
+### Parameter
+
+Field | Type | Description
+----- | ---- | -----------
+sales_page_id | Integer | ID of sales page, for which you create this pricing plan
+pricing_plan | Object | Pricing plan object
+&nbsp;&nbsp;form | String | Allowed values: `"one_time", "subscription", "splited"`
+&nbsp;&nbsp;preferences | Object | preferences object is differs for pricing forms
+&nbsp;&nbsp;&nbsp;&nbsp;price | Decimal | price by current pricing plan
+&nbsp;&nbsp;&nbsp;&nbsp;old_price | Decimal | old product price
+&nbsp;&nbsp;&nbsp;&nbsp;p_count | Integer | total count of payments (required for pricing plan form: splited)
+&nbsp;&nbsp;&nbsp;&nbsp;first_interval | String | first payment interval (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;&nbsp;&nbsp;first_amount | Decimal | first payment amount (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;&nbsp;&nbsp;next_interval | String | next payment interval startdate (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;&nbsp;&nbsp;next_amount | Decimal | next payment amount (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;&nbsp;&nbsp;spliting_type | String | spliting type (required for pricing plan form: splited); notes: "installment" - one invoice for all payments, "limited_subscription" - for each payments payer will get seperate invoice <br> Allowed values: ["installment", "limited_subscription"]
+
+### Success 200
+
+Field | Type | Description
+----- | ---- | -----------
+id | Integer | Created pricing plan ID
+form | String | Allowed values: `"one_time", "subscription", "splited"`
+preferences | Object | preferences object is differs for pricing forms
+&nbsp;&nbsp;price | Decimal | price by current pricing plan
+&nbsp;&nbsp;old_price | Decimal | old product price
+&nbsp;&nbsp;p_count | Integer | total count of payments (required for pricing plan form: splited)
+&nbsp;&nbsp;first_interval | String | first payment interval (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;first_amount | Decimal | first payment amount (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;next_interval | String | next payment interval startdate (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;next_amount | Decimal | next payment amount (required for pricing plan form: subscription/splited)
+&nbsp;&nbsp;spliting_type | String | spliting type (required for pricing plan form: splited); notes: "installment" - one invoice for all payments, "limited_subscription" - for each payments payer will get seperate invoice <br> Allowed values: ["installment", "limited_subscription"]
+
+### Error 4xx
+
+Name | Description
+---- | -----------
+NoAccessRight | Only authenticated Sellers can access the data.
+UserNotFound | The key of the User was not found.
+
+
 # Payments
 
 ## Get payment info
 
 > Example usage:
 
-```curl
-curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/payments/{id}?key={your API key}&secret={API secret}"
+```shell
+curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/payments/{id}?key={api_key}&secret={api_secret}"
 ```
 
 ```ruby
 require 'net/http'
 require 'uri'
 
-Net::HTTP.get(URI('https://elopage.com/api/payments/{id}?key={your API key}&secret={API secret}'))
+Net::HTTP.get(URI('https://elopage.com/api/payments/{id}?key={api_key}&secret={api_secret}'))
 ```
 
 Fetch transfer info by ID
@@ -273,7 +502,7 @@ Fetch transfer info by ID
 
 Field | Type | Description
 ----- | ---- | -----------
-secret | String | Elopage API secret, you can find them inside your Elopage cabinet: Settings > Integrations
+secret | String | Elopage api_secret, you can find them inside your Elopage cabinet: Settings > Integrations
 key | String | Your personal elopage API key which can be generated and found in the sellers dashboard under Settings > Integrations
 id | Number | Payment ID is sent with the success_url redirection after payment
 
@@ -289,60 +518,19 @@ payer | Object | payer object
 &nbsp;&nbsp;city | String | payer city
 &nbsp;&nbsp;street | String | payer street
 &nbsp;&nbsp;zip | String | payer zip
-publisher | Object | publisher object
-&nbsp;&nbsp;id | Integer | publisher id
-&nbsp;&nbsp;email | String | publisher email
-&nbsp;&nbsp;first_name | String | publisher first name
-&nbsp;&nbsp;last_name | String | publisher last name
-&nbsp;&nbsp;street | String | publisher street
-&nbsp;&nbsp;zip | String | publisher zip
-&nbsp;&nbsp;city | String | publisher city
-&nbsp;&nbsp;country | String | publisher country
-&nbsp;&nbsp;phone | String | publisher phone
-&nbsp;&nbsp;company | String | publisher company
-product | Object | product object
-&nbsp;&nbsp;id | Integer | product id
-&nbsp;&nbsp;slug | String | product slug
-&nbsp;&nbsp;name | String | product name
-&nbsp;&nbsp;type | String | product type
-&nbsp;&nbsp;price | Decimal | product price
-pricing_plans | Array | Array of objects which represents pricing plans of the product (at least one object required)
-&nbsp;&nbsp;form | String | Allowed values: `"one_time", "subscription", "splited"`
-&nbsp;&nbsp;preferences | Object | preferences object is differs for pricing forms
-&nbsp;&nbsp;&nbsp;&nbsp;price | Decimal | price by current pricing plan
-&nbsp;&nbsp;&nbsp;&nbsp;old_price | Decimal | old product price
-&nbsp;&nbsp;&nbsp;&nbsp;payments_count | Integer | total count of payments (required for pricing plan form: splited)
-&nbsp;&nbsp;&nbsp;&nbsp;first_interval | String | first payment interval (required for pricing plan form: subscription/splited)
-&nbsp;&nbsp;&nbsp;&nbsp;first_amount | Decimal | first payment amount (required for pricing plan form: subscription/splited)
-&nbsp;&nbsp;&nbsp;&nbsp;next_interval | String | next payment interval startdate (required for pricing plan form: subscription/splited)
-&nbsp;&nbsp;&nbsp;&nbsp;next_amount | Decimal | next payment amount (required for pricing plan form: subscription/splited)
-&nbsp;&nbsp;&nbsp;&nbsp;spliting_type | String | spliting type (required for pricing plan form: installment); notes: "installment" - one invoice for all payments, "limited_subscription" - for each payments payer will get seperate invoice <br> Allowed values: `["installment", "limited_subscription"]`
-event | Object | event object
-&nbsp;&nbsp;id | Integer | event id
-&nbsp;&nbsp;name | String | event name
-&nbsp;&nbsp;price | Decimal | event price
-&nbsp;&nbsp;location_short | String | event location_short
-&nbsp;&nbsp;location_long | String | event location_long
-&nbsp;&nbsp;current_code | String | event current_code
-&nbsp;&nbsp;code_prefix | String | event code_prefix
-&nbsp;&nbsp;date | String | event date
-tickets | Object | tickets object
-&nbsp;&nbsp;count | Integer | tickets count
-&nbsp;&nbsp;codes | Array | tickets codes
+&nbsp;&nbsp;company | String | payer company name
+&nbsp;&nbsp;vat_id | String | payer VAT id
+&nbsp;&nbsp;phone | String | payer phone
 revenue | Decimal | revenue
 amount | Decimal | amount
 fee | Decimal | fee
-bill_number | String | bill_number
-campaign_id | String | campaign_id
-coupon_code | String | code of coupon if applied
-shift_in_days | Integer | shift_in_days
-payment_method | String | card, bank_account, paypal, sofort, bank_wire or free
+recurring | Boolean | Returns true if the payment is recurring
+recurring_form | String | Returns the recurring form of the transaction. This value is being taken from the pricing plan form(one_time, subscription, splited), which was chosen by payer on sales page
+payment_method | String | card, bank_account, paypal, sofort, bank_wire
 state | String | waiting, successful, success_av, canceled or error
 created_date | String | created_date
 success_date | String | success_date with time
 success_date_short | String | success_date without time
-tickets_count | Integer | tickets count - Warning! Deprecated. Please use tickets[count] instead.
-event_id | Integer | tickets count - Warning! Deprecated. Please use event[id] instead.
 invoice_link | String | link to download invoice, you should setup invoice generation inside cabinet.
 
 ### Error 4xx
@@ -352,5 +540,7 @@ Name | Description
 NoAccessRight | Only authenticated Sellers can access the data.
 UserNotFound | The key of the User was not found.
 
+# Test enviroment
+For using our test enviroment, you should change URI `https://elopage.com/` to `http://staging.elopage.com/`. API key and secret are given after the user approval.
 # Thanks for using the elopage API!
 As we are currently in the beta version we are looking forward to your feedback and support requests. Please contact us via support@elopage.com. Thank you!
