@@ -377,7 +377,7 @@
                   <span class="p">}</span> <span class="p">}.</span><span class="nf">to_json</span><span class="p">,</span>
                <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"application/json"</span>
 </code></pre>
-<p>The elopage API allows to initiative payments and complete payments on its optimized payment interfaces. In order to process payments you first need to create a payment link. With the payment link creation you receive the &#39;url_to_pay&#39; parameter to which you must redirect the payer to complete payment. There after you can redirect the user back to your URL and forward information. After payer proceed with payment, or after the payment state changes from pending/waiting to success/error, you will get notification to the &#39;webhook_url&#39;, which you sent to sales page referenced to this payment.</p>
+<p>The elopage API allows to initiative payments and complete payments on its optimized payment interfaces. In order to process payments you first need to create a payment link. With the payment link creation you receive the &#39;url_to_pay&#39; parameter to which you must redirect the payer to complete payment. There after you can redirect the user back to your URL and forward information. After payer proceed with payment, or after the payment state changes from pending/waiting to success/error, you will get webhook to the &#39;webhook_url&#39;, which you sent to sales page referenced to this payment.</p>
 <h3 id='post'>POST</h3>
 <p><code>https://elopage.com/api/sales_pages</code></p>
 <h3 id='parameter'>Parameter</h3>
