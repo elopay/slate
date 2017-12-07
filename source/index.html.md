@@ -542,5 +542,43 @@ UserNotFound | The key of the User was not found.
 
 # Test enviroment
 For using our test enviroment, you should change URI `https://elopage.com/` to `http://staging.elopage.com/`. API key and secret are given after the user approval.
+
+## Test payments credentials
+To do payments inside test enviroment, please use this credentials
+
+### Credit Card
+
+Parameter | Value
+---- | -----------
+CVV | Any 3 digits
+Date | any date in the future, before 2030
+Number | 5017670000005900 <br> 5017670000006700 <br> 5017670000007500 <br> 5017670000008300
+
+### SOFORT
+
+Parameter | Value
+---- | -----------
+Country of your bank | Germany
+Sort code or BIC | 88888888
+Account number | 234567
+PIN | 12345
+TAN | 12345
+
+### Paypal
+
+Parameter | Value
+---- | -----------
+Username | info-buyer@elopage.com
+Password | 123elopage
+
+### SEPA
+
+For SEPA, it usually takes about 5 days to process payment. To do an instant successful or error payments, please use next creds:
+
+Description | IBAN
+---- | -----------
+To do an instant successful transaction | DE89370400440532013000
+To do an instant failed transaction | DE62370400440532013001
+
 # Thanks for using the elopage API!
 As we are currently in the beta version we are looking forward to your feedback and support requests. Please contact us via support@elopage.com. Thank you!
