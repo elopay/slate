@@ -260,6 +260,11 @@
           </li>
           <li>
             <a href="#test-enviroment" class="toc-h1 toc-link" data-title="Test enviroment">Test enviroment</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#test-payments-credentials" class="toc-h2 toc-link" data-title="Test payments credentials">Test payments credentials</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#thanks-for-using-the-elopage-api" class="toc-h1 toc-link" data-title="Thanks for using the elopage API!">Thanks for using the elopage API!</a>
@@ -1410,6 +1415,90 @@
 </tbody></table>
 <h1 id='test-enviroment'>Test enviroment</h1>
 <p>For using our test enviroment, you should change URI <code>https://elopage.com/</code> to <code>http://staging.elopage.com/</code>. API key and secret are given after the user approval.</p>
+<h2 id='test-payments-credentials'>Test payments credentials</h2>
+<p>To do payments inside test enviroment, please use this credentials</p>
+<h3 id='credit-card'>Credit Card</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CVV</td>
+<td>Any 3 digits</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>any date in the future, before 2030</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>5017670000005900 <br> 5017670000006700 <br> 5017670000007500 <br> 5017670000008300</td>
+</tr>
+</tbody></table>
+<h3 id='sofort'>SOFORT</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Country of your bank</td>
+<td>Germany</td>
+</tr>
+<tr>
+<td>Sort code or BIC</td>
+<td>88888888</td>
+</tr>
+<tr>
+<td>Account number</td>
+<td>234567</td>
+</tr>
+<tr>
+<td>PIN</td>
+<td>12345</td>
+</tr>
+<tr>
+<td>TAN</td>
+<td>12345</td>
+</tr>
+</tbody></table>
+<h3 id='paypal'>Paypal</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Username</td>
+<td>info-buyer@elopage.com</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>123elopage</td>
+</tr>
+</tbody></table>
+<h3 id='sepa'>SEPA</h3>
+<p>For SEPA, it usually takes about 5 days to process payment. To do an instant successful or error payments, please use next creds:</p>
+
+<table><thead>
+<tr>
+<th>Description</th>
+<th>IBAN</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>To do an instant successful transaction</td>
+<td>DE89370400440532013000</td>
+</tr>
+<tr>
+<td>To do an instant failed transaction</td>
+<td>DE62370400440532013001</td>
+</tr>
+</tbody></table>
 <h1 id='thanks-for-using-the-elopage-api'>Thanks for using the elopage API!</h1>
 <p>As we are currently in the beta version we are looking forward to your feedback and support requests. Please contact us via support@elopage.com. Thank you!</p>
 
