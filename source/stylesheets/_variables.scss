@@ -23,11 +23,11 @@ under the License.
 
 // BACKGROUND COLORS
 ////////////////////
-$nav-bg: #2E3336 !default;
+$nav-bg: rgba(51, 51, 51, 0.05) !default;
 $examples-bg: #2E3336 !default;
 $code-bg: #1E2224 !default;
 $code-annotation-bg: #191D1F !default;
-$nav-subitem-bg: #1E2224 !default;
+$nav-subitem-bg: rgba(51, 51, 51, 0.05) !default;
 $nav-active-bg: #0F75D4 !default;
 $nav-active-parent-bg: #1E2224 !default; // parent links of the current section
 $lang-select-border: #000 !default;
