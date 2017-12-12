@@ -223,6 +223,9 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
             <a href="#sandbox" class="toc-h1 toc-link" data-title="Sandbox">Sandbox</a>
               <ul class="toc-list-h2">
                   <li>
@@ -272,7 +275,27 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Create sales pages and process payments through them easily with the elopage API. Use it to sell your products via our sales page using one time payments, subscriptions or installment payments.</p>
+<p>The elopage API is based on REST. To get started and explore as much as possible, you can apply for the API credentials and get both test and live credentials. Live credentials can be accessed via your dashboard. To switch between the test and live environment, simply change the API credentials and the (sub)domain-URL. Our sandbox is run on staging.elopage.com. Requests in the staging environment will never touch the banking networks and will not create costs on your side. You can test Paypal, Sofort, Bank Wire and Credit Card payments.</p>
+
+<p>Be sure to subscribe to our <a target='blank' href='https://elopage.com'>API-updates list</a> to receive updates on changes, additions or deprecations.</p>
+
+<p><b>On the right side you can use sample requests.</b> To go live, make sure to use your API key that is linked to your elopage account.  </p>
+
+<aside class='notice'>To use the API to create sales pages, payment plans and payment sessions, you don’t need to create products via your dashboard on elopage.com. However, make sure to complete registration and legitimate your account before starting your sales. </aside>
+
+<p><b>Which steps have to be completed via elopage.com?</b>
+<ul>
+<li>Registration and profile creation</li>
+<li>Creation and activation of seller account: Imprint, Payment methods activation, General VAT settings</li>
+<li>Legitimation process</li>
+<li>Refunds (for now only via dashboard, will be added soon)</li>
+</ul></p>
+
+<p>Feel free to <a href='mailto:support@elopage.com'>contact us</a> or visit our <a href='http://support.elopage.com' target='blank'>Help Center.</a></p>
+<h1 id='authentication'>Authentication</h1>
+<p>Authenticate your account by using your secret API key in the request. You can create or renew your API keys in your dashboard settings. Keep your API and secret keys secret. Please do not share your API keys publicly on Github and so forth.</p>
+
+<p>On production you must create requests over HTTPS, otherwise calls will fail. Sandbox requests can be with HTTP.</p>
 <h1 id='sandbox'>Sandbox</h1>
 <p>For using our test enviroment, please use <code>http://staging.elopage.com/</code>. API key and secret are given after the user approval.</p>
 <h2 id='test-payments-credentials'>Test payments credentials</h2>
