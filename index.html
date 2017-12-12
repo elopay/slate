@@ -535,12 +535,12 @@
 <tr>
 <td>pricing_plans</td>
 <td>Array</td>
-<td>Array of objects which represents pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;one_time&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;price&quot;: &quot;199.9&quot;,</code><br><code>&quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plan: <br><code>[{ &quot;form&quot;: &quot;subscription&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;splited&#39; example (installment) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;splited&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;splited&#39; example (limited_subscription) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;splited&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;limited_subscription&quot; } }]</code><br> Warning! maximum pricing plans allowed for one sales page is 5</td>
+<td>Array of objects which represents pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;one_time&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;price&quot;: &quot;199.9&quot;,</code><br><code>&quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plan: <br><code>[{ &quot;form&quot;: &quot;subscription&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;splitted&#39; example (installment) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;splitted&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;splitted&#39; example (limited_subscription) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;splitted&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;limited_subscription&quot; } }]</code><br> Warning! maximum pricing plans allowed for one sales page is 5</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp; form</td>
 <td>String</td>
-<td>Allowed values: <code>&quot;one_time&quot;</code>, <code>&quot;subscription&quot;</code>, <code>&quot;splited&quot;</code></td>
+<td>Allowed values: <code>&quot;one_time&quot;</code>, <code>&quot;subscription&quot;</code>, <code>&quot;splitted&quot;</code></td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp; preferences</td>
@@ -560,32 +560,32 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; p_count</td>
 <td>Integer</td>
-<td>total count of payments (required for pricing plan form: splited)</td>
+<td>total count of payments (required for pricing plan form: splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; first_interval</td>
 <td>String</td>
-<td>first payment interval (required for pricing plan form: subscription/splited)</td>
+<td>first payment interval (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; first_amount</td>
 <td>Decimal</td>
-<td>first payment amount (required for pricing plan form: subscription/splited)</td>
+<td>first payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; next_interval</td>
 <td>String</td>
-<td>next payment interval startdate (required for pricing plan form: subscription/splited)</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; next_amount</td>
 <td>Decimal</td>
-<td>next payment amount (required for pricing plan form: subscription/splited)</td>
+<td>next payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; spliting_type</td>
 <td>String</td>
-<td>spliting type (required for pricing plan form: splited); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payment payer will get seperate invoice <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
+<td>spliting type (required for pricing plan form: splitted); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payment payer will get seperate invoice <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
 </tr>
 <tr>
 <td>forward</td>
@@ -793,7 +793,7 @@
 <tr>
 <td>&nbsp;&nbsp;form</td>
 <td>String</td>
-<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splited&quot;</code></td>
+<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splitted&quot;</code></td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;preferences</td>
@@ -813,32 +813,32 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;p_count</td>
 <td>Integer</td>
-<td>total count of payments (required for pricing plan form: splited)</td>
+<td>total count of payments (required for pricing plan form: splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;first_interval</td>
 <td>String</td>
-<td>first payment interval (required for pricing plan form: subscription/splited)</td>
+<td>first payment interval (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;first_amount</td>
 <td>Decimal</td>
-<td>first payment amount (required for pricing plan form: subscription/splited)</td>
+<td>first payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;next_interval</td>
 <td>String</td>
-<td>next payment interval startdate (required for pricing plan form: subscription/splited)</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;next_amount</td>
 <td>Decimal</td>
-<td>next payment amount (required for pricing plan form: subscription/splited)</td>
+<td>next payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;spliting_type</td>
 <td>String</td>
-<td>spliting type (required for pricing plan form: splited); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
+<td>spliting type (required for pricing plan form: splitted); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
 </tr>
 </tbody></table>
 <h3 id='error-4xx-2'>Error 4xx</h3>
@@ -924,7 +924,7 @@
 <tr>
 <td>form</td>
 <td>String</td>
-<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splited&quot;</code></td>
+<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splitted&quot;</code></td>
 </tr>
 <tr>
 <td>preferences</td>
@@ -944,32 +944,32 @@
 <tr>
 <td>&nbsp;&nbsp;p_count</td>
 <td>Integer</td>
-<td>total count of payments (required for pricing plan form: splited)</td>
+<td>total count of payments (required for pricing plan form: splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;first_interval</td>
 <td>String</td>
-<td>first payment interval (required for pricing plan form: subscription/splited)</td>
+<td>first payment interval (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;first_amount</td>
 <td>Decimal</td>
-<td>first payment amount (required for pricing plan form: subscription/splited)</td>
+<td>first payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;next_interval</td>
 <td>String</td>
-<td>next payment interval startdate (required for pricing plan form: subscription/splited)</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;next_amount</td>
 <td>Decimal</td>
-<td>next payment amount (required for pricing plan form: subscription/splited)</td>
+<td>next payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;spliting_type</td>
 <td>String</td>
-<td>spliting type (required for pricing plan form: splited); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
+<td>spliting type (required for pricing plan form: splitted); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
 </tr>
 </tbody></table>
 <h3 id='error-4xx-3'>Error 4xx</h3>
@@ -1002,7 +1002,7 @@
     "secret": "{secret}",
     "sales_page_id": 1087,
     "pricing_plan": {
-        "form": "splited",
+        "form": "splitted",
         "preferences": {
             "p_count": 2,
             "first_amount": 0.5,
@@ -1021,7 +1021,7 @@
   <span class="s2">"secret"</span> <span class="o">=&gt;</span> <span class="s2">"{api_secret}"</span><span class="p">,</span>
   <span class="s2">"sales_page_id"</span> <span class="o">=&gt;</span> <span class="mi">1087</span><span class="p">,</span>
   <span class="s2">"pricing_plan"</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="s2">"form"</span> <span class="o">=&gt;</span> <span class="s2">"splited"</span><span class="p">,</span>
+    <span class="s2">"form"</span> <span class="o">=&gt;</span> <span class="s2">"splitted"</span><span class="p">,</span>
     <span class="s2">"preferences"</span> <span class="o">=&gt;</span> <span class="p">{</span>
       <span class="s2">"p_count"</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
       <span class="s2">"first_amount"</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span>
@@ -1073,7 +1073,7 @@
 <tr>
 <td>&nbsp;&nbsp;form</td>
 <td>String</td>
-<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splited&quot;</code></td>
+<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splitted&quot;</code></td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;preferences</td>
@@ -1093,32 +1093,32 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;p_count</td>
 <td>Integer</td>
-<td>total count of payments (required for pricing plan form: splited)</td>
+<td>total count of payments (required for pricing plan form: splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;first_interval</td>
 <td>String</td>
-<td>first payment interval (required for pricing plan form: subscription/splited)</td>
+<td>first payment interval (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;first_amount</td>
 <td>Decimal</td>
-<td>first payment amount (required for pricing plan form: subscription/splited)</td>
+<td>first payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;next_interval</td>
 <td>String</td>
-<td>next payment interval startdate (required for pricing plan form: subscription/splited)</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;next_amount</td>
 <td>Decimal</td>
-<td>next payment amount (required for pricing plan form: subscription/splited)</td>
+<td>next payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;spliting_type</td>
 <td>String</td>
-<td>spliting type (required for pricing plan form: splited); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
+<td>spliting type (required for pricing plan form: splitted); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
 </tr>
 </tbody></table>
 <h3 id='success-200-4'>Success 200</h3>
@@ -1137,7 +1137,7 @@
 <tr>
 <td>form</td>
 <td>String</td>
-<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splited&quot;</code></td>
+<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splitted&quot;</code></td>
 </tr>
 <tr>
 <td>preferences</td>
@@ -1157,32 +1157,32 @@
 <tr>
 <td>&nbsp;&nbsp;p_count</td>
 <td>Integer</td>
-<td>total count of payments (required for pricing plan form: splited)</td>
+<td>total count of payments (required for pricing plan form: splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;first_interval</td>
 <td>String</td>
-<td>first payment interval (required for pricing plan form: subscription/splited)</td>
+<td>first payment interval (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;first_amount</td>
 <td>Decimal</td>
-<td>first payment amount (required for pricing plan form: subscription/splited)</td>
+<td>first payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;next_interval</td>
 <td>String</td>
-<td>next payment interval startdate (required for pricing plan form: subscription/splited)</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;next_amount</td>
 <td>Decimal</td>
-<td>next payment amount (required for pricing plan form: subscription/splited)</td>
+<td>next payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;spliting_type</td>
 <td>String</td>
-<td>spliting type (required for pricing plan form: splited); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
+<td>spliting type (required for pricing plan form: splitted); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
 </tr>
 </tbody></table>
 <h3 id='error-4xx-4'>Error 4xx</h3>
@@ -1263,7 +1263,7 @@
 <tr>
 <td>&nbsp;&nbsp;form</td>
 <td>String</td>
-<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splited&quot;</code></td>
+<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splitted&quot;</code></td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;preferences</td>
@@ -1283,32 +1283,32 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;p_count</td>
 <td>Integer</td>
-<td>total count of payments (required for pricing plan form: splited)</td>
+<td>total count of payments (required for pricing plan form: splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;first_interval</td>
 <td>String</td>
-<td>first payment interval (required for pricing plan form: subscription/splited)</td>
+<td>first payment interval (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;first_amount</td>
 <td>Decimal</td>
-<td>first payment amount (required for pricing plan form: subscription/splited)</td>
+<td>first payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;next_interval</td>
 <td>String</td>
-<td>next payment interval startdate (required for pricing plan form: subscription/splited)</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;next_amount</td>
 <td>Decimal</td>
-<td>next payment amount (required for pricing plan form: subscription/splited)</td>
+<td>next payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;spliting_type</td>
 <td>String</td>
-<td>spliting type (required for pricing plan form: splited); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
+<td>spliting type (required for pricing plan form: splitted); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
 </tr>
 </tbody></table>
 <h3 id='success-200-5'>Success 200</h3>
@@ -1327,7 +1327,7 @@
 <tr>
 <td>form</td>
 <td>String</td>
-<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splited&quot;</code></td>
+<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;splitted&quot;</code></td>
 </tr>
 <tr>
 <td>preferences</td>
@@ -1347,32 +1347,32 @@
 <tr>
 <td>&nbsp;&nbsp;p_count</td>
 <td>Integer</td>
-<td>total count of payments (required for pricing plan form: splited)</td>
+<td>total count of payments (required for pricing plan form: splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;first_interval</td>
 <td>String</td>
-<td>first payment interval (required for pricing plan form: subscription/splited)</td>
+<td>first payment interval (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;first_amount</td>
 <td>Decimal</td>
-<td>first payment amount (required for pricing plan form: subscription/splited)</td>
+<td>first payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;next_interval</td>
 <td>String</td>
-<td>next payment interval startdate (required for pricing plan form: subscription/splited)</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;next_amount</td>
 <td>Decimal</td>
-<td>next payment amount (required for pricing plan form: subscription/splited)</td>
+<td>next payment amount (required for pricing plan form: subscription/splitted)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;spliting_type</td>
 <td>String</td>
-<td>spliting type (required for pricing plan form: splited); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
+<td>spliting type (required for pricing plan form: splitted); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
 </tr>
 </tbody></table>
 <h3 id='error-4xx-5'>Error 4xx</h3>
@@ -1545,7 +1545,7 @@
 <tr>
 <td>recurring_form</td>
 <td>String</td>
-<td>Returns the recurring form of the transaction. This value is being taken from the pricing plan form(one_time, subscription, splited), which was chosen by payer on sales page</td>
+<td>Returns the recurring form of the transaction. This value is being taken from the pricing plan form(one_time, subscription, splitted), which was chosen by payer on sales page</td>
 </tr>
 <tr>
 <td>payment_method</td>
