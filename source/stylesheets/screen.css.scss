@@ -40,6 +40,79 @@ html, body {
 // TABLE OF CONTENTS
 ////////////////////////////////////////////////////////////////////////////////
 
+#get, #get-2, #get-3, #get-4, #get-5 {
+  font-size: 20px;
+  color: #6bbd5b;
+}
+
+#delete, #delete-2, #delete-3 {
+  font-size: 20px;
+  color: #e27a7a;
+}
+#post, #post-2, #post-3 {
+  color: #248fb2;
+  font-size: 20px;
+}
+#put {
+  color: #9b708b;
+  font-size: 20px;
+}
+a[href='#create-sales-page'], a[href='#create-pricing-plan'], a[href='#create-a-refund'] {
+  &:before {
+    content: 'POST';
+    background-color: #248fb2;
+    margin-right: 5px;
+    font-size: 8px;
+    padding: 3px;
+    border-radius: 5px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+    color: white;
+  }
+}
+
+a[href='#get-sales-page-info'], a[href='#get-pricing-plan'], a[href='#get-payment-info'], a[href='#get-refund-info'], a[href='#get-sales-pages'] {
+  &:before {
+    content: 'GET';
+    background-color: #6bbd5b;
+    margin-right: 5px;
+    font-size: 8px;
+    padding: 3px;
+    border-radius: 5px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+    color: white;
+  }
+}
+
+a[href='#update-sales-page'] {
+  &:before {
+    content: 'PUT';
+    background-color: #9b708b;
+    margin-right: 5px;
+    font-size: 8px;
+    padding: 3px;
+    border-radius: 5px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+    color: white;
+  }
+}
+
+a[href='#delete-pricing-plan'] {
+  &:before {
+    content: 'DELETE';
+    background-color: #e27a7a;
+    margin-right: 5px;
+    font-size: 8px;
+    padding: 3px;
+    border-radius: 5px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+    color: white;
+  }
+}
+
 #toc > ul > li > a > span {
   float: right;
   background-color: #2484FF;
@@ -47,13 +120,10 @@ html, body {
   width: 20px;
 }
 
-#get {
-  font-size: 20px;
-}
-
 .toc-wrapper {
+  box-shadow: 1px 1px 0.5px lightgray;
   transition: left 0.3s ease-in-out;
-
+  border-right: 1px solid lightgray;
   overflow-y: auto;
   overflow-x: hidden;
   position: fixed;
@@ -93,7 +163,7 @@ html, body {
       margin: $nav-v-padding 0px;
       width: 100%;
       outline: none;
-      color: $nav-text;
+      color: black;
       border-radius: 0; /* ios has a default border radius */
     }
 
@@ -101,7 +171,7 @@ html, body {
       position: absolute;
       top: 17px;
       left: 15px;
-      color: $nav-text;
+      color: black;
       @extend %icon-search;
     }
   }
@@ -133,7 +203,7 @@ html, body {
     }
 
     a {
-      color: $nav-text;
+      color: black;
       text-decoration: none;
 
       &:hover {
@@ -154,7 +224,7 @@ html, body {
   }
 
   li {
-    color: $nav-text;
+    color: black;
     transition-property: background;
     transition-timing-function: linear;
     transition-duration: 200ms;
@@ -345,7 +415,7 @@ html, body {
   }
 
   &>ul, &>ol {
-    padding-left: $main-padding + 15px;
+    padding-left: $main-padding + 40px;
   }
 
   // the div is the tocify hidden div for placeholding stuff
@@ -414,6 +484,7 @@ html, body {
       line-height: 1.6;
       code {
         white-space: nowrap;
+        color: blue;
       }
     }
 
