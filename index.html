@@ -223,9 +223,6 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#get-started-now" class="toc-h1 toc-link" data-title="Get started now">Get started now</a>
-          </li>
-          <li>
             <a href="#sandbox" class="toc-h1 toc-link" data-title="Sandbox">Sandbox</a>
               <ul class="toc-list-h2">
                   <li>
@@ -276,8 +273,6 @@
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
 <p>Create sales pages and process payments through them easily with the elopage API. Use it to sell your products via our sales page using one time payments, subscriptions or installment payments.</p>
-<h1 id='get-started-now'>Get started now</h1>
-<p>Create sales pages, get paid, receive webhooks, create or delete pricing plans, find and search transaction ID / payment IDs and more is following. For questions please contact support@elopage.com.</p>
 <h1 id='sandbox'>Sandbox</h1>
 <p>For using our test enviroment, please use <code>http://staging.elopage.com/</code>. API key and secret are given after the user approval.</p>
 <h2 id='test-payments-credentials'>Test payments credentials</h2>
@@ -515,7 +510,7 @@
 <tr>
 <td>pricing_plans</td>
 <td>Array</td>
-<td>Array of objects which represents pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plans: <code>[{ &quot;form&quot;: &quot;one_time&quot;, &quot;preferences&quot;: { &quot;price&quot;: &quot;199.9&quot;, &quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plans: <code>[{ &quot;form&quot;: &quot;subscription&quot;, &quot;preferences&quot;: { &quot;first_interval&quot;: &quot;1w&quot;, &quot;first_amount&quot;: &quot;20.0&quot;, &quot;next_interval&quot;: &quot;1m&quot;, &quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;splited&#39; example (installment) pricing_plans: <code>[{ &quot;form&quot;: &quot;splited&quot;, &quot;preferences&quot;: { &quot;p_count&quot;: &quot;5&quot;, &quot;first_interval&quot;: &quot;1w&quot;, &quot;first_amount&quot;: &quot;20.0&quot;, &quot;next_interval&quot;: &quot;1m&quot;, &quot;next_amount&quot;: &quot;10.0&quot;, &quot;spliting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;splited&#39; example (limited_subscription) pricing_plans: <code>[{ &quot;form&quot;: &quot;splited&quot;, &quot;preferences&quot;: { &quot;p_count&quot;: &quot;5&quot;, &quot;first_interval&quot;: &quot;1w&quot;, &quot;first_amount&quot;: &quot;20.0&quot;, &quot;next_interval&quot;: &quot;1m&quot;, &quot;next_amount&quot;: &quot;10.0&quot;, &quot;spliting_type&quot;: &quot;limited_subscription&quot; } }]</code> Warning! maximum pricing plans allowed for one sales page is 5</td>
+<td>Array of objects which represents pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;one_time&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;price&quot;: &quot;199.9&quot;,</code><br><code>&quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plan: <br><code>[{ &quot;form&quot;: &quot;subscription&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;splited&#39; example (installment) pricing_plan: <code>[{ &quot;form&quot;: &quot;splited&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;splited&#39; example (limited_subscription) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;splited&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;limited_subscription&quot; } }]</code><br> Warning! maximum pricing plans allowed for one sales page is 5</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp; form</td>
