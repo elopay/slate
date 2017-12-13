@@ -267,6 +267,17 @@
               </ul>
           </li>
           <li>
+            <a href="#refunds" class="toc-h1 toc-link" data-title="Refunds">Refunds</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-a-refund" class="toc-h2 toc-link" data-title="Create a refund">Create a refund</a>
+                  </li>
+                  <li>
+                    <a href="#get-refund-info" class="toc-h2 toc-link" data-title="Get refund info">Get refund info</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
               <ul class="toc-list-h2">
                   <li>
@@ -1467,7 +1478,7 @@
 <tr>
 <td>id</td>
 <td>Number</td>
-<td>Payment ID is sent with the success_url redirection after payment</td>
+<td>Payment ID</td>
 </tr>
 </tbody></table>
 <h3 id='success-200-6'>Success 200</h3>
@@ -1595,6 +1606,403 @@
 </tr>
 </tbody></table>
 <h3 id='error-4xx-6'>Error 4xx</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NoAccessRight</td>
+<td>Only authenticated Sellers can access the data.</td>
+</tr>
+<tr>
+<td>UserNotFound</td>
+<td>The key of the User was not found.</td>
+</tr>
+</tbody></table>
+<h1 id='refunds'>Refunds</h1>
+<p>Refunds allow you to refund a transfer that has previously been created but not yet refunded. Funds will be refunded to the credit or debit card that was originally charged.</p>
+<h2 id='create-a-refund'>Create a refund</h2>
+<p>Refund an existing transfer</p>
+
+<blockquote>
+<p>Example usage:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  https://elopage.com/api/payments/<span class="o">{</span>:id<span class="o">}</span>/refund <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+  "key":"{API key}",
+  "secret":"{API secret}"
+}'</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://elopage.com/api/payments/{:id}/refund"</span><span class="p">)</span>
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+                  <span class="ss">key: </span><span class="s2">"{API key}"</span><span class="p">,</span>
+                  <span class="ss">secret: </span><span class="s2">"{API secret}"</span>
+               <span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+  "payer": {
+      "email": "jonhdoe@doe.com",
+      "first_name": "John",
+      "last_name": "Done",
+      "country": "Berlin",
+      "city": "Germany",
+      "street": "Joachimsthaler Straße 21",
+      "zip": "10719",
+      "company": null,
+      "vat_id": null,
+      "phone": "+4930398204650"
+  },
+  "total": "-199.9",
+  "amount": "-199.9",
+  "fee": 0,
+  "id": 542652,
+  "payment_method": "sepa",
+  "payment_session_id": 3913,
+  "refunded_tansfer_id": 542180,
+  "state": "waiting"
+}
+</code></pre><h3 id='post-3'>POST</h3>
+<p><code>https://elopage.com/api/payments/:id/refund</code></p>
+<h3 id='parameter-7'>Parameter</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>secret</td>
+<td>String</td>
+<td>Elopage api_secret, you can find them inside your Elopage cabinet: Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Your personal elopage API key which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Number</td>
+<td>Payment ID</td>
+</tr>
+</tbody></table>
+<h3 id='success-200-7'>Success 200</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>payer</td>
+<td>Object</td>
+<td>payer object</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;email</td>
+<td>String</td>
+<td>payer email</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;first_name</td>
+<td>String</td>
+<td>payer first name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;last_name</td>
+<td>String</td>
+<td>payer last name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;country</td>
+<td>String</td>
+<td>payer country</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;city</td>
+<td>String</td>
+<td>payer city</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;street</td>
+<td>String</td>
+<td>payer street</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;zip</td>
+<td>String</td>
+<td>payer zip</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;company</td>
+<td>String</td>
+<td>payer company name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;vat_id</td>
+<td>String</td>
+<td>payer VAT id</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;phone</td>
+<td>String</td>
+<td>payer phone</td>
+</tr>
+<tr>
+<td>total</td>
+<td>Decimal</td>
+<td>brutto amount</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Decimal</td>
+<td>netto amount</td>
+</tr>
+<tr>
+<td>fee</td>
+<td>Decimal</td>
+<td>fee</td>
+</tr>
+<tr>
+<td>payment_method</td>
+<td>String</td>
+<td>card, bank_account, paypal, sofort, bank_wire</td>
+</tr>
+<tr>
+<td>payment_session_id</td>
+<td>Integer</td>
+<td>ID of payment session, that this payment belongs to. You should save it for the recurring payments, the payment session for them will be the same.</td>
+</tr>
+<tr>
+<td>refunded_transfer_id</td>
+<td>Integer</td>
+<td>ID of the transfer which is being refunded</td>
+</tr>
+<tr>
+<td>state</td>
+<td>String</td>
+<td>waiting, successful, success_av, canceled or error</td>
+</tr>
+</tbody></table>
+<h3 id='error-4xx-7'>Error 4xx</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NoAccessRight</td>
+<td>Only authenticated Sellers can access the data.</td>
+</tr>
+<tr>
+<td>UserNotFound</td>
+<td>The key of the User was not found.</td>
+</tr>
+</tbody></table>
+<h2 id='get-refund-info'>Get refund info</h2>
+<blockquote>
+<p>Example usage:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://elopage.com/api/payments/{id}?key={api_key}&amp;secret={api_secret}"</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/payments/{id}?key={api_key}&amp;secret={api_secret}'</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+  "payer": {
+      "email": "jonhdoe@doe.com",
+      "first_name": "John",
+      "last_name": "Done",
+      "country": "Berlin",
+      "city": "Germany",
+      "street": "Joachimsthaler Straße 21",
+      "zip": "10719",
+      "company": null,
+      "vat_id": null,
+      "phone": "+4930398204650"
+  },
+  "total": "-199.9",
+  "amount": "-199.9",
+  "fee": 0,
+  "id": 542652,
+  "payment_method": "sepa",
+  "payment_session_id": 3913,
+  "refunded_tansfer_id": 542180,
+  "state": "waiting"
+}
+</code></pre>
+<p>Fetch transfer info by ID</p>
+<h3 id='get-4'>GET</h3>
+<p><code>https://elopage.com/api/payments/:id</code></p>
+<h3 id='parameter-8'>Parameter</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>secret</td>
+<td>String</td>
+<td>Elopage api_secret, you can find them inside your Elopage cabinet: Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Your personal elopage API key which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Number</td>
+<td>Payment ID</td>
+</tr>
+</tbody></table>
+<h3 id='success-200-8'>Success 200</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>payer</td>
+<td>Object</td>
+<td>payer object</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;email</td>
+<td>String</td>
+<td>payer email</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;first_name</td>
+<td>String</td>
+<td>payer first name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;last_name</td>
+<td>String</td>
+<td>payer last name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;country</td>
+<td>String</td>
+<td>payer country</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;city</td>
+<td>String</td>
+<td>payer city</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;street</td>
+<td>String</td>
+<td>payer street</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;zip</td>
+<td>String</td>
+<td>payer zip</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;company</td>
+<td>String</td>
+<td>payer company name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;vat_id</td>
+<td>String</td>
+<td>payer VAT id</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;phone</td>
+<td>String</td>
+<td>payer phone</td>
+</tr>
+<tr>
+<td>revenue</td>
+<td>Decimal</td>
+<td>revenue</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Decimal</td>
+<td>amount</td>
+</tr>
+<tr>
+<td>fee</td>
+<td>Decimal</td>
+<td>fee</td>
+</tr>
+<tr>
+<td>recurring</td>
+<td>Boolean</td>
+<td>Returns true if the payment is recurring</td>
+</tr>
+<tr>
+<td>recurring_form</td>
+<td>String</td>
+<td>Returns the recurring form of the transaction. This value is being taken from the pricing plan form(one_time, subscription, splitted), which was chosen by payer on sales page</td>
+</tr>
+<tr>
+<td>payment_method</td>
+<td>String</td>
+<td>card, bank_account, paypal, sofort, bank_wire</td>
+</tr>
+<tr>
+<td>payment_session_id</td>
+<td>Integer</td>
+<td>ID of payment session, that this payment belongs to. You should save it for the recurring payments, the payment session for them will be the same.</td>
+</tr>
+<tr>
+<td>state</td>
+<td>String</td>
+<td>waiting, successful, success_av, canceled or error</td>
+</tr>
+<tr>
+<td>created_date</td>
+<td>String</td>
+<td>created_date</td>
+</tr>
+<tr>
+<td>success_date</td>
+<td>String</td>
+<td>success_date with time</td>
+</tr>
+<tr>
+<td>success_date_short</td>
+<td>String</td>
+<td>success_date without time</td>
+</tr>
+<tr>
+<td>invoice_link</td>
+<td>String</td>
+<td>link to download invoice, you should setup invoice generation inside cabinet.</td>
+</tr>
+</tbody></table>
+<h3 id='error-4xx-8'>Error 4xx</h3>
 <table><thead>
 <tr>
 <th>Name</th>
