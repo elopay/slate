@@ -267,7 +267,15 @@
               </ul>
           </li>
           <li>
-            <a href="#thanks-for-using-the-elopage-api" class="toc-h1 toc-link" data-title="Thanks for using the elopage API!">Thanks for using the elopage API!</a>
+            <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#message-body" class="toc-h2 toc-link" data-title="Message body">Message body</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#thanks" class="toc-h1 toc-link" data-title="Thanks!">Thanks!</a>
           </li>
       </div>
     </div>
@@ -1426,6 +1434,7 @@
     "recurring": false,
     "recurring_form": "one_time",
     "payment_method": "paypal",
+    "payment_session_id": "1234",
     "state": "successful",
     "created_date": "2017-12-11T15:47Z",
     "success_date": "2017-12-11T15:47Z",
@@ -1555,6 +1564,11 @@
 <td>card, bank_account, paypal, sofort, bank_wire</td>
 </tr>
 <tr>
+<td>payment_session_id</td>
+<td>Integer</td>
+<td>ID of payment session, that this payment belongs to. You should save it for the recurring payments, the payment session for them will be the same.</td>
+</tr>
+<tr>
 <td>state</td>
 <td>String</td>
 <td>waiting, successful, success_av, canceled or error</td>
@@ -1596,7 +1610,133 @@
 <td>The key of the User was not found.</td>
 </tr>
 </tbody></table>
-<h1 id='thanks-for-using-the-elopage-api'>Thanks for using the elopage API!</h1>
+<h1 id='webhooks'>Webhooks</h1>
+<p>Webhooks allow systems integrated with Elopage to receive near real-time notification of events related with payment success error or waiting payment. After you do a payment, or after it change its initial state from waiting or pending to successful or error.</p>
+<h3 id='message-body'>Message body</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>payer</td>
+<td>Object</td>
+<td>payer object</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;email</td>
+<td>String</td>
+<td>payer email</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;first_name</td>
+<td>String</td>
+<td>payer first name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;last_name</td>
+<td>String</td>
+<td>payer last name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;country</td>
+<td>String</td>
+<td>payer country</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;city</td>
+<td>String</td>
+<td>payer city</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;street</td>
+<td>String</td>
+<td>payer street</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;zip</td>
+<td>String</td>
+<td>payer zip</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;company</td>
+<td>String</td>
+<td>payer company name</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;vat_id</td>
+<td>String</td>
+<td>payer VAT id</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;phone</td>
+<td>String</td>
+<td>payer phone</td>
+</tr>
+<tr>
+<td>revenue</td>
+<td>Decimal</td>
+<td>revenue</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Decimal</td>
+<td>amount</td>
+</tr>
+<tr>
+<td>fee</td>
+<td>Decimal</td>
+<td>fee</td>
+</tr>
+<tr>
+<td>recurring</td>
+<td>Boolean</td>
+<td>Returns true if the payment is recurring</td>
+</tr>
+<tr>
+<td>recurring_form</td>
+<td>String</td>
+<td>Returns the recurring form of the transaction. This value is being taken from the pricing plan form(one_time, subscription, splitted), which was chosen by payer on sales page</td>
+</tr>
+<tr>
+<td>payment_method</td>
+<td>String</td>
+<td>card, bank_account, paypal, sofort, bank_wire</td>
+</tr>
+<tr>
+<td>payment_session_id</td>
+<td>Integer</td>
+<td>ID of payment session, that this payment belongs to. You should save it for the recurring payments, the payment session for them will be the same.</td>
+</tr>
+<tr>
+<td>state</td>
+<td>String</td>
+<td>waiting, successful, success_av, canceled or error</td>
+</tr>
+<tr>
+<td>created_date</td>
+<td>String</td>
+<td>created_date</td>
+</tr>
+<tr>
+<td>success_date</td>
+<td>String</td>
+<td>success_date with time</td>
+</tr>
+<tr>
+<td>success_date_short</td>
+<td>String</td>
+<td>success_date without time</td>
+</tr>
+<tr>
+<td>invoice_link</td>
+<td>String</td>
+<td>link to download invoice, you should setup invoice generation inside cabinet.</td>
+</tr>
+</tbody></table>
+<h1 id='thanks'>Thanks!</h1>
 <p>As we are currently in the beta version we are looking forward to your feedback and support requests. Please contact us via support@elopage.com. Thank you!</p>
 
       </div>
