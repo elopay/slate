@@ -429,6 +429,13 @@
        }
      }
    ],
+   "authors": [
+    {
+      "id": 4,
+      "custom_commission_enabled": true,
+      "commission": 10
+    }
+    ],
    "success_email": {
       "subject_de": "test",
       "body_de": "&lt;p&gt;Hallo %{first_name} %{last_name},&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;vielen Dank f&amp;uuml;r die Bestellung.&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;Produktname: %{product_name}&lt;/p&gt;\n&lt;p&gt;Betrag: %{amount}&lt;/p&gt;\n&lt;p&gt;Zahlung: %{recurring_type}&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;Bitte jetzt hier klicken:&lt;/p&gt;\n&lt;p&gt;%{next_button}&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;Sch&amp;ouml;ne Gr&amp;uuml;&amp;szlig;e,&lt;/p&gt;",
@@ -458,6 +465,13 @@
                        <span class="p">}</span>
                      <span class="p">}</span>
                    <span class="p">],</span>
+                 <span class="s2">"authors"</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                      <span class="s2">"custom_commission_enabled"</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>
+                      <span class="s2">"commission"</span><span class="p">:</span> <span class="mi">10</span>
+                    <span class="p">}</span>
+                  <span class="p">],</span>
                   <span class="s2">"success_email"</span><span class="p">:</span> <span class="p">{</span>
                     <span class="s2">"subject_de"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
                     <span class="s2">"body_de"</span><span class="p">:</span> <span class="s2">"&lt;p&gt;Hallo %{first_name} %{last_name},&lt;/p&gt;
@@ -556,7 +570,27 @@
 <tr>
 <td>pricing_plans</td>
 <td>Array</td>
-<td>Array of objects which represents pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;one_time&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;price&quot;: &quot;199.9&quot;,</code><br><code>&quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plan: <br><code>[{ &quot;form&quot;: &quot;subscription&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;splitted&#39; example (installment) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;splitted&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;splitted&#39; example (limited_subscription) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;splitted&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;limited_subscription&quot; } }]</code><br> Warning! maximum pricing plans allowed for one sales page is 5</td>
+<td>Array of objects which represent pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;one_time&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;price&quot;: &quot;199.9&quot;,</code><br><code>&quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plan: <br><code>[{ &quot;form&quot;: &quot;subscription&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;splitted&#39; example (installment) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;splitted&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;splitted&#39; example (limited_subscription) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;splitted&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;limited_subscription&quot; } }]</code><br> Warning! maximum pricing plans allowed for one sales page is 5</td>
+</tr>
+<tr>
+<td>Authors</td>
+<td>Array</td>
+<td>Array of objects which represent the authors, that will be connected to the sales page</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; id</td>
+<td>Integer</td>
+<td>ID of the elopage publisher, which you want to connect to the sales page</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; c_c_enabled</td>
+<td>Boolean</td>
+<td>Pass &#39;true&#39; here if you want to overwrite general commission with this one, you should pass &#39;commission&#39; for it to take effect</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; commission</td>
+<td>Integer</td>
+<td>Field which represents how much will author receive, measured in %</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp; form</td>
@@ -1452,6 +1486,14 @@
     "success_date_short": "2017-12-11",
     "invoice_link": "https://elopage.com/common/invoices/2879?token=uVUai-84pyDhdz8K3nNd",
     "success_link": "https://elopage.com/s/elopage/product-name-6/payment_success?token=uVUai-84pyDhdz8K3nNd"
+    "author_commissions": [
+      {
+          "id": 1,
+          "rate": "10.0",
+          "amount": "19.385",
+          "payment_id": 542711
+      }
+    ]
 }
 </code></pre>
 <p>Fetch transfer info by ID</p>
@@ -2142,6 +2184,31 @@
 <td>invoice_link</td>
 <td>String</td>
 <td>link to download invoice, you should setup invoice generation inside cabinet.</td>
+</tr>
+<tr>
+<td>author_commissions</td>
+<td>Array</td>
+<td>Commissions received by your authors for the sales page, that they are linked to</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; id</td>
+<td>Integer</td>
+<td>Author commission ID</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; rate</td>
+<td>Integer</td>
+<td>Rate, by which the revenue of author was counted</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; amount</td>
+<td>Integer</td>
+<td>Amount of revenue granted</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; payment_id</td>
+<td>Integer</td>
+<td>ID of payment, for which the commission are created</td>
 </tr>
 </tbody></table>
 <h1 id='thanks'>Thanks!</h1>
