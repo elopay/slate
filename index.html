@@ -550,7 +550,7 @@
     "url_to_pay": "https://elopage.com/s/elopage/product-name-1/payment"
 }
 </code></pre>
-<p>The elopage API allows to initiative payments and complete payments on its optimized payment interfaces. In order to process payments you first need to create a sales page. With the sales page creation you receive the &#39;url_to_pay&#39; parameter to which you must redirect the payer to complete payment. There after you can redirect the user back to your URL and forward information. After payer proceed with payment, or after the payment state changes from pending/waiting to success/error, you will get webhook to the &#39;webhook_url&#39;, which you sent to sales page referenced to this payment.</p>
+<p>The elopage API allows to initiate and complete payments using optimized checkout interfaces. In order to process payments you first need to create a sales page. After the sales page creation you will receive a &#39;url_to_pay&#39; parameter to which you must redirect your customer to complete payment. Thereafter you need to redirect the customer back to your success URL and pass on parameters and information. Using webhooks (webhook_url), you will get instant notifications about the status of the payment.</p>
 <h3 id='post'>POST</h3>
 <p><code>https://elopage.com/api/sales_pages</code></p>
 <h3 id='parameter'>Parameter</h3>
@@ -574,42 +574,32 @@
 <tr>
 <td>name</td>
 <td>String</td>
-<td>What is the payer paying for? Name the payment by entering a product name, plan name or similar. This name will be visible to your payer during the checkout process.</td>
+<td>What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.</td>
 </tr>
 <tr>
 <td>success_url</td>
 <td>String</td>
-<td>URL to which the payer or payer will be redirected after successfully completing payment. Attention: Payments with some payment methods require time to process. Due to this reason you must attach parameters to the redirection URLs to fetch updates of payment IDs. First is Payment ID <code>payment_id</code> which you can you fetch in order to receive the payment status <code>/api/payments/:id</code>.</td>
+<td><b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.</td>
 </tr>
 <tr>
 <td>cancel_url</td>
 <td>String</td>
-<td>URL to which payer is redirected to in case payment process was cancelled by payer.</td>
+<td><b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.</td>
 </tr>
 <tr>
 <td>error_url</td>
 <td>String</td>
-<td>URL to which payer is redirected in case of errors during payment process (e.g. Bad credit card info, rejected by pop etc.)</td>
+<td><b>Error URL</b> to which your customer is redirected in case of error occurrences during the payment processing (for example bad credit card information, rejected card etc.).</td>
 </tr>
 <tr>
 <td>webhook_url</td>
 <td>String</td>
-<td>elopage API sends POST request to this URL if payment for payment of product/name once it changes status to successful (e.g. bank wire updates). Also we will add transation id and payment id to POST request.</td>
-</tr>
-<tr>
-<td>price</td>
-<td>Decimal</td>
-<td>Will be deprecated after 01.01.2018 use pricing_plans instead</td>
-</tr>
-<tr>
-<td>recurring_prices</td>
-<td>Object</td>
-<td>Will be deprecated after 01.01.2018 including all its subparams - use pricing_plans instead</td>
+<td>The elopage API sends POST requests to this URL when there are updates related to the payment (for example bank wire payment updates to status successful). Transaction IDs and payment IDs are included in the POST requests.</td>
 </tr>
 <tr>
 <td>pricing_plans</td>
 <td>Array</td>
-<td>Array of objects which represent pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;one_time&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;price&quot;: &quot;199.9&quot;,</code><br><code>&quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plan: <br><code>[{ &quot;form&quot;: &quot;subscription&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;split&#39; example (installment) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;split&#39; example (limited_subscription) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;limited_subscription&quot; } }]</code><br> Warning! maximum pricing plans allowed for one sales page is 5</td>
+<td>Array of objects which represent pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;one_time&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;price&quot;: &quot;199.9&quot;,</code><br><code>&quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plan: <br><code>[{ &quot;form&quot;: &quot;subscription&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;split&#39; example (installment) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;splitting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;split&#39; example (limited_subscription) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;splitting_type&quot;: &quot;limited_subscription&quot; } }]</code><br> <span style='background-color: lightpink'>Note: Per sales page you are allowed to use maximum 5 pricing plans </span>.</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp; form</td>
@@ -619,12 +609,7 @@
 <tr>
 <td>&nbsp;&nbsp; preferences</td>
 <td>Object</td>
-<td>preferences object is differs for pricing forms</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp; price</td>
-<td>Decimal</td>
-<td>price by current pricing plan (only for one_time pricing plan)</td>
+<td>Preferences can be different for each pricing form&nbsp;&nbsp;&nbsp;&nbsp; price</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; old_price</td>
@@ -639,7 +624,7 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; first_interval</td>
 <td>String</td>
-<td>first payment interval (required for pricing plan form: subscription/split)</td>
+<td>first payment interval (required for pricing plan form: subscription/split), possible values: ‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; first_amount</td>
@@ -649,7 +634,7 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; next_interval</td>
 <td>String</td>
-<td>next payment interval startdate (required for pricing plan form: subscription/split)</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/split), possible values: ‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; next_amount</td>
@@ -657,7 +642,7 @@
 <td>next payment amount (required for pricing plan form: subscription/split)</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp; spliting_type</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; splitting_type</td>
 <td>String</td>
 <td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payment payer will get seperate invoice <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
 </tr>
@@ -855,7 +840,7 @@
 <tr>
 <td>name</td>
 <td>String</td>
-<td>What is the payer paying for? Name the payment by entering a product name, plan name or similar. This name will be visible to your payer during the checkout process.</td>
+<td>What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.</td>
 </tr>
 <tr>
 <td>price</td>
@@ -870,17 +855,17 @@
 <tr>
 <td>success_url</td>
 <td>String</td>
-<td>URL to which the payer or payer will be redirected after successfully completing payment. Attention: Payments with some payment methods require time to process. Due to this reason you must attach parameters to the redirection URLs to fetch updates of payment IDs. First is Payment ID <code>payment_id</code> which you can you fetch in order to receive the payment status <code>/api/payments/:id</code>.</td>
+<td><b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.</td>
 </tr>
 <tr>
 <td>cancel_url</td>
 <td>String</td>
-<td>URL to which payer is redirected to in case payment process was cancelled by payer.</td>
+<td><b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.</td>
 </tr>
 <tr>
 <td>error_url</td>
 <td>String</td>
-<td>URL to which payer is redirected in case of errors during payment process (e.g. Bad credit card info, rejected by pop etc.)</td>
+<td><b>Error URL</b> to which your customer is redirected in case of error occurrences during the payment processing (for example bad credit card information, rejected card etc.).</td>
 </tr>
 <tr>
 <td>webhook_url</td>
@@ -905,12 +890,7 @@
 <tr>
 <td>&nbsp;&nbsp;preferences</td>
 <td>Object</td>
-<td>preferences object is differs for pricing forms</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;price</td>
-<td>Decimal</td>
-<td>price by current pricing plan</td>
+<td>Preferences can be different for each pricing form&nbsp;&nbsp;&nbsp;&nbsp;price</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;old_price</td>
@@ -925,7 +905,7 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;first_interval</td>
 <td>String</td>
-<td>first payment interval (required for pricing plan form: subscription/split)</td>
+<td>first payment interval (required for pricing plan form: subscription/split), possible values: ‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;first_amount</td>
@@ -935,7 +915,7 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;next_interval</td>
 <td>String</td>
-<td>next payment interval startdate (required for pricing plan form: subscription/split)</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/split), possible values: ‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;next_amount</td>
@@ -943,7 +923,7 @@
 <td>next payment amount (required for pricing plan form: subscription/split)</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;spliting_type</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;splitting_type</td>
 <td>String</td>
 <td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
 </tr>
@@ -1087,42 +1067,32 @@
 <tr>
 <td>name</td>
 <td>String</td>
-<td>What is the payer paying for? Name the payment by entering a product name, plan name or similar. This name will be visible to your payer during the checkout process.</td>
+<td>What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.</td>
 </tr>
 <tr>
 <td>success_url</td>
 <td>String</td>
-<td>URL to which the payer or payer will be redirected after successfully completing payment. Attention: Payments with some payment methods require time to process. Due to this reason you must attach parameters to the redirection URLs to fetch updates of payment IDs. First is Payment ID <code>payment_id</code> which you can you fetch in order to receive the payment status <code>/api/payments/:id</code>.</td>
+<td><b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.</td>
 </tr>
 <tr>
 <td>cancel_url</td>
 <td>String</td>
-<td>URL to which payer is redirected to in case payment process was cancelled by payer.</td>
+<td><b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.</td>
 </tr>
 <tr>
 <td>error_url</td>
 <td>String</td>
-<td>URL to which payer is redirected in case of errors during payment process (e.g. Bad credit card info, rejected by pop etc.)</td>
+<td><b>Error URL</b> to which your customer is redirected in case of error occurrences during the payment processing (for example bad credit card information, rejected card etc.).</td>
 </tr>
 <tr>
 <td>webhook_url</td>
 <td>String</td>
-<td>elopage API sends POST request to this URL if payment for payment of product/name once it changes status to successful (e.g. bank wire updates). Also we will add transation id and payment id to POST request.</td>
-</tr>
-<tr>
-<td>price</td>
-<td>Decimal</td>
-<td>Will be deprecated after 01.01.2018 use pricing_plans instead</td>
-</tr>
-<tr>
-<td>recurring_prices</td>
-<td>Object</td>
-<td>Will be deprecated after 01.01.2018 including all its subparams - use pricing_plans instead</td>
+<td>The elopage API sends POST requests to this URL when there are updates related to the payment (for example bank wire payment updates to status successful). Transaction IDs and payment IDs are included in the POST requests.</td>
 </tr>
 <tr>
 <td>pricing_plans</td>
 <td>Array</td>
-<td>Array of objects which represent pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;one_time&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;price&quot;: &quot;199.9&quot;,</code><br><code>&quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plan: <br><code>[{ &quot;form&quot;: &quot;subscription&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;split&#39; example (installment) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;split&#39; example (limited_subscription) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;spliting_type&quot;: &quot;limited_subscription&quot; } }]</code><br> Warning! maximum pricing plans allowed for one sales page is 5</td>
+<td>Array of objects which represent pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;one_time&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;price&quot;: &quot;199.9&quot;,</code><br><code>&quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plan: <br><code>[{ &quot;form&quot;: &quot;subscription&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;split&#39; example (installment) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;splitting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;split&#39; example (limited_subscription) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;splitting_type&quot;: &quot;limited_subscription&quot; } }]</code><br> <span style='background-color: lightpink'>Note: Per sales page you are allowed to use maximum 5 pricing plans </span>.</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp; ID</td>
@@ -1137,12 +1107,7 @@
 <tr>
 <td>&nbsp;&nbsp; preferences</td>
 <td>Object</td>
-<td>preferences object is differs for pricing forms</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp; price</td>
-<td>Decimal</td>
-<td>price by current pricing plan (only for one_time pricing plan)</td>
+<td>Preferences can be different for each pricing form&nbsp;&nbsp;&nbsp;&nbsp; price</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; old_price</td>
@@ -1157,7 +1122,7 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; first_interval</td>
 <td>String</td>
-<td>first payment interval (required for pricing plan form: subscription/split)</td>
+<td>first payment interval (required for pricing plan form: subscription/split), possible values: ‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; first_amount</td>
@@ -1167,7 +1132,7 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; next_interval</td>
 <td>String</td>
-<td>next payment interval startdate (required for pricing plan form: subscription/split)</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/split), possible values: ‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; next_amount</td>
@@ -1175,7 +1140,7 @@
 <td>next payment amount (required for pricing plan form: subscription/split)</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp; spliting_type</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; splitting_type</td>
 <td>String</td>
 <td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payment payer will get seperate invoice <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
 </tr>
@@ -1362,12 +1327,7 @@
 <tr>
 <td>preferences</td>
 <td>Object</td>
-<td>preferences object is differs for pricing forms</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;price</td>
-<td>Decimal</td>
-<td>price by current pricing plan</td>
+<td>Preferences can be different for each pricing form&nbsp;&nbsp;price</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;old_price</td>
@@ -1400,7 +1360,7 @@
 <td>next payment amount (required for pricing plan form: subscription/split)</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;spliting_type</td>
+<td>&nbsp;&nbsp;splitting_type</td>
 <td>String</td>
 <td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
 </tr>
@@ -1511,12 +1471,7 @@
 <tr>
 <td>&nbsp;&nbsp;preferences</td>
 <td>Object</td>
-<td>preferences object is differs for pricing forms</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;price</td>
-<td>Decimal</td>
-<td>price by current pricing plan</td>
+<td>Preferences can be different for each pricing form&nbsp;&nbsp;&nbsp;&nbsp;price</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;old_price</td>
@@ -1549,7 +1504,7 @@
 <td>next payment amount (required for pricing plan form: subscription/split)</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;spliting_type</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;splitting_type</td>
 <td>String</td>
 <td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
 </tr>
@@ -1575,12 +1530,7 @@
 <tr>
 <td>preferences</td>
 <td>Object</td>
-<td>preferences object is differs for pricing forms</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;price</td>
-<td>Decimal</td>
-<td>price by current pricing plan</td>
+<td>Preferences can be different for each pricing form&nbsp;&nbsp;price</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;old_price</td>
@@ -1613,7 +1563,7 @@
 <td>next payment amount (required for pricing plan form: subscription/split)</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;spliting_type</td>
+<td>&nbsp;&nbsp;splitting_type</td>
 <td>String</td>
 <td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
 </tr>
@@ -1684,64 +1634,9 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>sales_page_id</td>
+<td>id</td>
 <td>Integer</td>
-<td>ID of sales page, for which you create this pricing plan</td>
-</tr>
-<tr>
-<td>pricing_plan</td>
-<td>Object</td>
-<td>Pricing plan object</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;form</td>
-<td>String</td>
-<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;split&quot;</code></td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;preferences</td>
-<td>Object</td>
-<td>preferences object is differs for pricing forms</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;price</td>
-<td>Decimal</td>
-<td>price by current pricing plan</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;old_price</td>
-<td>Decimal</td>
-<td>old product price</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;p_count</td>
-<td>Integer</td>
-<td>total count of payments (required for pricing plan form: split)</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;first_interval</td>
-<td>String</td>
-<td>first payment interval (required for pricing plan form: subscription/split)</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;first_amount</td>
-<td>Decimal</td>
-<td>first payment amount (required for pricing plan form: subscription/split)</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;next_interval</td>
-<td>String</td>
-<td>next payment interval startdate (required for pricing plan form: subscription/split)</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;next_amount</td>
-<td>Decimal</td>
-<td>next payment amount (required for pricing plan form: subscription/split)</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;spliting_type</td>
-<td>String</td>
-<td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
+<td>ID of the pricing plan you want to delete</td>
 </tr>
 </tbody></table>
 <h3 id='success-200-6'>Success 200</h3>
@@ -1753,59 +1648,14 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>id</td>
-<td>Integer</td>
-<td>Created pricing plan ID</td>
+<td>status</td>
+<td>string</td>
+<td>status of the request, possible values: &#39;success&#39;, &#39;error&#39;</td>
 </tr>
 <tr>
-<td>form</td>
-<td>String</td>
-<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;split&quot;</code></td>
-</tr>
-<tr>
-<td>preferences</td>
-<td>Object</td>
-<td>preferences object is differs for pricing forms</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;price</td>
-<td>Decimal</td>
-<td>price by current pricing plan</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;old_price</td>
-<td>Decimal</td>
-<td>old product price</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;p_count</td>
-<td>Integer</td>
-<td>total count of payments (required for pricing plan form: split)</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;first_interval</td>
-<td>String</td>
-<td>first payment interval (required for pricing plan form: subscription/split)</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;first_amount</td>
-<td>Decimal</td>
-<td>first payment amount (required for pricing plan form: subscription/split)</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;next_interval</td>
-<td>String</td>
-<td>next payment interval startdate (required for pricing plan form: subscription/split)</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;next_amount</td>
-<td>Decimal</td>
-<td>next payment amount (required for pricing plan form: subscription/split)</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;spliting_type</td>
-<td>String</td>
-<td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
+<td>response</td>
+<td>string</td>
+<td>response text</td>
 </tr>
 </tbody></table>
 <h3 id='error-4xx-6'>Error 4xx</h3>
