@@ -609,7 +609,12 @@
 <tr>
 <td>&nbsp;&nbsp; preferences</td>
 <td>Object</td>
-<td>Preferences can be different for each pricing form&nbsp;&nbsp;&nbsp;&nbsp; price</td>
+<td>Apply different intervals for pricing plans with subscription and installments.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; price</td>
+<td>Decimal</td>
+<td>price by current pricing plan (only for one_time pricing plan)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; old_price</td>
@@ -644,7 +649,7 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; splitting_type</td>
 <td>String</td>
-<td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payment payer will get seperate invoice <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
+<td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - One invoice for the entire amount will be issued, &quot;limited_subscription&quot; - For each payment a new invoice will be issued <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
 </tr>
 <tr>
 <td>Authors</td>
@@ -890,7 +895,12 @@
 <tr>
 <td>&nbsp;&nbsp;preferences</td>
 <td>Object</td>
-<td>Preferences can be different for each pricing form&nbsp;&nbsp;&nbsp;&nbsp;price</td>
+<td>Apply different intervals for pricing plans with subscription and installments.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;price</td>
+<td>Decimal</td>
+<td>price by current pricing plan</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;old_price</td>
@@ -925,7 +935,7 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;splitting_type</td>
 <td>String</td>
-<td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
+<td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - One invoice for the entire amount will be issued, &quot;limited_subscription&quot; - For each payment a new invoice will be issued <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
 </tr>
 <tr>
 <td>Authors</td>
@@ -1107,7 +1117,12 @@
 <tr>
 <td>&nbsp;&nbsp; preferences</td>
 <td>Object</td>
-<td>Preferences can be different for each pricing form&nbsp;&nbsp;&nbsp;&nbsp; price</td>
+<td>Apply different intervals for pricing plans with subscription and installments.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; price</td>
+<td>Decimal</td>
+<td>price by current pricing plan (only for one_time pricing plan)</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; old_price</td>
@@ -1142,7 +1157,7 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp; splitting_type</td>
 <td>String</td>
-<td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payment payer will get seperate invoice <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
+<td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - <b> One invoice for the entire amount will be issued </b>, &quot;limited_subscription&quot; - <b>For each payment a new invoice will be issued</b> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
 </tr>
 <tr>
 <td>Authors</td>
@@ -1327,7 +1342,7 @@
 <tr>
 <td>preferences</td>
 <td>Object</td>
-<td>Preferences can be different for each pricing form&nbsp;&nbsp;price</td>
+<td>Apply different intervals for pricing plans with subscription and installments.&nbsp;&nbsp;price</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;old_price</td>
@@ -1362,7 +1377,7 @@
 <tr>
 <td>&nbsp;&nbsp;splitting_type</td>
 <td>String</td>
-<td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
+<td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - One invoice for the entire amount will be issued, &quot;limited_subscription&quot; - For each payment a new invoice will be issued <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
 </tr>
 </tbody></table>
 <h3 id='error-4xx-4'>Error 4xx</h3>
@@ -1471,7 +1486,7 @@
 <tr>
 <td>&nbsp;&nbsp;preferences</td>
 <td>Object</td>
-<td>Preferences can be different for each pricing form&nbsp;&nbsp;&nbsp;&nbsp;price</td>
+<td>Apply different intervals for pricing plans with subscription and installments.&nbsp;&nbsp;&nbsp;&nbsp;price</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;old_price</td>
@@ -1506,7 +1521,7 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;splitting_type</td>
 <td>String</td>
-<td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
+<td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - One invoice for the entire amount will be issued, &quot;limited_subscription&quot; - For each payment a new invoice will be issued <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
 </tr>
 </tbody></table>
 <h3 id='success-200-5'>Success 200</h3>
@@ -1530,7 +1545,7 @@
 <tr>
 <td>preferences</td>
 <td>Object</td>
-<td>Preferences can be different for each pricing form&nbsp;&nbsp;price</td>
+<td>Apply different intervals for pricing plans with subscription and installments.&nbsp;&nbsp;price</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;old_price</td>
@@ -1565,7 +1580,7 @@
 <tr>
 <td>&nbsp;&nbsp;splitting_type</td>
 <td>String</td>
-<td>spliting type (required for pricing plan form: split); notes: &quot;installment&quot; - one invoice for all payments, &quot;limited_subscription&quot; - for each payments payer will get seperate invoice <br> Allowed values: [&quot;installment&quot;, &quot;limited_subscription&quot;]</td>
+<td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - One invoice for the entire amount will be issued, &quot;limited_subscription&quot; - For each payment a new invoice will be issued <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
 </tr>
 </tbody></table>
 <h3 id='error-4xx-5'>Error 4xx</h3>
