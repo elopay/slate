@@ -597,6 +597,16 @@
 <td>The elopage API sends POST requests to this URL when there are updates related to the payment (for example bank wire payment updates to status successful). Transaction IDs and Payment IDs are included in the POST requests.</td>
 </tr>
 <tr>
+<td>page_header</td>
+<td>String</td>
+<td>Use the page header to add content above the payment form (testimonials, campaign information etc.)  using html.</td>
+</tr>
+<tr>
+<td>page_footer</td>
+<td>String</td>
+<td>Use the page footer to add further information and content below the payment form using html.</td>
+</tr>
+<tr>
 <td>pricing_plans</td>
 <td>Array</td>
 <td>Array of objects which represent pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;one_time&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;price&quot;: &quot;199.9&quot;,</code><br><code>&quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plan: <br><code>[{ &quot;form&quot;: &quot;subscription&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;split&#39; example (installment) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;splitting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;split&#39; example (limited_subscription) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;splitting_type&quot;: &quot;limited_subscription&quot; } }]</code><br> <span style='background-color: lightpink'>Note: Per sales page you are allowed to use maximum 5 pricing plans </span>.</td>
@@ -1098,6 +1108,16 @@
 <td>webhook_url</td>
 <td>String</td>
 <td>The elopage API sends POST requests to this URL when there are updates related to the payment (for example bank wire payment updates to status successful). Transaction IDs and Payment IDs are included in the POST requests.</td>
+</tr>
+<tr>
+<td>page_header</td>
+<td>String</td>
+<td>Use the page header to add content above the payment form (testimonials, campaign information etc.)  using html.</td>
+</tr>
+<tr>
+<td>page_footer</td>
+<td>String</td>
+<td>Use the page footer to add further information and content below the payment form using html.</td>
 </tr>
 <tr>
 <td>pricing_plans</td>
@@ -2570,7 +2590,7 @@
 </tr>
 </tbody></table>
 <h1 id='thanks'>Thanks!</h1>
-<p>We look forward to your questions and feedback. The elopage API is yet making its baby steps and we value all types of feedback from developers. Feel free to contact us via support@elopage.com. Thanks for using our API. </p>
+<p>We look forward to your questions and feedback. The elopage API is yet making its baby steps and we value all types of feedback from developers. Feel free to contact us via support@elopage.com. Thanks for using our API.</p>
 
       </div>
       <div class="dark-box">
