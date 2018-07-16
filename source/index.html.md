@@ -877,7 +877,7 @@ recurring_form | String | Returns the recurring type of the transaction. This va
 payment_method | String | card, bank_account, paypal, sofort, bank_wire
 payment_session_id | Integer | ID of payment session to which the payment belongs to. You should save it for the recurring payments as recurring payments (next or follow up payments) will have the same session.
 sales_page_id | Integer | ID of sales page that is connected to this payment
-state | String | waiting, successful, success_av, canceled or error
+state | String | <b>Waiting:</b> shown when a payment is not yet successful. The status waiting can appear when:</br><ul><li>A bank wire was initiated</li><li>A Pay Later payment was initiated</li></ul><b>Successful:</b> Shown when a payment was initiated and successfully processed</br><b>Pending:</b> Shown only when a Paypal payment was initiated, but not yet processed. Once the payment is successfully processed, the status becomes successful</br><ul><li>A SEPA payment was initiated</li><li>A Paypal payment was initiated but not finished. Once the payment is successfully processed, the state becomes successful</li></ul><b>Canceled:</b> Shown when a payment has been initiated, but canceled before being successfully processed</br><b>Error:</b> Shown when an issue appeared, preventing the payment from being initiated. After 10 days without being processed, waiting payments state changes to error.
 created_date | String | Date of payment initiation
 success_date | String | Date and time of completed payment
 success_date_short | String | Date of completed payment
@@ -998,7 +998,7 @@ payment_method | String | card, bank_account, paypal, sofort, bank_wire
 payment_session_id | Integer | ID of payment session to which the payment belongs to. You should save it for the recurring payments as recurring payments (next or follow up payments) will have the same session.
 sales_page_id | Integer | ID of sales page that is connected to this payment
 refunded_transfer_id | Integer | ID of the transfer which is being refunded
-state | String | waiting, successful, success_av, canceled or error
+state | String | <b>Waiting:</b> shown when a payment is not yet successful. The status waiting can appear when:</br><ul><li>A bank wire was initiated</li><li>A Pay Later payment was initiated</li></ul><b>Successful:</b> Shown when a payment was initiated and successfully processed</br><b>Pending:</b> Shown only when a Paypal payment was initiated, but not yet processed. Once the payment is successfully processed, the status becomes successful</br><ul><li>A SEPA payment was initiated</li><li>A Paypal payment was initiated but not finished. Once the payment is successfully processed, the state becomes successful</li></ul><b>Canceled:</b> Shown when a payment has been initiated, but canceled before being successfully processed</br><b>Error:</b> Shown when an issue appeared, preventing the payment from being initiated. After 10 days without being processed, waiting payments state changes to error.
 author_commissions | Array | Refunded commission that was previously paid to the author
 &nbsp;&nbsp; id | Integer | Author commission ID
 &nbsp;&nbsp; rate | Integer | Commission rate in percentage with which commission was calculated
@@ -1100,7 +1100,7 @@ recurring_form | String | Returns the recurring type of the transaction. This va
 payment_method | String | card, bank_account, paypal, sofort, bank_wire
 payment_session_id | Integer | ID of payment session to which the payment belongs to. You should save it for the recurring payments as recurring payments (next or follow up payments) will have the same session.
 sales_page_id | Integer | ID of sales page that is connected to this payment
-state | String | waiting, successful, pending, canceled or error
+state | String | <b>Waiting:</b> shown when a payment is not yet successful. The status waiting can appear when:</br><ul><li>A bank wire was initiated</li><li>A Pay Later payment was initiated</li></ul><b>Successful:</b> Shown when a payment was initiated and successfully processed</br><b>Pending:</b> Shown only when a Paypal payment was initiated, but not yet processed. Once the payment is successfully processed, the status becomes successful</br><ul><li>A SEPA payment was initiated</li><li>A Paypal payment was initiated but not finished. Once the payment is successfully processed, the state becomes successful</li></ul><b>Canceled:</b> Shown when a payment has been initiated, but canceled before being successfully processed</br><b>Error:</b> Shown when an issue appeared, preventing the payment from being initiated. After 10 days without being processed, waiting payments state changes to error.
 created_date | String | Date of payment initiation
 success_date | String | Date and time of completed payment
 success_date_short | String | Date of completed payment
@@ -1144,7 +1144,7 @@ recurring_form | String | Returns the recurring type of the transaction. This va
 payment_method | String | card, bank_account, paypal, sofort, bank_wire
 payment_session_id | Integer | ID of payment session to which the payment belongs to. You should save it for the recurring payments as recurring payments (next or follow up payments) will have the same session.
 sales_page_id | Integer | ID of sales page that is connected to this payment
-state | String | waiting, successful, success_av, canceled or error
+state | String | <b>Waiting:</b> shown when a payment is not yet successful. The status waiting can appear when:</br><ul><li>A bank wire was initiated</li><li>A Pay Later payment was initiated</li></ul><b>Successful:</b> Shown when a payment was initiated and successfully processed</br><b>Pending:</b> Shown only when a Paypal payment was initiated, but not yet processed. Once the payment is successfully processed, the status becomes successful</br><ul><li>A SEPA payment was initiated</li><li>A Paypal payment was initiated but not finished. Once the payment is successfully processed, the state becomes successful</li></ul><b>Canceled:</b> Shown when a payment has been initiated, but canceled before being successfully processed</br><b>Error:</b> Shown when an issue appeared, preventing the payment from being initiated. After 10 days without being processed, waiting payments state changes to error.
 created_date | String | Date of payment initiation
 success_date | String | Date and time of completed payment
 success_date_short | String | Date of completed payment
