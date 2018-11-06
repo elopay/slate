@@ -40,7 +40,7 @@ html, body {
 // TABLE OF CONTENTS
 ////////////////////////////////////////////////////////////////////////////////
 
-#get, #get-2, #get-3, #get-4, #get-5 {
+#get, #get-2, #get-3, #get-4, #get-5, #get-6 {
   font-size: 20px;
   color: #6bbd5b;
 }
@@ -71,7 +71,7 @@ a[href='#create-sales-page'], a[href='#create-pricing-plan'], a[href='#create-a-
   }
 }
 
-a[href='#get-sales-page-info'], a[href='#get-pricing-plan'], a[href='#get-payment-info'], a[href='#get-refund-info'], a[href='#get-sales-pages'] {
+a[href='#get-sales-page-info'], a[href='#get-pricing-plan'], a[href='#get-payment-info'], a[href='#get-refund-info'], a[href='#get-sales-pages'], a[href='#get-sales-page'] {
   &:before {
     content: 'GET';
     background-color: #6bbd5b;

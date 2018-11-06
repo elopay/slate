@@ -289,9 +289,9 @@ Name | Description
 NoAccessRight | Only authenticated sellers can access the data.
 UserNotFound | The key of the user was not found.
 
-## Get sales pages
+## Get sales page
 
-Fetch sales pages and all relevant information such as product name, pricing plans, authors and more.
+Fetch sales page and all relevant information such as product name, pricing plans, authors and more.
 
 > Example usage:
 
@@ -385,6 +385,109 @@ Name | Description
 ---- | -----------
 NoAccessRight | Only authenticated sellers can access the data.
 UserNotFound | The key of the user was not found.
+
+
+## Get sales pages
+
+Fetch sales pages list.
+
+> Example usage:
+
+```shell
+curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/sales_pages?key={api_key}&secret={api_secret}"
+```
+
+```ruby
+require 'net/http'
+require 'uri'
+
+Net::HTTP.get(URI('https://elopage.com/api/sales_pages?key={api_key}&secret={api_secret}'))
+```
+
+> Example resppnse:
+
+```
+[
+  {
+      "id": 1646,
+      "name": "Test digital",
+      "url_to_pay": "https://elopage.com/s/testsellerregistration/test-digital-2/payment",
+      "webhook_url": "https://webhook.site/e6f6c835-1786-448e-bc12-58048ecfcdc8",
+      "active": true,
+      "sold_count": 34,
+      "created_at": "2018-07-31T11:48:15.789Z"
+  },
+  {
+      "id": 1679,
+      "name": "test product",
+      "url_to_pay": "https://elopage.com/s/testsellerregistration/test-58/payment",
+      "active": true,
+      "sold_count": 0,
+      "created_at": "2018-08-17T14:06:25.806Z"
+  },
+  {
+      "id": 1682,
+      "name": "test",
+      "url_to_pay": "https://elopage.com/s/testsellerregistration/test-w4rwerwe/payment",
+      "active": true,
+      "sold_count": 0,
+      "created_at": "2018-08-17T14:35:14.205Z"
+  }
+]
+
+```
+
+### GET
+
+`https://elopage.com/api/sales_pages`
+
+
+### Parameter
+
+Field | Type | Description
+----- | ---- | -----------
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
+key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Settings > Integrations
+id | Number | Sales page ID
+
+### Success 200
+
+Field | Type | Description
+----- | ---- | -----------
+url_to_pay | String | Sales page URL to which customer must be redirected
+name | String | What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.
+price | Decimal | The final price or amount you want to charge your customer incl. taxes, fees etc.
+free | Boolean | Sales page for a free product
+success_url | String | <b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.
+cancel_url | String | <b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.
+error_url | String | <b>Error URL</b> to which your customer is redirected in case of error occurrences during the payment processing (for example bad credit card information, rejected card etc.).
+webhook_url | String | elopage API sends POST request to this URL if payment for payment of product/name changes status to successful (e.g. bank wire updates).
+pricing_plans | Array | Array of objects which represents pricing plans of the product (at least one object required)
+&nbsp;&nbsp;ID | Integer | ID of the pricing plan
+&nbsp;&nbsp;form | String | Allowed values: `"one_time", "subscription", "split"`
+&nbsp;&nbsp;preferences | Object | Apply different intervals for pricing plans with subscription and installments.
+&nbsp;&nbsp;&nbsp;&nbsp;price | Decimal | price by current pricing plan
+&nbsp;&nbsp;&nbsp;&nbsp;old_price | Decimal | old product price
+&nbsp;&nbsp;&nbsp;&nbsp;p_count | Integer | total count of payments (required for pricing plan form: split)
+&nbsp;&nbsp;&nbsp;&nbsp;first_interval | String | first payment interval (required for pricing plan form: subscription/split), possible values: `‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’`
+&nbsp;&nbsp;&nbsp;&nbsp;first_amount | Decimal | first payment amount (required for pricing plan form: subscription/split)
+&nbsp;&nbsp;&nbsp;&nbsp;next_interval | String | next payment interval startdate (required for pricing plan form: subscription/split), possible values: `‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’`
+&nbsp;&nbsp;&nbsp;&nbsp;next_amount | Decimal | next payment amount (required for pricing plan form: subscription/split)
+&nbsp;&nbsp;&nbsp;&nbsp;splitting_type | String | splitting type (required for pricing plan form: split); notes: "installment" - <b>One invoice for the entire amount will be issued</b>, "limited_subscription" - <b>For each payment a new invoice will be issued</b> <br> Allowed values: `["installment", "limited_subscription"]`
+Authors | Array | Array of objects which represent the authors, that will be connected to the sales page
+&nbsp;&nbsp; id | Integer | ID of the author, which you want to connect to the sales page (IDs of authors can be found in your dashboard under Team Members)
+&nbsp;&nbsp; c_c_enabled | Boolean | Pass 'true' here if you want to overwrite general commission with this one, you should pass 'commission' for it to take effect
+&nbsp;&nbsp; commission | Integer | Field which represents the commisison of author, measured in %
+
+### Error 4xx
+
+Name | Description
+---- | -----------
+NoAccessRight | Only authenticated sellers can access the data.
+UserNotFound | The key of the user was not found.
+
+
+
 
 
 ## Update sales page
