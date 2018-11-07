@@ -305,7 +305,7 @@ require 'uri'
 Net::HTTP.get(URI('https://elopage.com/api/products/{id}?key={api_key}&secret={api_secret}'))
 ```
 
-> Example resppnse:
+> Example response:
 
 ```
 {
