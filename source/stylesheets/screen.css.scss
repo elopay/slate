@@ -40,7 +40,7 @@ html, body {
 // TABLE OF CONTENTS
 ////////////////////////////////////////////////////////////////////////////////
 
-#get, #get-2, #get-3, #get-4, #get-5, #get-6 {
+#get, #get-2, #get-3, #get-4, #get-5, #get-6, #get-7, #get-8, #get-9 {
   font-size: 20px;
   color: #6bbd5b;
 }
@@ -49,7 +49,7 @@ html, body {
   font-size: 20px;
   color: #e27a7a;
 }
-#post, #post-2, #post-3 {
+#post, #post-2, #post-3, #post-4, #post-5, #post-6, #post-7 {
   color: #248fb2;
   font-size: 20px;
 }
@@ -57,7 +57,7 @@ html, body {
   color: #9b708b;
   font-size: 20px;
 }
-a[href='#create-sales-page'], a[href='#create-pricing-plan'], a[href='#create-a-refund'] {
+a[href='#update-product'], a[href='#create-product'], a[href='#unenroll-publisher-from-program'], a[href='#enroll-publisher-to-program'], a[href='#create-sales-page'], a[href='#create-pricing-plan'], a[href='#create-a-refund'] {
   &:before {
     content: 'POST';
     background-color: #248fb2;
@@ -71,7 +71,7 @@ a[href='#create-sales-page'], a[href='#create-pricing-plan'], a[href='#create-a-
   }
 }
 
-a[href='#get-sales-page-info'], a[href='#get-pricing-plan'], a[href='#get-payment-info'], a[href='#get-refund-info'], a[href='#get-sales-pages'], a[href='#get-sales-page'] {
+a[href='#get-products'], a[href='#get-product'], a[href='#get-publishers-list'], a[href='#get-sales-page-info'], a[href='#get-pricing-plan'], a[href='#get-payment-info'], a[href='#get-refund-info'], a[href='#get-sales-pages'], a[href='#get-sales-page'] {
   &:before {
     content: 'GET';
     background-color: #6bbd5b;

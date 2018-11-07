@@ -113,8 +113,532 @@ Password | 123elopage
 
 We recommend testing each payment method and status.
 
+# Product
 
-# Sales Page
+## Create product
+
+> Example usage:
+
+```shell
+curl -X POST \
+  https://elopage.com/api/products \
+  -H 'content-type: application/json' \
+  -d '{
+  "key":"{api_key}",
+  "secret":"{api_secret}",
+  "name":"product name",
+  "success_url": "elopage.com",
+  "cancel_url": "elopage.com",
+  "error_url": "elopage.com",
+  "webhook_url": "elopage.com",
+  "pricing_plans": [
+    {
+      "form": "one_time",
+      "preferences": {
+        "price": "199.9",
+        "old_price": "200"
+       }
+     }
+   ],
+   "authors": [
+      {
+        "id": 4,
+        "custom_commission_enabled": true,
+        "commission": 10
+      }
+    ],
+   "success_email": {
+	  "subject_de": "test",
+	  "body_de": "<p>Hallo %{first_name} %{last_name},</p>\n<p><br></p>\n<p>vielen Dank f&uuml;r die Bestellung.</p>\n<p><br></p>\n<p>Produktname: %{product_name}</p>\n<p>Betrag: %{amount}</p>\n<p>Zahlung: %{recurring_type}</p>\n<p><br></p>\n<p>Bitte jetzt hier klicken:</p>\n<p>%{next_button}</p>\n<p><br></p>\n<p>Sch&ouml;ne Gr&uuml;&szlig;e,</p>",
+	  "subject_en": "test",
+	  "body_en": "<p>Hello %{first_name} %{last_name},</p>\n<p><br></p>\n<p>thanks for your order.</p>\n<p><br></p>\n<p>Product name: %{product_name}</p>\n<p>Amount: %{amount}</p>\n<p>Plan: %{recurring_type}</p>\n<p><br></p>\n<p>Now click here:</p>\n<p>%{next_button}</p>\n<p><br></p><p>Best regards,</p>"
+   }
+}'
+```
+
+```ruby
+require 'net/http'
+require 'uri'
+
+Net::HTTP.post URI('https://elopage.com/api/products'),
+               { "q" => "ruby", "max" => "50",
+                 {
+                  "key":"{api_key}",
+                  "secret":"{api_secret}",
+                  "name":"product name",
+                  "success_url": "{success_url}",
+                  "cancel_url": "{cancel_url}",
+                  "error_url": "{error_url}",
+                  "webhook_url": "{webhook_url}",
+                  "pricing_plans": [
+                    {
+                      "form": "one_time",
+                      "preferences": {
+                        "price": "199.9",
+                        "old_price": "200"
+                       }
+                     }
+                   ],
+                   "authors": [
+                      {
+                        "id": 4,
+                        "custom_commission_enabled": true,
+                        "commission": 10
+                      }
+                    ],
+                    "success_email": {
+                      "subject_de": "test",
+                      "body_de": "<p>Hallo %{first_name} %{last_name},</p>
+                                  <p><br></p>
+                                  <p>vielen Dank f&uuml;r die Bestellung.</p>
+                                  <p><br></p>
+                                  <p>Produktname: %{product_name}</p>
+                                  <p>Betrag: %{amount}</p>
+                                  <p>Zahlung: %{recurring_type}</p>
+                                  <p><br></p>
+                                  <p>Bitte jetzt hier klicken:</p>
+                                  <p>%{next_button}</p>
+                                  <p><br></p>
+                                  <p>Sch&ouml;ne Gr&uuml;&szlig;e,</p>",
+                      "subject_en": "test",
+                      "body_en": "<p>Hello %{first_name} %{last_name},</p>
+                                  <p><br></p>
+                                  <p>thanks for your order.</p>
+                                  <p><br></p>
+                                  <p>Product name: %{product_name}</p>
+                                  <p>Amount: %{amount}</p>
+                                  <p>Plan: %{recurring_type}</p>
+                                  <p><br></p>
+                                  <p>Now click here:</p>
+                                  <p>%{next_button}</p>
+                                  <p><br></p>
+                                  <p>Best regards,</p>"
+                      }
+                    } }.to_json,
+                    "Content-Type" => "application/json"
+```
+
+> Example response:
+
+```
+{
+    "id": 1087,
+    "url_to_pay": "https://elopage.com/s/elopage/product-name-1/payment"
+}
+```
+
+
+The elopage API allows to initiate and complete payments using optimized checkout interfaces. In order to process payments you first need to create a product. After the product creation you will receive a 'url_to_pay' parameter to which you must redirect your customer to complete payment. Thereafter you need to redirect the customer back to your success URL and pass on parameters and information. Using webhooks (webhook_url), you will get instant notifications about the status of the payment.
+
+### POST
+
+`https://elopage.com/api/products`
+
+### Parameter
+
+Field       | Type | Description
+----------- | --- | -----------
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+name | String | What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.
+success_url | String | <b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.
+cancel_url | String | <b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.
+error_url | String | <b>Error URL</b> to which your customer is redirected in case of error occurrences during the payment processing (for example bad credit card information, rejected card etc.).
+webhook_url | String | The elopage API sends POST requests to this URL when there are updates related to the payment (for example bank wire payment updates to status successful). Transaction IDs and Payment IDs are included in the POST requests.
+page_header | String | Use the page header to add content above the payment form (testimonials, campaign information etc.)  using html.
+page_footer | String | Use the page footer to add further information and content below the payment form using html.
+pricing_plans | Array | Array of objects which represent pricing plans of the product (at least one object required): <br> 'one_time' example pricing_plan:<br> `[{ "form": "one_time",`<br>`"preferences": `<br>`{ "price": "199.9", `<br>` "old_price": "200" } }]`<br> 'subscription' example pricing_plan: <br>`[{ "form": "subscription",`<br>` "preferences": `<br>`{ "first_interval": "1w", `<br>`"first_amount": "20.0",`<br>` "next_interval": "1m",`<br>` "next_amount": "10.0" } }]`<br> 'split' example (installment) pricing_plan:<br> `[{ "form": "split",`<br>` "preferences": `<br>`{ "p_count": "5",`<br>` "first_interval": "1w", `<br>`"first_amount": "20.0", `<br>`"next_interval": "1m",`<br>` "next_amount": "10.0",`<br>` "splitting_type": "installment" } }]`<br> 'split' example (limited_subscription) pricing_plan:<br> `[{ "form": "split", `<br>`"preferences": `<br>`{ "p_count": "5",`<br>` "first_interval": "1w",`<br>` "first_amount": "20.0", `<br>`"next_interval": "1m", `<br>`"next_amount": "10.0",`<br>` "splitting_type": "limited_subscription" } }]`<br> <span style='background-color: lightpink'>Note: Per product you are allowed to use maximum 5 pricing plans </span>.
+&nbsp;&nbsp; form | String | Allowed values: `"one_time"`, `"subscription"`, `"split"`
+&nbsp;&nbsp; preferences | Object | Apply different intervals for pricing plans with subscription and installments.
+&nbsp;&nbsp;&nbsp;&nbsp; price | Decimal | price by current pricing plan (only for one_time pricing plan)
+&nbsp;&nbsp;&nbsp;&nbsp; old_price | Decimal | old product price (only for one_time pricing plan)
+&nbsp;&nbsp;&nbsp;&nbsp; p_count | Integer | total count of payments (required for pricing plan form: split)
+&nbsp;&nbsp;&nbsp;&nbsp; first_interval | String | first payment interval (required for pricing plan form: subscription/split), possible values: `‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’`
+&nbsp;&nbsp;&nbsp;&nbsp; first_amount | Decimal | first payment amount (required for pricing plan form: subscription/split)
+&nbsp;&nbsp;&nbsp;&nbsp; next_interval | String | next payment interval startdate (required for pricing plan form: subscription/split), possible values: `‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’`
+&nbsp;&nbsp;&nbsp;&nbsp; next_amount | Decimal | next payment amount (required for pricing plan form: subscription/split)
+&nbsp;&nbsp;&nbsp;&nbsp; splitting_type | String | splitting type (required for pricing plan form: split); notes: "installment" - <b>One invoice for the entire amount will be issued</b>, "limited_subscription" - <b>For each payment a new invoice will be issued</b> <br> Allowed values: `["installment", "limited_subscription"]`
+Authors | Array | Array of objects which represent the authors, that will be connected to the product
+&nbsp;&nbsp; id | Integer | ID of the author, which you want to connect to the product (IDs of authors can be found in your dashboard under Team Members)
+&nbsp;&nbsp; c_c_enabled | Boolean | Pass 'true' here if you want to overwrite general commission with this one, you should pass 'commission' for it to take effect
+&nbsp;&nbsp; commission | Integer | Field which represents the commisison of author, measured in %
+forward | Object |  [we can forward params with url_to_pay to prefill payment form, check this blog](http://blog.elopage.com/hilfebereich/was-bedeutet-die-url-parameter-weiterleitung/)
+&nbsp;&nbsp; first_name | String | first name of customer
+&nbsp;&nbsp; last_name | String | last name of customer
+&nbsp;&nbsp; email | String | email of customer
+&nbsp;&nbsp; coupon | String | coupon code to be applied automatically
+&nbsp;&nbsp; campaign_id | String | campaign IDs can be freely added
+success_email | Object | Payment confirmation or success email object contains data for the creation of custom emails which is automatically sent to the customer after successful payment. If success_email is not specified, elopage is sending out the standard email template which you can check in the product settings on elopage. For API usage, we do not recommend the usage of the standard template. Please customize your success email.  In the custom email you have the option to add your own email body using html in body_en for the English version and body_de for the German version. In addition, you can add several variables that will be replaced automatically with your customers or purchase information: First name of customer `first_name`, last name `last_name`, name of the product `product_name`, price paid amount and recurring payment type `recurring_type`.
+&nbsp;&nbsp; subject_en | String | Subject of email in English
+&nbsp;&nbsp; subject_de | String | Subject of email in German
+&nbsp;&nbsp; body_en | String | Body of email in English
+&nbsp;&nbsp; body_de | String | Body of email in German
+
+### Success 200
+
+Field | Type | Description
+----- | ---- | -----------
+id | Number | Product ID.
+url_to_pay | String | Product URL to which customer must be redirected
+
+### Error 4xx
+
+Name | Description
+-----| -----------
+NoAccessRight | Only authenticated sellers can access the data.
+UserNotFound | The key of the user was not found.
+
+## Get product
+
+Fetch product and all relevant information such as product name, pricing plans, authors and more.
+
+> Example usage:
+
+```shell
+curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/products/{id}?key={api_key}&secret={api_secret}"
+```
+
+```ruby
+require 'net/http'
+require 'uri'
+
+Net::HTTP.get(URI('https://elopage.com/api/products/{id}?key={api_key}&secret={api_secret}'))
+```
+
+> Example resppnse:
+
+```
+{
+    "name": "product name",
+    "url_to_pay": "https://elopage.com/s/elopage/product-name-1/payment",
+    "success_url": "http://elopage.com",
+    "cancel_url": "elopage.com",
+    "error_url": "elopage.com",
+    "webhook_url": "elopage.com",
+    "free": false,
+    "pricing_plans": [
+        {
+            id: "1",
+            "form": "one_time",
+            "preferences": {
+                "price": "199.9",
+                "old_price": "200.0"
+            }
+        }
+    ],
+    "authors": [
+      {
+          "author_id": 4,
+          "c_c_enabled": true,
+          "commission": "10.0"
+      }
+    ]
+}
+```
+
+### GET
+
+`https://elopage.com/api/products/:id`
+
+
+### Parameter
+
+Field | Type | Description
+----- | ---- | -----------
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
+key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Settings > Integrations
+id | Number | Product ID
+
+### Success 200
+
+Field | Type | Description
+----- | ---- | -----------
+url_to_pay | String | Product URL to which customer must be redirected
+name | String | What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.
+price | Decimal | The final price or amount you want to charge your customer incl. taxes, fees etc.
+free | Boolean | Product for a free product
+success_url | String | <b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.
+cancel_url | String | <b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.
+error_url | String | <b>Error URL</b> to which your customer is redirected in case of error occurrences during the payment processing (for example bad credit card information, rejected card etc.).
+webhook_url | String | elopage API sends POST request to this URL if payment for payment of product/name changes status to successful (e.g. bank wire updates).
+pricing_plans | Array | Array of objects which represents pricing plans of the product (at least one object required)
+&nbsp;&nbsp;ID | Integer | ID of the pricing plan
+&nbsp;&nbsp;form | String | Allowed values: `"one_time", "subscription", "split"`
+&nbsp;&nbsp;preferences | Object | Apply different intervals for pricing plans with subscription and installments.
+&nbsp;&nbsp;&nbsp;&nbsp;price | Decimal | price by current pricing plan
+&nbsp;&nbsp;&nbsp;&nbsp;old_price | Decimal | old product price
+&nbsp;&nbsp;&nbsp;&nbsp;p_count | Integer | total count of payments (required for pricing plan form: split)
+&nbsp;&nbsp;&nbsp;&nbsp;first_interval | String | first payment interval (required for pricing plan form: subscription/split), possible values: `‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’`
+&nbsp;&nbsp;&nbsp;&nbsp;first_amount | Decimal | first payment amount (required for pricing plan form: subscription/split)
+&nbsp;&nbsp;&nbsp;&nbsp;next_interval | String | next payment interval startdate (required for pricing plan form: subscription/split), possible values: `‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’`
+&nbsp;&nbsp;&nbsp;&nbsp;next_amount | Decimal | next payment amount (required for pricing plan form: subscription/split)
+&nbsp;&nbsp;&nbsp;&nbsp;splitting_type | String | splitting type (required for pricing plan form: split); notes: "installment" - <b>One invoice for the entire amount will be issued</b>, "limited_subscription" - <b>For each payment a new invoice will be issued</b> <br> Allowed values: `["installment", "limited_subscription"]`
+Authors | Array | Array of objects which represent the authors, that will be connected to the product
+&nbsp;&nbsp; id | Integer | ID of the author, which you want to connect to the product (IDs of authors can be found in your dashboard under Team Members)
+&nbsp;&nbsp; c_c_enabled | Boolean | Pass 'true' here if you want to overwrite general commission with this one, you should pass 'commission' for it to take effect
+&nbsp;&nbsp; commission | Integer | Field which represents the commisison of author, measured in %
+
+### Error 4xx
+
+Name | Description
+---- | -----------
+NoAccessRight | Only authenticated sellers can access the data.
+UserNotFound | The key of the user was not found.
+
+
+## Get products
+
+Fetch products list.
+
+> Example usage:
+
+```shell
+curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/products?key={api_key}&secret={api_secret}"
+```
+
+```ruby
+require 'net/http'
+require 'uri'
+
+Net::HTTP.get(URI('https://elopage.com/api/products?key={api_key}&secret={api_secret}'))
+```
+
+> Example resppnse:
+
+```
+[
+  {
+      "id": 1646,
+      "name": "Test digital",
+      "url_to_pay": "https://elopage.com/s/testsellerregistration/test-digital-2/payment",
+      "webhook_url": "https://webhook.site/e6f6c835-1786-448e-bc12-58048ecfcdc8",
+      "active": true,
+      "sold_count": 34,
+      "created_at": "2018-07-31T11:48:15.789Z"
+  },
+  {
+      "id": 1679,
+      "name": "test product",
+      "url_to_pay": "https://elopage.com/s/testsellerregistration/test-58/payment",
+      "active": true,
+      "sold_count": 0,
+      "created_at": "2018-08-17T14:06:25.806Z"
+  },
+  {
+      "id": 1682,
+      "name": "test",
+      "url_to_pay": "https://elopage.com/s/testsellerregistration/test-w4rwerwe/payment",
+      "active": true,
+      "sold_count": 0,
+      "created_at": "2018-08-17T14:35:14.205Z"
+  }
+]
+
+```
+
+### GET
+
+`https://elopage.com/api/products`
+
+
+### Parameter
+
+Field | Type | Description
+----- | ---- | -----------
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
+key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Settings > Integrations
+id | Number | Product ID
+
+### Success 200
+
+Field | Type | Description
+----- | ---- | -----------
+url_to_pay | String | Product URL to which customer must be redirected
+name | String | What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.
+price | Decimal | The final price or amount you want to charge your customer incl. taxes, fees etc.
+free | Boolean | Product for a free product
+success_url | String | <b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.
+cancel_url | String | <b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.
+error_url | String | <b>Error URL</b> to which your customer is redirected in case of error occurrences during the payment processing (for example bad credit card information, rejected card etc.).
+webhook_url | String | elopage API sends POST request to this URL if payment for payment of product/name changes status to successful (e.g. bank wire updates).
+pricing_plans | Array | Array of objects which represents pricing plans of the product (at least one object required)
+&nbsp;&nbsp;ID | Integer | ID of the pricing plan
+&nbsp;&nbsp;form | String | Allowed values: `"one_time", "subscription", "split"`
+&nbsp;&nbsp;preferences | Object | Apply different intervals for pricing plans with subscription and installments.
+&nbsp;&nbsp;&nbsp;&nbsp;price | Decimal | price by current pricing plan
+&nbsp;&nbsp;&nbsp;&nbsp;old_price | Decimal | old product price
+&nbsp;&nbsp;&nbsp;&nbsp;p_count | Integer | total count of payments (required for pricing plan form: split)
+&nbsp;&nbsp;&nbsp;&nbsp;first_interval | String | first payment interval (required for pricing plan form: subscription/split), possible values: `‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’`
+&nbsp;&nbsp;&nbsp;&nbsp;first_amount | Decimal | first payment amount (required for pricing plan form: subscription/split)
+&nbsp;&nbsp;&nbsp;&nbsp;next_interval | String | next payment interval startdate (required for pricing plan form: subscription/split), possible values: `‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’`
+&nbsp;&nbsp;&nbsp;&nbsp;next_amount | Decimal | next payment amount (required for pricing plan form: subscription/split)
+&nbsp;&nbsp;&nbsp;&nbsp;splitting_type | String | splitting type (required for pricing plan form: split); notes: "installment" - <b>One invoice for the entire amount will be issued</b>, "limited_subscription" - <b>For each payment a new invoice will be issued</b> <br> Allowed values: `["installment", "limited_subscription"]`
+Authors | Array | Array of objects which represent the authors, that will be connected to the product
+&nbsp;&nbsp; id | Integer | ID of the author, which you want to connect to the product (IDs of authors can be found in your dashboard under Team Members)
+&nbsp;&nbsp; c_c_enabled | Boolean | Pass 'true' here if you want to overwrite general commission with this one, you should pass 'commission' for it to take effect
+&nbsp;&nbsp; commission | Integer | Field which represents the commisison of author, measured in %
+
+### Error 4xx
+
+Name | Description
+---- | -----------
+NoAccessRight | Only authenticated sellers can access the data.
+UserNotFound | The key of the user was not found.
+
+
+
+
+
+## Update product
+
+> Example usage:
+
+```shell
+curl -X PUT \
+  https://elopage.com/api/products/1115 \
+  -H 'content-type: application/json' \
+  -d '{
+  "key":"{api_key}",
+  "secret":"{api_secret}",
+  "name":"product name",
+  "success_url": "elopage.com",
+  "cancel_url": "elopage.com",
+  "error_url": "elopage.com",
+  "webhook_url": "elopage.com",
+    "pricing_plans": [
+        {
+            "id": 1340,
+            "form": "one_time",
+            "preferences": {
+                "price": "220",
+                "old_price": "200.0"
+            }
+        }
+    ],
+   "success_email": {
+	  "subject_de": "test",
+	  "body_de": "<p>Hallo %{first_name} %{last_name},</p>\n<p><br></p>\n<p>vielen Dank f&uuml;r die Bestellung.</p>\n<p><br></p>\n<p>Produktname: %{product_name}</p>\n<p>Betrag: %{amount}</p>\n<p>Zahlung: %{recurring_type}</p>\n<p><br></p>\n<p>Bitte jetzt hier klicken:</p>\n<p>%{next_button}</p>\n<p><br></p>\n<p>Sch&ouml;ne Gr&uuml;&szlig;e,</p>",
+	  "subject_en": "test",
+	  "body_en": "<p>Hello %{first_name} %{last_name},</p>\n<p><br></p>\n<p>thanks for your order.</p>\n<p><br></p>\n<p>Product name: %{product_name}</p>\n<p>Amount: %{amount}</p>\n<p>Plan: %{recurring_type}</p>\n<p><br></p>\n<p>Now click here:</p>\n<p>%{next_button}</p>\n<p><br></p><p>Best regards,</p>"
+   }
+}'
+```
+
+```ruby
+require 'uri'
+require 'net/http'
+
+url = URI("https://elopage.com/api/products/1115")
+
+http = Net::HTTP.new(url.host, url.port)
+
+request = Net::HTTP::Put.new(url)
+request["content-type"] = 'application/json'
+request.body = {
+                "key":"{api_key}",
+                "secret":"{api_secret}",
+                "name":"product name",
+                "success_url": "elopage.com",
+                "cancel_url": "elopage.com",
+                "error_url": "elopage.com",
+                "webhook_url": "elopage.com",
+                "pricing_plans": [
+                    {
+                        "id": 1340,
+                        "form": "one_time",
+                        "preferences": {
+                            "price": "220",
+                            "old_price": "200.0"
+                        }
+                    }
+                 ],
+                 "success_email": {
+                    "subject_de": "test",
+                    "body_de": "<p>Hallo %{first_name} %{last_name},</p>\n<p><br></p>\n<p>vielen Dank f&uuml;r die Bestellung.</p>\n<p><br></p>\n<p>Produktname: %{product_name}</p>\n<p>Betrag: %{amount}</p>\n<p>Zahlung: %{recurring_type}</p>\n<p><br></p>\n<p>Bitte jetzt hier klicken:</p>\n<p>%{next_button}</p>\n<p><br></p>\n<p>Sch&ouml;ne Gr&uuml;&szlig;e,</p>",
+                    "subject_en": "test",
+                    "body_en": "<p>Hello %{first_name} %{last_name},</p>\n<p><br></p>\n<p>thanks for your order.</p>\n<p><br></p>\n<p>Product name: %{product_name}</p>\n<p>Amount: %{amount}</p>\n<p>Plan: %{recurring_type}</p>\n<p><br></p>\n<p>Now click here:</p>\n<p>%{next_button}</p>\n<p><br></p><p>Best regards,</p>"
+                 }
+                }
+
+response = http.request(request)
+puts response.read_body
+
+```
+
+> Example response:
+
+```
+{
+    "id": 1087,
+    "url_to_pay": "https://elopage.com/s/elopage/product-name-1/payment"
+}
+```
+
+
+The elopage API allows creating products. To change or update the product information like price or name, please use put actions.
+
+### PUT
+
+`https://elopage.com/api/products/:id`
+
+### Parameter
+
+Field       | Type | Description
+----------- | --- | -----------
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+name | String | What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.
+success_url | String | <b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.
+cancel_url | String | <b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.
+error_url | String | <b>Error URL</b> to which your customer is redirected in case of error occurrences during the payment processing (for example bad credit card information, rejected card etc.).
+webhook_url | String | The elopage API sends POST requests to this URL when there are updates related to the payment (for example bank wire payment updates to status successful). Transaction IDs and Payment IDs are included in the POST requests.
+page_header | String | Use the page header to add content above the payment form (testimonials, campaign information etc.)  using html.
+page_footer | String | Use the page footer to add further information and content below the payment form using html.
+pricing_plans | Array | Array of objects which represent pricing plans of the product (at least one object required): <br> 'one_time' example pricing_plan:<br> `[{ "form": "one_time",`<br>`"preferences": `<br>`{ "price": "199.9", `<br>` "old_price": "200" } }]`<br> 'subscription' example pricing_plan: <br>`[{ "form": "subscription",`<br>` "preferences": `<br>`{ "first_interval": "1w", `<br>`"first_amount": "20.0",`<br>` "next_interval": "1m",`<br>` "next_amount": "10.0" } }]`<br> 'split' example (installment) pricing_plan:<br> `[{ "form": "split",`<br>` "preferences": `<br>`{ "p_count": "5",`<br>` "first_interval": "1w", `<br>`"first_amount": "20.0", `<br>`"next_interval": "1m",`<br>` "next_amount": "10.0",`<br>` "splitting_type": "installment" } }]`<br> 'split' example (limited_subscription) pricing_plan:<br> `[{ "form": "split", `<br>`"preferences": `<br>`{ "p_count": "5",`<br>` "first_interval": "1w",`<br>` "first_amount": "20.0", `<br>`"next_interval": "1m", `<br>`"next_amount": "10.0",`<br>` "splitting_type": "limited_subscription" } }]`<br> <span style='background-color: lightpink'>Note: Per product you are allowed to use maximum 5 pricing plans </span>.
+&nbsp;&nbsp; ID | Integer | ID of the pricing plan you want to edit
+&nbsp;&nbsp; form | String | Allowed values: `"one_time"`, `"subscription"`, `"split"`
+&nbsp;&nbsp; preferences | Object | Apply different intervals for pricing plans with subscription and installments.
+&nbsp;&nbsp;&nbsp;&nbsp; price | Decimal | price by current pricing plan (only for one_time pricing plan)
+&nbsp;&nbsp;&nbsp;&nbsp; old_price | Decimal | old product price (only for one_time pricing plan)
+&nbsp;&nbsp;&nbsp;&nbsp; p_count | Integer | total count of payments (required for pricing plan form: split)
+&nbsp;&nbsp;&nbsp;&nbsp; first_interval | String | first payment interval (required for pricing plan form: subscription/split), possible values: `‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’`
+&nbsp;&nbsp;&nbsp;&nbsp; first_amount | Decimal | first payment amount (required for pricing plan form: subscription/split)
+&nbsp;&nbsp;&nbsp;&nbsp; next_interval | String | next payment interval startdate (required for pricing plan form: subscription/split), possible values: `‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’`
+&nbsp;&nbsp;&nbsp;&nbsp; next_amount | Decimal | next payment amount (required for pricing plan form: subscription/split)
+&nbsp;&nbsp;&nbsp;&nbsp; splitting_type | String | splitting type (required for pricing plan form: split); notes: "installment" - <b> One invoice for the entire amount will be issued </b>, "limited_subscription" - <b>For each payment a new invoice will be issued</b> <br>Allowed values: `["installment", "limited_subscription"]`
+Authors | Array | Array of objects which represent the authors, that will be connected to the product
+&nbsp;&nbsp; id | Integer | ID of the author, which you want to connect to the product (IDs of authors can be found in your dashboard under Team Members)
+&nbsp;&nbsp; c_c_enabled | Boolean | Pass 'true' here if you want to overwrite general commission with this one, you should pass 'commission' for it to take effect
+&nbsp;&nbsp; commission | Integer | Field which represents the commisison of author, measured in %
+forward | Object | [we can forward params with url_to_pay to prefill payment form, check this blog](http://blog.elopage.com/hilfebereich/was-bedeutet-die-url-parameter-weiterleitung/)
+&nbsp;&nbsp; first_name | String | first name of customer
+&nbsp;&nbsp; last_name | String | last name of customer
+&nbsp;&nbsp; email | String | email of customer
+&nbsp;&nbsp; coupon | String | coupon code to be applied automatically
+&nbsp;&nbsp; campaign_id | String | campaign IDs can be freely added
+success_email | Object | Payment confirmation or success email object contains data for the creation of custom emails which is automatically sent to the customer after successful payment. If success_email is not specified, elopage is sending out the standard email template which you can check in the product settings on elopage. For API usage, we do not recommend the usage of the standard template. Please customize your success email.  In the custom email you have the option to add your own email body using html in body_en for the English version and body_de for the German version. In addition, you can add several variables that will be replaced automatically with your customers or purchase information: First name of customer `first_name`, last name `last_name`, name of the product `product_name`, price paid amount and recurring payment type `recurring_type`.
+&nbsp;&nbsp; subject_en | String | Subject of email in English
+&nbsp;&nbsp; subject_de | String | Subject of email in German
+&nbsp;&nbsp; body_en | String | Body of email in English
+&nbsp;&nbsp; body_de | String | Body of email in German
+
+### Success 200
+
+Field | Type | Description
+----- | ---- | -----------
+id | Number | Product ID.
+url_to_pay | String | Product URL to which customer must be redirected
+
+### Error 4xx
+
+Name | Description
+-----| -----------
+NoAccessRight | Only authenticated sellers can access the data.
+UserNotFound | The key of the user was not found.
+
+
+
+# Sales Page(Deprecated)
 
 ## Create sales page
 
@@ -637,7 +1161,230 @@ Name | Description
 NoAccessRight | Only authenticated sellers can access the data.
 UserNotFound | The key of the user was not found.
 
+# Publishers
 
+## Get publishers list
+
+Fetch publishers list.
+
+> Example usage:
+
+```shell
+curl -X GET -H "Content-Type: application/json" "https://elopage.com/api/publishers?key={api_key}&secret={api_secret}"
+```
+
+```ruby
+require 'net/http'
+require 'uri'
+
+Net::HTTP.get(URI('https://elopage.com/api/publishers?key={api_key}&secret={api_secret}'))
+```
+
+> Example resppnse:
+
+```
+[
+    {
+        "id": 306,
+        "first_name": "Test",
+        "last_name": "Publisher",
+        "email": "testpublisher@gmail.com",
+        "program_ids": "129"
+    },
+    {
+        "id": 266,
+        "first_name": "New",
+        "last_name": "Publisher",
+        "email": "newpublisher@gmail.com",
+        "program_ids": "129"
+    }
+]
+
+```
+
+### GET
+
+`https://elopage.com/api/publishers`
+
+
+### Parameter
+
+Field | Type | Description
+----- | ---- | -----------
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
+key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Settings > Integrations
+
+### Success 200
+
+Field | Type | Description
+----- | ---- | -----------
+id | String | Publisher ID
+first_name | String | Publisher first name
+last_name | String | Publisher last name
+email | String | Publisher email
+program_ids | Array | Affiliate program ids, in which publisher is currently enrolled
+address | String | Publisher address
+zip | String | Publisher zip
+city | String | Publisher city
+phone | String | Publisher phone
+tax_no | String | Publisher tax number
+vat_no | String | Publisher vat number
+
+### Error 4xx
+
+Name | Description
+---- | -----------
+NoAccessRight | Only authenticated sellers can access the data.
+UserNotFound | The key of the user was not found.
+
+
+## Enroll publisher to program
+
+> Example usage:
+
+```shell
+curl -X POST \
+  https://elopage.com/api/publishers/{id}/enroll \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
+  -F key={api_key} \
+  -F secret={api_secret} \
+  -F affiliate_program_id="{affiliate_program_id}"
+```
+
+```ruby
+require 'uri'
+require 'net/http'
+
+url = URI("https://elopage.com/api/publishers/{id}/enroll")
+
+http = Net::HTTP.new(url.host, url.port)
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
+request["cache-control"] = 'no-cache'
+request.body = {
+  "key":"{api_key}",
+  "secret":"{api_secret}",
+  "affiliate_program_id": "{affiliate_program_id}"
+}
+
+response = http.request(request)
+puts response.read_body
+```
+
+> Example response:
+
+```
+{
+    "success": true,
+    "msg": "Publisher successfully enrolled in program 15 Multilevel program (no bonus)"
+}
+```
+
+
+The elopage API allows unenrolling publishers from your affiliate programs.
+
+### POST
+
+`https://elopage.com/api/publishers/:id/enroll`
+
+### Parameter
+
+Field       | Type | Description
+----------- | --- | -----------
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+affiliate_program_id | String | Program, to which publisher should be enrolled after a successful call
+
+### Success 200
+
+Field | Type | Description
+----- | ---- | -----------
+id | Number | Product ID.
+success | Boolean | Field which determines if the call was successful or not
+msg | String | Server answer to the request
+
+### Error 4xx
+
+Name | Description
+-----| -----------
+NoAccessRight | Only authenticated sellers can access the data.
+UserNotFound | The key of the user was not found.
+
+## Unenroll publisher from program
+
+> Example usage:
+
+```shell
+curl -X POST \
+  https://elopage.com/api/publishers/{id}/unenroll \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
+  -F key={api_key} \
+  -F secret={api_secret} \
+  -F affiliate_program_id="{affiliate_program_id}"
+```
+
+```ruby
+require 'uri'
+require 'net/http'
+
+url = URI("https://elopage.com/api/publishers/{id}/unenroll")
+
+http = Net::HTTP.new(url.host, url.port)
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
+request["cache-control"] = 'no-cache'
+request.body = {
+  "key":"{api_key}",
+  "secret":"{api_secret}",
+  "affiliate_program_id": "{affiliate_program_id}"
+}
+
+response = http.request(request)
+puts response.read_body
+```
+
+> Example response:
+
+```
+{
+    "success": true,
+    "msg": "Publisher successfully unenrolled from program 15 Multilevel program (no bonus)"
+}
+```
+
+
+The elopage API allows unenrolling publishers for your affiliate programs.
+
+### POST
+
+`https://elopage.com/api/publishers/:id/unenroll`
+
+### Parameter
+
+Field       | Type | Description
+----------- | --- | -----------
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+affiliate_program_id | String | Program, to which publisher should be enrolled after a successful call
+
+### Success 200
+
+Field | Type | Description
+----- | ---- | -----------
+id | Number | Product ID.
+success | Boolean | Field which determines if the call was successful or not
+msg | String | Server answer to the request
+
+### Error 4xx
+
+Name | Description
+-----| -----------
+NoAccessRight | Only authenticated sellers can access the data.
+UserNotFound | The key of the user was not found.
 
 # Pricing plans
 Pricing plans are created during the creation of sales. In addition, you can create pricing plans separately, view them and delete pricing plans. elopage pricing plans allow the setup of multiple options such as time-limited subscriptions, installment payments and one time payments. Furthermore you can create and attach up to 5 pricing plans for one sales page.
