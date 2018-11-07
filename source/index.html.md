@@ -1283,7 +1283,7 @@ puts response.read_body
 ```
 
 
-The elopage API allows unenrolling publishers from your affiliate programs.
+The elopage API allows enrolling publishers from your affiliate programs.
 
 ### POST
 
