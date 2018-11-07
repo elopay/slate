@@ -238,8 +238,8 @@ The elopage API allows to initiate and complete payments using optimized checkou
 
 Field       | Type | Description
 ----------- | --- | -----------
-secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
-key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Apps > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Apps > Integrations
 name | String | What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.
 success_url | String | <b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.
 cancel_url | String | <b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.
@@ -345,8 +345,8 @@ Net::HTTP.get(URI('https://elopage.com/api/products/{id}?key={api_key}&secret={a
 
 Field | Type | Description
 ----- | ---- | -----------
-secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
-key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Apps > Integrations
+key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Apps > Integrations
 id | Number | Product ID
 
 ### Success 200
@@ -445,8 +445,8 @@ Net::HTTP.get(URI('https://elopage.com/api/products?key={api_key}&secret={api_se
 
 Field | Type | Description
 ----- | ---- | -----------
-secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
-key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Apps > Integrations
+key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Apps > Integrations
 id | Number | Product ID
 
 ### Success 200
@@ -585,8 +585,8 @@ The elopage API allows creating products. To change or update the product inform
 
 Field       | Type | Description
 ----------- | --- | -----------
-secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
-key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Apps > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Apps > Integrations
 name | String | What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.
 success_url | String | <b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.
 cancel_url | String | <b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.
@@ -763,8 +763,8 @@ The elopage API allows to initiate and complete payments using optimized checkou
 
 Field       | Type | Description
 ----------- | --- | -----------
-secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
-key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Apps > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Apps > Integrations
 name | String | What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.
 success_url | String | <b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.
 cancel_url | String | <b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.
@@ -870,8 +870,8 @@ Net::HTTP.get(URI('https://elopage.com/api/sales_pages/{id}?key={api_key}&secret
 
 Field | Type | Description
 ----- | ---- | -----------
-secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
-key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Apps > Integrations
+key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Apps > Integrations
 id | Number | Sales page ID
 
 ### Success 200
@@ -970,8 +970,8 @@ Net::HTTP.get(URI('https://elopage.com/api/sales_pages?key={api_key}&secret={api
 
 Field | Type | Description
 ----- | ---- | -----------
-secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
-key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Apps > Integrations
+key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Apps > Integrations
 id | Number | Sales page ID
 
 ### Success 200
@@ -1110,8 +1110,8 @@ The elopage API allows creating sales pages. To change or update the sales page 
 
 Field       | Type | Description
 ----------- | --- | -----------
-secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
-key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Apps > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Apps > Integrations
 name | String | What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.
 success_url | String | <b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.
 cancel_url | String | <b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.
@@ -1211,8 +1211,8 @@ Net::HTTP.get(URI('https://elopage.com/api/publishers?key={api_key}&secret={api_
 
 Field | Type | Description
 ----- | ---- | -----------
-secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
-key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Apps > Integrations
+key | String | Your personal elopage API key, you can find or generate them inside your elopage cabinet: Apps > Integrations
 
 ### Success 200
 
@@ -1293,8 +1293,8 @@ The elopage API allows unenrolling publishers from your affiliate programs.
 
 Field       | Type | Description
 ----------- | --- | -----------
-secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
-key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Apps > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Apps > Integrations
 affiliate_program_id | String | Program, to which publisher should be enrolled after a successful call
 
 ### Success 200
@@ -1367,8 +1367,8 @@ The elopage API allows unenrolling publishers for your affiliate programs.
 
 Field       | Type | Description
 ----------- | --- | -----------
-secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Settings > Integrations
-key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in the sellers dashboard under Apps > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Apps > Integrations
 affiliate_program_id | String | Program, to which publisher should be enrolled after a successful call
 
 ### Success 200
@@ -1426,8 +1426,8 @@ Fetch pricing plan information by ID to get all relevant information about your 
 
 Field | Type | Description
 ----- | ---- | -----------
-secret | String | elopage api_secret which can be generated and found in your dashboard under Settings > Integrations
-key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in your dashboard under Apps > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Apps > Integrations
 id | Number | Pricing plan ID is sent with the get sales page request.
 
 
@@ -1700,8 +1700,8 @@ Getting the payment information by fetching the transaction or payment info is a
 
 Field | Type | Description
 ----- | ---- | -----------
-secret | String | elopage api_secret which can be generated and found in your dashboard under Settings > Integrations
-key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in your dashboard under Apps > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Apps > Integrations
 id | Number | Payment ID
 
 ### Success 200
@@ -1822,8 +1822,8 @@ puts response.read_body
 
 Field | Type | Description
 ----- | ---- | -----------
-secret | String | elopage api_secret which can be generated and found in your dashboard under Settings > Integrations
-key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in your dashboard under Apps > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Apps > Integrations
 id | Number | Payment ID
 
 ### Success 200
@@ -1923,8 +1923,8 @@ You can fetch refund transactions by IDs. Please use the following method and pa
 
 Field | Type | Description
 ----- | ---- | -----------
-secret | String | elopage api_secret which can be generated and found in your dashboard under Settings > Integrations
-key | String | Your personal elopage API key which you can generate in your dashboard: Settings > Integrations
+secret | String | elopage api_secret which can be generated and found in your dashboard under Apps > Integrations
+key | String | Your personal elopage API key which you can generate in your dashboard: Apps > Integrations
 id | Number | Payment ID
 
 ### Success 200
