@@ -237,16 +237,50 @@
               </ul>
           </li>
           <li>
-            <a href="#sales-page" class="toc-h1 toc-link" data-title="Sales Page">Sales Page</a>
+            <a href="#product" class="toc-h1 toc-link" data-title="Product">Product</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-product" class="toc-h2 toc-link" data-title="Create product">Create product</a>
+                  </li>
+                  <li>
+                    <a href="#get-product" class="toc-h2 toc-link" data-title="Get product">Get product</a>
+                  </li>
+                  <li>
+                    <a href="#get-products" class="toc-h2 toc-link" data-title="Get products">Get products</a>
+                  </li>
+                  <li>
+                    <a href="#update-product" class="toc-h2 toc-link" data-title="Update product">Update product</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#sales-page-deprecated" class="toc-h1 toc-link" data-title="Sales Page(Deprecated)">Sales Page(Deprecated)</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#create-sales-page" class="toc-h2 toc-link" data-title="Create sales page">Create sales page</a>
+                  </li>
+                  <li>
+                    <a href="#get-sales-page" class="toc-h2 toc-link" data-title="Get sales page">Get sales page</a>
                   </li>
                   <li>
                     <a href="#get-sales-pages" class="toc-h2 toc-link" data-title="Get sales pages">Get sales pages</a>
                   </li>
                   <li>
                     <a href="#update-sales-page" class="toc-h2 toc-link" data-title="Update sales page">Update sales page</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#publishers" class="toc-h1 toc-link" data-title="Publishers">Publishers</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-publishers-list" class="toc-h2 toc-link" data-title="Get publishers list">Get publishers list</a>
+                  </li>
+                  <li>
+                    <a href="#enroll-publisher-to-program" class="toc-h2 toc-link" data-title="Enroll publisher to program">Enroll publisher to program</a>
+                  </li>
+                  <li>
+                    <a href="#unenroll-publisher-from-program" class="toc-h2 toc-link" data-title="Unenroll publisher from program">Unenroll publisher from program</a>
                   </li>
               </ul>
           </li>
@@ -444,7 +478,1067 @@
 </ol></p>
 
 <p>We recommend testing each payment method and status.</p>
-<h1 id='sales-page'>Sales Page</h1><h2 id='create-sales-page'>Create sales page</h2>
+<h1 id='product'>Product</h1><h2 id='create-product'>Create product</h2>
+<blockquote>
+<p>Example usage:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  https://elopage.com/api/products <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+  "key":"{api_key}",
+  "secret":"{api_secret}",
+  "name":"product name",
+  "success_url": "elopage.com",
+  "cancel_url": "elopage.com",
+  "error_url": "elopage.com",
+  "webhook_url": "elopage.com",
+  "pricing_plans": [
+    {
+      "form": "one_time",
+      "preferences": {
+        "price": "199.9",
+        "old_price": "200"
+       }
+     }
+   ],
+   "authors": [
+      {
+        "id": 4,
+        "custom_commission_enabled": true,
+        "commission": 10
+      }
+    ],
+   "success_email": {
+      "subject_de": "test",
+      "body_de": "&lt;p&gt;Hallo %{first_name} %{last_name},&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;vielen Dank f&amp;uuml;r die Bestellung.&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;Produktname: %{product_name}&lt;/p&gt;\n&lt;p&gt;Betrag: %{amount}&lt;/p&gt;\n&lt;p&gt;Zahlung: %{recurring_type}&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;Bitte jetzt hier klicken:&lt;/p&gt;\n&lt;p&gt;%{next_button}&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;Sch&amp;ouml;ne Gr&amp;uuml;&amp;szlig;e,&lt;/p&gt;",
+      "subject_en": "test",
+      "body_en": "&lt;p&gt;Hello %{first_name} %{last_name},&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;thanks for your order.&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;Product name: %{product_name}&lt;/p&gt;\n&lt;p&gt;Amount: %{amount}&lt;/p&gt;\n&lt;p&gt;Plan: %{recurring_type}&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;Now click here:&lt;/p&gt;\n&lt;p&gt;%{next_button}&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Best regards,&lt;/p&gt;"
+   }
+}'</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">post</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/products'</span><span class="p">),</span>
+               <span class="p">{</span> <span class="s2">"q"</span> <span class="o">=&gt;</span> <span class="s2">"ruby"</span><span class="p">,</span> <span class="s2">"max"</span> <span class="o">=&gt;</span> <span class="s2">"50"</span><span class="p">,</span>
+                 <span class="p">{</span>
+                  <span class="s2">"key"</span><span class="ss">:"{api_key}"</span><span class="p">,</span>
+                  <span class="s2">"secret"</span><span class="ss">:"{api_secret}"</span><span class="p">,</span>
+                  <span class="s2">"name"</span><span class="ss">:"product name"</span><span class="p">,</span>
+                  <span class="s2">"success_url"</span><span class="p">:</span> <span class="s2">"{success_url}"</span><span class="p">,</span>
+                  <span class="s2">"cancel_url"</span><span class="p">:</span> <span class="s2">"{cancel_url}"</span><span class="p">,</span>
+                  <span class="s2">"error_url"</span><span class="p">:</span> <span class="s2">"{error_url}"</span><span class="p">,</span>
+                  <span class="s2">"webhook_url"</span><span class="p">:</span> <span class="s2">"{webhook_url}"</span><span class="p">,</span>
+                  <span class="s2">"pricing_plans"</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                      <span class="s2">"form"</span><span class="p">:</span> <span class="s2">"one_time"</span><span class="p">,</span>
+                      <span class="s2">"preferences"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"199.9"</span><span class="p">,</span>
+                        <span class="s2">"old_price"</span><span class="p">:</span> <span class="s2">"200"</span>
+                       <span class="p">}</span>
+                     <span class="p">}</span>
+                   <span class="p">],</span>
+                   <span class="s2">"authors"</span><span class="p">:</span> <span class="p">[</span>
+                      <span class="p">{</span>
+                        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                        <span class="s2">"custom_commission_enabled"</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>
+                        <span class="s2">"commission"</span><span class="p">:</span> <span class="mi">10</span>
+                      <span class="p">}</span>
+                    <span class="p">],</span>
+                    <span class="s2">"success_email"</span><span class="p">:</span> <span class="p">{</span>
+                      <span class="s2">"subject_de"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+                      <span class="s2">"body_de"</span><span class="p">:</span> <span class="s2">"&lt;p&gt;Hallo %{first_name} %{last_name},&lt;/p&gt;
+                                  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                  &lt;p&gt;vielen Dank f&amp;uuml;r die Bestellung.&lt;/p&gt;
+                                  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                  &lt;p&gt;Produktname: %{product_name}&lt;/p&gt;
+                                  &lt;p&gt;Betrag: %{amount}&lt;/p&gt;
+                                  &lt;p&gt;Zahlung: %{recurring_type}&lt;/p&gt;
+                                  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                  &lt;p&gt;Bitte jetzt hier klicken:&lt;/p&gt;
+                                  &lt;p&gt;%{next_button}&lt;/p&gt;
+                                  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                  &lt;p&gt;Sch&amp;ouml;ne Gr&amp;uuml;&amp;szlig;e,&lt;/p&gt;"</span><span class="p">,</span>
+                      <span class="s2">"subject_en"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+                      <span class="s2">"body_en"</span><span class="p">:</span> <span class="s2">"&lt;p&gt;Hello %{first_name} %{last_name},&lt;/p&gt;
+                                  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                  &lt;p&gt;thanks for your order.&lt;/p&gt;
+                                  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                  &lt;p&gt;Product name: %{product_name}&lt;/p&gt;
+                                  &lt;p&gt;Amount: %{amount}&lt;/p&gt;
+                                  &lt;p&gt;Plan: %{recurring_type}&lt;/p&gt;
+                                  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                  &lt;p&gt;Now click here:&lt;/p&gt;
+                                  &lt;p&gt;%{next_button}&lt;/p&gt;
+                                  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+                                  &lt;p&gt;Best regards,&lt;/p&gt;"</span>
+                      <span class="p">}</span>
+                    <span class="p">}</span> <span class="p">}.</span><span class="nf">to_json</span><span class="p">,</span>
+                    <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"application/json"</span>
+</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "id": 1087,
+    "url_to_pay": "https://elopage.com/s/elopage/product-name-1/payment"
+}
+</code></pre>
+<p>The elopage API allows to initiate and complete payments using optimized checkout interfaces. In order to process payments you first need to create a product. After the product creation you will receive a &#39;url_to_pay&#39; parameter to which you must redirect your customer to complete payment. Thereafter you need to redirect the customer back to your success URL and pass on parameters and information. Using webhooks (webhook_url), you will get instant notifications about the status of the payment.</p>
+<h3 id='post'>POST</h3>
+<p><code>https://elopage.com/api/products</code></p>
+<h3 id='parameter'>Parameter</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>secret</td>
+<td>String</td>
+<td>elopage api_secret which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Your personal elopage API key which you can generate in your dashboard: Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.</td>
+</tr>
+<tr>
+<td>success_url</td>
+<td>String</td>
+<td><b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.</td>
+</tr>
+<tr>
+<td>cancel_url</td>
+<td>String</td>
+<td><b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.</td>
+</tr>
+<tr>
+<td>error_url</td>
+<td>String</td>
+<td><b>Error URL</b> to which your customer is redirected in case of error occurrences during the payment processing (for example bad credit card information, rejected card etc.).</td>
+</tr>
+<tr>
+<td>webhook_url</td>
+<td>String</td>
+<td>The elopage API sends POST requests to this URL when there are updates related to the payment (for example bank wire payment updates to status successful). Transaction IDs and Payment IDs are included in the POST requests.</td>
+</tr>
+<tr>
+<td>page_header</td>
+<td>String</td>
+<td>Use the page header to add content above the payment form (testimonials, campaign information etc.)  using html.</td>
+</tr>
+<tr>
+<td>page_footer</td>
+<td>String</td>
+<td>Use the page footer to add further information and content below the payment form using html.</td>
+</tr>
+<tr>
+<td>pricing_plans</td>
+<td>Array</td>
+<td>Array of objects which represent pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;one_time&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;price&quot;: &quot;199.9&quot;,</code><br><code>&quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plan: <br><code>[{ &quot;form&quot;: &quot;subscription&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;split&#39; example (installment) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;splitting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;split&#39; example (limited_subscription) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;splitting_type&quot;: &quot;limited_subscription&quot; } }]</code><br> <span style='background-color: lightpink'>Note: Per product you are allowed to use maximum 5 pricing plans </span>.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; form</td>
+<td>String</td>
+<td>Allowed values: <code>&quot;one_time&quot;</code>, <code>&quot;subscription&quot;</code>, <code>&quot;split&quot;</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; preferences</td>
+<td>Object</td>
+<td>Apply different intervals for pricing plans with subscription and installments.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; price</td>
+<td>Decimal</td>
+<td>price by current pricing plan (only for one_time pricing plan)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; old_price</td>
+<td>Decimal</td>
+<td>old product price (only for one_time pricing plan)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; p_count</td>
+<td>Integer</td>
+<td>total count of payments (required for pricing plan form: split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; first_interval</td>
+<td>String</td>
+<td>first payment interval (required for pricing plan form: subscription/split), possible values: <code>‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; first_amount</td>
+<td>Decimal</td>
+<td>first payment amount (required for pricing plan form: subscription/split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; next_interval</td>
+<td>String</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/split), possible values: <code>‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; next_amount</td>
+<td>Decimal</td>
+<td>next payment amount (required for pricing plan form: subscription/split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; splitting_type</td>
+<td>String</td>
+<td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - <b>One invoice for the entire amount will be issued</b>, &quot;limited_subscription&quot; - <b>For each payment a new invoice will be issued</b> <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
+</tr>
+<tr>
+<td>Authors</td>
+<td>Array</td>
+<td>Array of objects which represent the authors, that will be connected to the product</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; id</td>
+<td>Integer</td>
+<td>ID of the author, which you want to connect to the product (IDs of authors can be found in your dashboard under Team Members)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; c_c_enabled</td>
+<td>Boolean</td>
+<td>Pass &#39;true&#39; here if you want to overwrite general commission with this one, you should pass &#39;commission&#39; for it to take effect</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; commission</td>
+<td>Integer</td>
+<td>Field which represents the commisison of author, measured in %</td>
+</tr>
+<tr>
+<td>forward</td>
+<td>Object</td>
+<td><a href="http://blog.elopage.com/hilfebereich/was-bedeutet-die-url-parameter-weiterleitung/">we can forward params with url_to_pay to prefill payment form, check this blog</a></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; first_name</td>
+<td>String</td>
+<td>first name of customer</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; last_name</td>
+<td>String</td>
+<td>last name of customer</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; email</td>
+<td>String</td>
+<td>email of customer</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; coupon</td>
+<td>String</td>
+<td>coupon code to be applied automatically</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; campaign_id</td>
+<td>String</td>
+<td>campaign IDs can be freely added</td>
+</tr>
+<tr>
+<td>success_email</td>
+<td>Object</td>
+<td>Payment confirmation or success email object contains data for the creation of custom emails which is automatically sent to the customer after successful payment. If success_email is not specified, elopage is sending out the standard email template which you can check in the product settings on elopage. For API usage, we do not recommend the usage of the standard template. Please customize your success email.  In the custom email you have the option to add your own email body using html in body_en for the English version and body_de for the German version. In addition, you can add several variables that will be replaced automatically with your customers or purchase information: First name of customer <code>first_name</code>, last name <code>last_name</code>, name of the product <code>product_name</code>, price paid amount and recurring payment type <code>recurring_type</code>.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; subject_en</td>
+<td>String</td>
+<td>Subject of email in English</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; subject_de</td>
+<td>String</td>
+<td>Subject of email in German</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; body_en</td>
+<td>String</td>
+<td>Body of email in English</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; body_de</td>
+<td>String</td>
+<td>Body of email in German</td>
+</tr>
+</tbody></table>
+<h3 id='success-200'>Success 200</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Number</td>
+<td>Product ID.</td>
+</tr>
+<tr>
+<td>url_to_pay</td>
+<td>String</td>
+<td>Product URL to which customer must be redirected</td>
+</tr>
+</tbody></table>
+<h3 id='error-4xx'>Error 4xx</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NoAccessRight</td>
+<td>Only authenticated sellers can access the data.</td>
+</tr>
+<tr>
+<td>UserNotFound</td>
+<td>The key of the user was not found.</td>
+</tr>
+</tbody></table>
+<h2 id='get-product'>Get product</h2>
+<p>Fetch product and all relevant information such as product name, pricing plans, authors and more.</p>
+
+<blockquote>
+<p>Example usage:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://elopage.com/api/products/{id}?key={api_key}&amp;secret={api_secret}"</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/products/{id}?key={api_key}&amp;secret={api_secret}'</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>Example resppnse:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "name": "product name",
+    "url_to_pay": "https://elopage.com/s/elopage/product-name-1/payment",
+    "success_url": "http://elopage.com",
+    "cancel_url": "elopage.com",
+    "error_url": "elopage.com",
+    "webhook_url": "elopage.com",
+    "free": false,
+    "pricing_plans": [
+        {
+            id: "1",
+            "form": "one_time",
+            "preferences": {
+                "price": "199.9",
+                "old_price": "200.0"
+            }
+        }
+    ],
+    "authors": [
+      {
+          "author_id": 4,
+          "c_c_enabled": true,
+          "commission": "10.0"
+      }
+    ]
+}
+</code></pre><h3 id='get'>GET</h3>
+<p><code>https://elopage.com/api/products/:id</code></p>
+<h3 id='parameter-2'>Parameter</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>secret</td>
+<td>String</td>
+<td>elopage api_secret which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Your personal elopage API key, you can find or generate them inside your elopage cabinet: Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Number</td>
+<td>Product ID</td>
+</tr>
+</tbody></table>
+<h3 id='success-200-2'>Success 200</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url_to_pay</td>
+<td>String</td>
+<td>Product URL to which customer must be redirected</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Decimal</td>
+<td>The final price or amount you want to charge your customer incl. taxes, fees etc.</td>
+</tr>
+<tr>
+<td>free</td>
+<td>Boolean</td>
+<td>Product for a free product</td>
+</tr>
+<tr>
+<td>success_url</td>
+<td>String</td>
+<td><b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.</td>
+</tr>
+<tr>
+<td>cancel_url</td>
+<td>String</td>
+<td><b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.</td>
+</tr>
+<tr>
+<td>error_url</td>
+<td>String</td>
+<td><b>Error URL</b> to which your customer is redirected in case of error occurrences during the payment processing (for example bad credit card information, rejected card etc.).</td>
+</tr>
+<tr>
+<td>webhook_url</td>
+<td>String</td>
+<td>elopage API sends POST request to this URL if payment for payment of product/name changes status to successful (e.g. bank wire updates).</td>
+</tr>
+<tr>
+<td>pricing_plans</td>
+<td>Array</td>
+<td>Array of objects which represents pricing plans of the product (at least one object required)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;ID</td>
+<td>Integer</td>
+<td>ID of the pricing plan</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;form</td>
+<td>String</td>
+<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;split&quot;</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;preferences</td>
+<td>Object</td>
+<td>Apply different intervals for pricing plans with subscription and installments.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;price</td>
+<td>Decimal</td>
+<td>price by current pricing plan</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;old_price</td>
+<td>Decimal</td>
+<td>old product price</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;p_count</td>
+<td>Integer</td>
+<td>total count of payments (required for pricing plan form: split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;first_interval</td>
+<td>String</td>
+<td>first payment interval (required for pricing plan form: subscription/split), possible values: <code>‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;first_amount</td>
+<td>Decimal</td>
+<td>first payment amount (required for pricing plan form: subscription/split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;next_interval</td>
+<td>String</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/split), possible values: <code>‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;next_amount</td>
+<td>Decimal</td>
+<td>next payment amount (required for pricing plan form: subscription/split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;splitting_type</td>
+<td>String</td>
+<td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - <b>One invoice for the entire amount will be issued</b>, &quot;limited_subscription&quot; - <b>For each payment a new invoice will be issued</b> <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
+</tr>
+<tr>
+<td>Authors</td>
+<td>Array</td>
+<td>Array of objects which represent the authors, that will be connected to the product</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; id</td>
+<td>Integer</td>
+<td>ID of the author, which you want to connect to the product (IDs of authors can be found in your dashboard under Team Members)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; c_c_enabled</td>
+<td>Boolean</td>
+<td>Pass &#39;true&#39; here if you want to overwrite general commission with this one, you should pass &#39;commission&#39; for it to take effect</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; commission</td>
+<td>Integer</td>
+<td>Field which represents the commisison of author, measured in %</td>
+</tr>
+</tbody></table>
+<h3 id='error-4xx-2'>Error 4xx</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NoAccessRight</td>
+<td>Only authenticated sellers can access the data.</td>
+</tr>
+<tr>
+<td>UserNotFound</td>
+<td>The key of the user was not found.</td>
+</tr>
+</tbody></table>
+<h2 id='get-products'>Get products</h2>
+<p>Fetch products list.</p>
+
+<blockquote>
+<p>Example usage:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://elopage.com/api/products?key={api_key}&amp;secret={api_secret}"</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/products?key={api_key}&amp;secret={api_secret}'</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>Example resppnse:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+      "id": 1646,
+      "name": "Test digital",
+      "url_to_pay": "https://elopage.com/s/testsellerregistration/test-digital-2/payment",
+      "webhook_url": "https://webhook.site/e6f6c835-1786-448e-bc12-58048ecfcdc8",
+      "active": true,
+      "sold_count": 34,
+      "created_at": "2018-07-31T11:48:15.789Z"
+  },
+  {
+      "id": 1679,
+      "name": "test product",
+      "url_to_pay": "https://elopage.com/s/testsellerregistration/test-58/payment",
+      "active": true,
+      "sold_count": 0,
+      "created_at": "2018-08-17T14:06:25.806Z"
+  },
+  {
+      "id": 1682,
+      "name": "test",
+      "url_to_pay": "https://elopage.com/s/testsellerregistration/test-w4rwerwe/payment",
+      "active": true,
+      "sold_count": 0,
+      "created_at": "2018-08-17T14:35:14.205Z"
+  }
+]
+
+</code></pre><h3 id='get-2'>GET</h3>
+<p><code>https://elopage.com/api/products</code></p>
+<h3 id='parameter-3'>Parameter</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>secret</td>
+<td>String</td>
+<td>elopage api_secret which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Your personal elopage API key, you can find or generate them inside your elopage cabinet: Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Number</td>
+<td>Product ID</td>
+</tr>
+</tbody></table>
+<h3 id='success-200-3'>Success 200</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url_to_pay</td>
+<td>String</td>
+<td>Product URL to which customer must be redirected</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Decimal</td>
+<td>The final price or amount you want to charge your customer incl. taxes, fees etc.</td>
+</tr>
+<tr>
+<td>free</td>
+<td>Boolean</td>
+<td>Product for a free product</td>
+</tr>
+<tr>
+<td>success_url</td>
+<td>String</td>
+<td><b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.</td>
+</tr>
+<tr>
+<td>cancel_url</td>
+<td>String</td>
+<td><b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.</td>
+</tr>
+<tr>
+<td>error_url</td>
+<td>String</td>
+<td><b>Error URL</b> to which your customer is redirected in case of error occurrences during the payment processing (for example bad credit card information, rejected card etc.).</td>
+</tr>
+<tr>
+<td>webhook_url</td>
+<td>String</td>
+<td>elopage API sends POST request to this URL if payment for payment of product/name changes status to successful (e.g. bank wire updates).</td>
+</tr>
+<tr>
+<td>pricing_plans</td>
+<td>Array</td>
+<td>Array of objects which represents pricing plans of the product (at least one object required)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;ID</td>
+<td>Integer</td>
+<td>ID of the pricing plan</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;form</td>
+<td>String</td>
+<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;split&quot;</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;preferences</td>
+<td>Object</td>
+<td>Apply different intervals for pricing plans with subscription and installments.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;price</td>
+<td>Decimal</td>
+<td>price by current pricing plan</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;old_price</td>
+<td>Decimal</td>
+<td>old product price</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;p_count</td>
+<td>Integer</td>
+<td>total count of payments (required for pricing plan form: split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;first_interval</td>
+<td>String</td>
+<td>first payment interval (required for pricing plan form: subscription/split), possible values: <code>‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;first_amount</td>
+<td>Decimal</td>
+<td>first payment amount (required for pricing plan form: subscription/split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;next_interval</td>
+<td>String</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/split), possible values: <code>‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;next_amount</td>
+<td>Decimal</td>
+<td>next payment amount (required for pricing plan form: subscription/split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;splitting_type</td>
+<td>String</td>
+<td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - <b>One invoice for the entire amount will be issued</b>, &quot;limited_subscription&quot; - <b>For each payment a new invoice will be issued</b> <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
+</tr>
+<tr>
+<td>Authors</td>
+<td>Array</td>
+<td>Array of objects which represent the authors, that will be connected to the product</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; id</td>
+<td>Integer</td>
+<td>ID of the author, which you want to connect to the product (IDs of authors can be found in your dashboard under Team Members)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; c_c_enabled</td>
+<td>Boolean</td>
+<td>Pass &#39;true&#39; here if you want to overwrite general commission with this one, you should pass &#39;commission&#39; for it to take effect</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; commission</td>
+<td>Integer</td>
+<td>Field which represents the commisison of author, measured in %</td>
+</tr>
+</tbody></table>
+<h3 id='error-4xx-3'>Error 4xx</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NoAccessRight</td>
+<td>Only authenticated sellers can access the data.</td>
+</tr>
+<tr>
+<td>UserNotFound</td>
+<td>The key of the user was not found.</td>
+</tr>
+</tbody></table>
+<h2 id='update-product'>Update product</h2>
+<blockquote>
+<p>Example usage:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PUT <span class="se">\</span>
+  https://elopage.com/api/products/1115 <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+  "key":"{api_key}",
+  "secret":"{api_secret}",
+  "name":"product name",
+  "success_url": "elopage.com",
+  "cancel_url": "elopage.com",
+  "error_url": "elopage.com",
+  "webhook_url": "elopage.com",
+    "pricing_plans": [
+        {
+            "id": 1340,
+            "form": "one_time",
+            "preferences": {
+                "price": "220",
+                "old_price": "200.0"
+            }
+        }
+    ],
+   "success_email": {
+      "subject_de": "test",
+      "body_de": "&lt;p&gt;Hallo %{first_name} %{last_name},&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;vielen Dank f&amp;uuml;r die Bestellung.&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;Produktname: %{product_name}&lt;/p&gt;\n&lt;p&gt;Betrag: %{amount}&lt;/p&gt;\n&lt;p&gt;Zahlung: %{recurring_type}&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;Bitte jetzt hier klicken:&lt;/p&gt;\n&lt;p&gt;%{next_button}&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;Sch&amp;ouml;ne Gr&amp;uuml;&amp;szlig;e,&lt;/p&gt;",
+      "subject_en": "test",
+      "body_en": "&lt;p&gt;Hello %{first_name} %{last_name},&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;thanks for your order.&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;Product name: %{product_name}&lt;/p&gt;\n&lt;p&gt;Amount: %{amount}&lt;/p&gt;\n&lt;p&gt;Plan: %{recurring_type}&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;Now click here:&lt;/p&gt;\n&lt;p&gt;%{next_button}&lt;/p&gt;\n&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Best regards,&lt;/p&gt;"
+   }
+}'</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://elopage.com/api/products/1115"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Put</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">"key"</span><span class="ss">:"{api_key}"</span><span class="p">,</span>
+                <span class="s2">"secret"</span><span class="ss">:"{api_secret}"</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="ss">:"product name"</span><span class="p">,</span>
+                <span class="s2">"success_url"</span><span class="p">:</span> <span class="s2">"elopage.com"</span><span class="p">,</span>
+                <span class="s2">"cancel_url"</span><span class="p">:</span> <span class="s2">"elopage.com"</span><span class="p">,</span>
+                <span class="s2">"error_url"</span><span class="p">:</span> <span class="s2">"elopage.com"</span><span class="p">,</span>
+                <span class="s2">"webhook_url"</span><span class="p">:</span> <span class="s2">"elopage.com"</span><span class="p">,</span>
+                <span class="s2">"pricing_plans"</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1340</span><span class="p">,</span>
+                        <span class="s2">"form"</span><span class="p">:</span> <span class="s2">"one_time"</span><span class="p">,</span>
+                        <span class="s2">"preferences"</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"220"</span><span class="p">,</span>
+                            <span class="s2">"old_price"</span><span class="p">:</span> <span class="s2">"200.0"</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                 <span class="p">],</span>
+                 <span class="s2">"success_email"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"subject_de"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+                    <span class="s2">"body_de"</span><span class="p">:</span> <span class="s2">"&lt;p&gt;Hallo %{first_name} %{last_name},&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;vielen Dank f&amp;uuml;r die Bestellung.&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;Produktname: %{product_name}&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;Betrag: %{amount}&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;Zahlung: %{recurring_type}&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;Bitte jetzt hier klicken:&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;%{next_button}&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;Sch&amp;ouml;ne Gr&amp;uuml;&amp;szlig;e,&lt;/p&gt;"</span><span class="p">,</span>
+                    <span class="s2">"subject_en"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+                    <span class="s2">"body_en"</span><span class="p">:</span> <span class="s2">"&lt;p&gt;Hello %{first_name} %{last_name},&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;thanks for your order.&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;Product name: %{product_name}&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;Amount: %{amount}&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;Plan: %{recurring_type}&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;&lt;br&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;Now click here:&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;%{next_button}&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Best regards,&lt;/p&gt;"</span>
+                 <span class="p">}</span>
+                <span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+
+</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "id": 1087,
+    "url_to_pay": "https://elopage.com/s/elopage/product-name-1/payment"
+}
+</code></pre>
+<p>The elopage API allows creating products. To change or update the product information like price or name, please use put actions.</p>
+<h3 id='put'>PUT</h3>
+<p><code>https://elopage.com/api/products/:id</code></p>
+<h3 id='parameter-4'>Parameter</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>secret</td>
+<td>String</td>
+<td>elopage api_secret which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Your personal elopage API key which you can generate in your dashboard: Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.</td>
+</tr>
+<tr>
+<td>success_url</td>
+<td>String</td>
+<td><b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.</td>
+</tr>
+<tr>
+<td>cancel_url</td>
+<td>String</td>
+<td><b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.</td>
+</tr>
+<tr>
+<td>error_url</td>
+<td>String</td>
+<td><b>Error URL</b> to which your customer is redirected in case of error occurrences during the payment processing (for example bad credit card information, rejected card etc.).</td>
+</tr>
+<tr>
+<td>webhook_url</td>
+<td>String</td>
+<td>The elopage API sends POST requests to this URL when there are updates related to the payment (for example bank wire payment updates to status successful). Transaction IDs and Payment IDs are included in the POST requests.</td>
+</tr>
+<tr>
+<td>page_header</td>
+<td>String</td>
+<td>Use the page header to add content above the payment form (testimonials, campaign information etc.)  using html.</td>
+</tr>
+<tr>
+<td>page_footer</td>
+<td>String</td>
+<td>Use the page footer to add further information and content below the payment form using html.</td>
+</tr>
+<tr>
+<td>pricing_plans</td>
+<td>Array</td>
+<td>Array of objects which represent pricing plans of the product (at least one object required): <br> &#39;one_time&#39; example pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;one_time&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;price&quot;: &quot;199.9&quot;,</code><br><code>&quot;old_price&quot;: &quot;200&quot; } }]</code><br> &#39;subscription&#39; example pricing_plan: <br><code>[{ &quot;form&quot;: &quot;subscription&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot; } }]</code><br> &#39;split&#39; example (installment) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;splitting_type&quot;: &quot;installment&quot; } }]</code><br> &#39;split&#39; example (limited_subscription) pricing_plan:<br> <code>[{ &quot;form&quot;: &quot;split&quot;,</code><br><code>&quot;preferences&quot;:</code><br><code>{ &quot;p_count&quot;: &quot;5&quot;,</code><br><code>&quot;first_interval&quot;: &quot;1w&quot;,</code><br><code>&quot;first_amount&quot;: &quot;20.0&quot;,</code><br><code>&quot;next_interval&quot;: &quot;1m&quot;,</code><br><code>&quot;next_amount&quot;: &quot;10.0&quot;,</code><br><code>&quot;splitting_type&quot;: &quot;limited_subscription&quot; } }]</code><br> <span style='background-color: lightpink'>Note: Per product you are allowed to use maximum 5 pricing plans </span>.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; ID</td>
+<td>Integer</td>
+<td>ID of the pricing plan you want to edit</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; form</td>
+<td>String</td>
+<td>Allowed values: <code>&quot;one_time&quot;</code>, <code>&quot;subscription&quot;</code>, <code>&quot;split&quot;</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; preferences</td>
+<td>Object</td>
+<td>Apply different intervals for pricing plans with subscription and installments.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; price</td>
+<td>Decimal</td>
+<td>price by current pricing plan (only for one_time pricing plan)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; old_price</td>
+<td>Decimal</td>
+<td>old product price (only for one_time pricing plan)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; p_count</td>
+<td>Integer</td>
+<td>total count of payments (required for pricing plan form: split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; first_interval</td>
+<td>String</td>
+<td>first payment interval (required for pricing plan form: subscription/split), possible values: <code>‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; first_amount</td>
+<td>Decimal</td>
+<td>first payment amount (required for pricing plan form: subscription/split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; next_interval</td>
+<td>String</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/split), possible values: <code>‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; next_amount</td>
+<td>Decimal</td>
+<td>next payment amount (required for pricing plan form: subscription/split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; splitting_type</td>
+<td>String</td>
+<td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - <b> One invoice for the entire amount will be issued </b>, &quot;limited_subscription&quot; - <b>For each payment a new invoice will be issued</b> <br>Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
+</tr>
+<tr>
+<td>Authors</td>
+<td>Array</td>
+<td>Array of objects which represent the authors, that will be connected to the product</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; id</td>
+<td>Integer</td>
+<td>ID of the author, which you want to connect to the product (IDs of authors can be found in your dashboard under Team Members)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; c_c_enabled</td>
+<td>Boolean</td>
+<td>Pass &#39;true&#39; here if you want to overwrite general commission with this one, you should pass &#39;commission&#39; for it to take effect</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; commission</td>
+<td>Integer</td>
+<td>Field which represents the commisison of author, measured in %</td>
+</tr>
+<tr>
+<td>forward</td>
+<td>Object</td>
+<td><a href="http://blog.elopage.com/hilfebereich/was-bedeutet-die-url-parameter-weiterleitung/">we can forward params with url_to_pay to prefill payment form, check this blog</a></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; first_name</td>
+<td>String</td>
+<td>first name of customer</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; last_name</td>
+<td>String</td>
+<td>last name of customer</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; email</td>
+<td>String</td>
+<td>email of customer</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; coupon</td>
+<td>String</td>
+<td>coupon code to be applied automatically</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; campaign_id</td>
+<td>String</td>
+<td>campaign IDs can be freely added</td>
+</tr>
+<tr>
+<td>success_email</td>
+<td>Object</td>
+<td>Payment confirmation or success email object contains data for the creation of custom emails which is automatically sent to the customer after successful payment. If success_email is not specified, elopage is sending out the standard email template which you can check in the product settings on elopage. For API usage, we do not recommend the usage of the standard template. Please customize your success email.  In the custom email you have the option to add your own email body using html in body_en for the English version and body_de for the German version. In addition, you can add several variables that will be replaced automatically with your customers or purchase information: First name of customer <code>first_name</code>, last name <code>last_name</code>, name of the product <code>product_name</code>, price paid amount and recurring payment type <code>recurring_type</code>.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; subject_en</td>
+<td>String</td>
+<td>Subject of email in English</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; subject_de</td>
+<td>String</td>
+<td>Subject of email in German</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; body_en</td>
+<td>String</td>
+<td>Body of email in English</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; body_de</td>
+<td>String</td>
+<td>Body of email in German</td>
+</tr>
+</tbody></table>
+<h3 id='success-200-4'>Success 200</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Number</td>
+<td>Product ID.</td>
+</tr>
+<tr>
+<td>url_to_pay</td>
+<td>String</td>
+<td>Product URL to which customer must be redirected</td>
+</tr>
+</tbody></table>
+<h3 id='error-4xx-4'>Error 4xx</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NoAccessRight</td>
+<td>Only authenticated sellers can access the data.</td>
+</tr>
+<tr>
+<td>UserNotFound</td>
+<td>The key of the user was not found.</td>
+</tr>
+</tbody></table>
+<h1 id='sales-page-deprecated'>Sales Page(Deprecated)</h1><h2 id='create-sales-page'>Create sales page</h2>
 <blockquote>
 <p>Example usage:</p>
 </blockquote>
@@ -551,9 +1645,9 @@
 }
 </code></pre>
 <p>The elopage API allows to initiate and complete payments using optimized checkout interfaces. In order to process payments you first need to create a sales page. After the sales page creation you will receive a &#39;url_to_pay&#39; parameter to which you must redirect your customer to complete payment. Thereafter you need to redirect the customer back to your success URL and pass on parameters and information. Using webhooks (webhook_url), you will get instant notifications about the status of the payment.</p>
-<h3 id='post'>POST</h3>
+<h3 id='post-2'>POST</h3>
 <p><code>https://elopage.com/api/sales_pages</code></p>
-<h3 id='parameter'>Parameter</h3>
+<h3 id='parameter-5'>Parameter</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -737,7 +1831,7 @@
 <td>Body of email in German</td>
 </tr>
 </tbody></table>
-<h3 id='success-200'>Success 200</h3>
+<h3 id='success-200-5'>Success 200</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -756,7 +1850,7 @@
 <td>Sales page URL to which customer must be redirected</td>
 </tr>
 </tbody></table>
-<h3 id='error-4xx'>Error 4xx</h3>
+<h3 id='error-4xx-5'>Error 4xx</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -772,8 +1866,8 @@
 <td>The key of the user was not found.</td>
 </tr>
 </tbody></table>
-<h2 id='get-sales-pages'>Get sales pages</h2>
-<p>Fetch sales pages and all relevant information such as product name, pricing plans, authors and more.</p>
+<h2 id='get-sales-page'>Get sales page</h2>
+<p>Fetch sales page and all relevant information such as product name, pricing plans, authors and more.</p>
 
 <blockquote>
 <p>Example usage:</p>
@@ -813,9 +1907,9 @@
       }
     ]
 }
-</code></pre><h3 id='get'>GET</h3>
+</code></pre><h3 id='get-3'>GET</h3>
 <p><code>https://elopage.com/api/sales_pages/:id</code></p>
-<h3 id='parameter-2'>Parameter</h3>
+<h3 id='parameter-6'>Parameter</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -839,7 +1933,7 @@
 <td>Sales page ID</td>
 </tr>
 </tbody></table>
-<h3 id='success-200-2'>Success 200</h3>
+<h3 id='success-200-6'>Success 200</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -968,7 +2062,221 @@
 <td>Field which represents the commisison of author, measured in %</td>
 </tr>
 </tbody></table>
-<h3 id='error-4xx-2'>Error 4xx</h3>
+<h3 id='error-4xx-6'>Error 4xx</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NoAccessRight</td>
+<td>Only authenticated sellers can access the data.</td>
+</tr>
+<tr>
+<td>UserNotFound</td>
+<td>The key of the user was not found.</td>
+</tr>
+</tbody></table>
+<h2 id='get-sales-pages'>Get sales pages</h2>
+<p>Fetch sales pages list.</p>
+
+<blockquote>
+<p>Example usage:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://elopage.com/api/sales_pages?key={api_key}&amp;secret={api_secret}"</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/sales_pages?key={api_key}&amp;secret={api_secret}'</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>Example resppnse:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+      "id": 1646,
+      "name": "Test digital",
+      "url_to_pay": "https://elopage.com/s/testsellerregistration/test-digital-2/payment",
+      "webhook_url": "https://webhook.site/e6f6c835-1786-448e-bc12-58048ecfcdc8",
+      "active": true,
+      "sold_count": 34,
+      "created_at": "2018-07-31T11:48:15.789Z"
+  },
+  {
+      "id": 1679,
+      "name": "test product",
+      "url_to_pay": "https://elopage.com/s/testsellerregistration/test-58/payment",
+      "active": true,
+      "sold_count": 0,
+      "created_at": "2018-08-17T14:06:25.806Z"
+  },
+  {
+      "id": 1682,
+      "name": "test",
+      "url_to_pay": "https://elopage.com/s/testsellerregistration/test-w4rwerwe/payment",
+      "active": true,
+      "sold_count": 0,
+      "created_at": "2018-08-17T14:35:14.205Z"
+  }
+]
+
+</code></pre><h3 id='get-4'>GET</h3>
+<p><code>https://elopage.com/api/sales_pages</code></p>
+<h3 id='parameter-7'>Parameter</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>secret</td>
+<td>String</td>
+<td>elopage api_secret which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Your personal elopage API key, you can find or generate them inside your elopage cabinet: Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Number</td>
+<td>Sales page ID</td>
+</tr>
+</tbody></table>
+<h3 id='success-200-7'>Success 200</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url_to_pay</td>
+<td>String</td>
+<td>Sales page URL to which customer must be redirected</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>What is the customer paying for? Enter a product name, plan name or similar. This name will be visible to your customer during the checkout process.</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Decimal</td>
+<td>The final price or amount you want to charge your customer incl. taxes, fees etc.</td>
+</tr>
+<tr>
+<td>free</td>
+<td>Boolean</td>
+<td>Sales page for a free product</td>
+</tr>
+<tr>
+<td>success_url</td>
+<td>String</td>
+<td><b>Success URL</b> to which the customer will be redirected after completing the payment. Important: Updates for payments with payment methods that require time to process (for example Bank Wire / Vorkasse) must be continuously fetched using Payment IDs (payment_id) in order to receive the payment status <b>(/api/payments/:id)</b>.</td>
+</tr>
+<tr>
+<td>cancel_url</td>
+<td>String</td>
+<td><b>Cancel URL</b> to which your customer is redirected in case of payment process was cancelled by the customer.</td>
+</tr>
+<tr>
+<td>error_url</td>
+<td>String</td>
+<td><b>Error URL</b> to which your customer is redirected in case of error occurrences during the payment processing (for example bad credit card information, rejected card etc.).</td>
+</tr>
+<tr>
+<td>webhook_url</td>
+<td>String</td>
+<td>elopage API sends POST request to this URL if payment for payment of product/name changes status to successful (e.g. bank wire updates).</td>
+</tr>
+<tr>
+<td>pricing_plans</td>
+<td>Array</td>
+<td>Array of objects which represents pricing plans of the product (at least one object required)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;ID</td>
+<td>Integer</td>
+<td>ID of the pricing plan</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;form</td>
+<td>String</td>
+<td>Allowed values: <code>&quot;one_time&quot;, &quot;subscription&quot;, &quot;split&quot;</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;preferences</td>
+<td>Object</td>
+<td>Apply different intervals for pricing plans with subscription and installments.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;price</td>
+<td>Decimal</td>
+<td>price by current pricing plan</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;old_price</td>
+<td>Decimal</td>
+<td>old product price</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;p_count</td>
+<td>Integer</td>
+<td>total count of payments (required for pricing plan form: split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;first_interval</td>
+<td>String</td>
+<td>first payment interval (required for pricing plan form: subscription/split), possible values: <code>‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;first_amount</td>
+<td>Decimal</td>
+<td>first payment amount (required for pricing plan form: subscription/split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;next_interval</td>
+<td>String</td>
+<td>next payment interval startdate (required for pricing plan form: subscription/split), possible values: <code>‘1w’, ‘2w’, ‘3w’, ‘1m’, ‘2m’, ‘3m’, ‘6m’, ‘1y’, ‘2y’</code></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;next_amount</td>
+<td>Decimal</td>
+<td>next payment amount (required for pricing plan form: subscription/split)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;splitting_type</td>
+<td>String</td>
+<td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - <b>One invoice for the entire amount will be issued</b>, &quot;limited_subscription&quot; - <b>For each payment a new invoice will be issued</b> <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
+</tr>
+<tr>
+<td>Authors</td>
+<td>Array</td>
+<td>Array of objects which represent the authors, that will be connected to the sales page</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; id</td>
+<td>Integer</td>
+<td>ID of the author, which you want to connect to the sales page (IDs of authors can be found in your dashboard under Team Members)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; c_c_enabled</td>
+<td>Boolean</td>
+<td>Pass &#39;true&#39; here if you want to overwrite general commission with this one, you should pass &#39;commission&#39; for it to take effect</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp; commission</td>
+<td>Integer</td>
+<td>Field which represents the commisison of author, measured in %</td>
+</tr>
+</tbody></table>
+<h3 id='error-4xx-7'>Error 4xx</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1064,9 +2372,9 @@
 }
 </code></pre>
 <p>The elopage API allows creating sales pages. To change or update the sales page information like price or name, please use put actions.</p>
-<h3 id='put'>PUT</h3>
+<h3 id='put-2'>PUT</h3>
 <p><code>https://elopage.com/api/sales_pages/:id</code></p>
-<h3 id='parameter-3'>Parameter</h3>
+<h3 id='parameter-8'>Parameter</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1255,7 +2563,7 @@
 <td>Body of email in German</td>
 </tr>
 </tbody></table>
-<h3 id='success-200-3'>Success 200</h3>
+<h3 id='success-200-8'>Success 200</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1274,7 +2582,350 @@
 <td>Sales page URL to which customer must be redirected</td>
 </tr>
 </tbody></table>
-<h3 id='error-4xx-3'>Error 4xx</h3>
+<h3 id='error-4xx-8'>Error 4xx</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NoAccessRight</td>
+<td>Only authenticated sellers can access the data.</td>
+</tr>
+<tr>
+<td>UserNotFound</td>
+<td>The key of the user was not found.</td>
+</tr>
+</tbody></table>
+<h1 id='publishers'>Publishers</h1><h2 id='get-publishers-list'>Get publishers list</h2>
+<p>Fetch publishers list.</p>
+
+<blockquote>
+<p>Example usage:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://elopage.com/api/publishers?key={api_key}&amp;secret={api_secret}"</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="no">URI</span><span class="p">(</span><span class="s1">'https://elopage.com/api/publishers?key={api_key}&amp;secret={api_secret}'</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>Example resppnse:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+    {
+        "id": 306,
+        "first_name": "Test",
+        "last_name": "Publisher",
+        "email": "testpublisher@gmail.com",
+        "program_ids": "129"
+    },
+    {
+        "id": 266,
+        "first_name": "New",
+        "last_name": "Publisher",
+        "email": "newpublisher@gmail.com",
+        "program_ids": "129"
+    }
+]
+
+</code></pre><h3 id='get-5'>GET</h3>
+<p><code>https://elopage.com/api/publishers</code></p>
+<h3 id='parameter-9'>Parameter</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>secret</td>
+<td>String</td>
+<td>elopage api_secret which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Your personal elopage API key, you can find or generate them inside your elopage cabinet: Settings &gt; Integrations</td>
+</tr>
+</tbody></table>
+<h3 id='success-200-9'>Success 200</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>Publisher ID</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>String</td>
+<td>Publisher first name</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>String</td>
+<td>Publisher last name</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>Publisher email</td>
+</tr>
+<tr>
+<td>program_ids</td>
+<td>Array</td>
+<td>Affiliate program ids, in which publisher is currently enrolled</td>
+</tr>
+<tr>
+<td>address</td>
+<td>String</td>
+<td>Publisher address</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>String</td>
+<td>Publisher zip</td>
+</tr>
+<tr>
+<td>city</td>
+<td>String</td>
+<td>Publisher city</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>Publisher phone</td>
+</tr>
+<tr>
+<td>tax_no</td>
+<td>String</td>
+<td>Publisher tax number</td>
+</tr>
+<tr>
+<td>vat_no</td>
+<td>String</td>
+<td>Publisher vat number</td>
+</tr>
+</tbody></table>
+<h3 id='error-4xx-9'>Error 4xx</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NoAccessRight</td>
+<td>Only authenticated sellers can access the data.</td>
+</tr>
+<tr>
+<td>UserNotFound</td>
+<td>The key of the user was not found.</td>
+</tr>
+</tbody></table>
+<h2 id='enroll-publisher-to-program'>Enroll publisher to program</h2>
+<blockquote>
+<p>Example usage:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  https://elopage.com/api/publishers/<span class="o">{</span>id<span class="o">}</span>/enroll <span class="se">\</span>
+  -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'</span> <span class="se">\</span>
+  -F <span class="nv">key</span><span class="o">={</span>api_key<span class="o">}</span> <span class="se">\</span>
+  -F <span class="nv">secret</span><span class="o">={</span>api_secret<span class="o">}</span> <span class="se">\</span>
+  -F <span class="nv">affiliate_program_id</span><span class="o">=</span><span class="s2">"{affiliate_program_id}"</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://elopage.com/api/publishers/{id}/enroll"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"cache-control"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'no-cache'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"key"</span><span class="ss">:"{api_key}"</span><span class="p">,</span>
+  <span class="s2">"secret"</span><span class="ss">:"{api_secret}"</span><span class="p">,</span>
+  <span class="s2">"affiliate_program_id"</span><span class="p">:</span> <span class="s2">"{affiliate_program_id}"</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "success": true,
+    "msg": "Publisher successfully enrolled in program 15 Multilevel program (no bonus)"
+}
+</code></pre>
+<p>The elopage API allows unenrolling publishers from your affiliate programs.</p>
+<h3 id='post-3'>POST</h3>
+<p><code>https://elopage.com/api/publishers/:id/enroll</code></p>
+<h3 id='parameter-10'>Parameter</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>secret</td>
+<td>String</td>
+<td>elopage api_secret which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Your personal elopage API key which you can generate in your dashboard: Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>affiliate_program_id</td>
+<td>String</td>
+<td>Program, to which publisher should be enrolled after a successful call</td>
+</tr>
+</tbody></table>
+<h3 id='success-200-10'>Success 200</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Number</td>
+<td>Product ID.</td>
+</tr>
+<tr>
+<td>success</td>
+<td>Boolean</td>
+<td>Field which determines if the call was successful or not</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>String</td>
+<td>Server answer to the request</td>
+</tr>
+</tbody></table>
+<h3 id='error-4xx-10'>Error 4xx</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NoAccessRight</td>
+<td>Only authenticated sellers can access the data.</td>
+</tr>
+<tr>
+<td>UserNotFound</td>
+<td>The key of the user was not found.</td>
+</tr>
+</tbody></table>
+<h2 id='unenroll-publisher-from-program'>Unenroll publisher from program</h2>
+<blockquote>
+<p>Example usage:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  https://elopage.com/api/publishers/<span class="o">{</span>id<span class="o">}</span>/unenroll <span class="se">\</span>
+  -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'</span> <span class="se">\</span>
+  -F <span class="nv">key</span><span class="o">={</span>api_key<span class="o">}</span> <span class="se">\</span>
+  -F <span class="nv">secret</span><span class="o">={</span>api_secret<span class="o">}</span> <span class="se">\</span>
+  -F <span class="nv">affiliate_program_id</span><span class="o">=</span><span class="s2">"{affiliate_program_id}"</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://elopage.com/api/publishers/{id}/unenroll"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"cache-control"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'no-cache'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"key"</span><span class="ss">:"{api_key}"</span><span class="p">,</span>
+  <span class="s2">"secret"</span><span class="ss">:"{api_secret}"</span><span class="p">,</span>
+  <span class="s2">"affiliate_program_id"</span><span class="p">:</span> <span class="s2">"{affiliate_program_id}"</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    "success": true,
+    "msg": "Publisher successfully unenrolled from program 15 Multilevel program (no bonus)"
+}
+</code></pre>
+<p>The elopage API allows unenrolling publishers for your affiliate programs.</p>
+<h3 id='post-4'>POST</h3>
+<p><code>https://elopage.com/api/publishers/:id/unenroll</code></p>
+<h3 id='parameter-11'>Parameter</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>secret</td>
+<td>String</td>
+<td>elopage api_secret which can be generated and found in the sellers dashboard under Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Your personal elopage API key which you can generate in your dashboard: Settings &gt; Integrations</td>
+</tr>
+<tr>
+<td>affiliate_program_id</td>
+<td>String</td>
+<td>Program, to which publisher should be enrolled after a successful call</td>
+</tr>
+</tbody></table>
+<h3 id='success-200-11'>Success 200</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Number</td>
+<td>Product ID.</td>
+</tr>
+<tr>
+<td>success</td>
+<td>Boolean</td>
+<td>Field which determines if the call was successful or not</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>String</td>
+<td>Server answer to the request</td>
+</tr>
+</tbody></table>
+<h3 id='error-4xx-11'>Error 4xx</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1315,9 +2966,9 @@
 }
 </code></pre>
 <p>Fetch pricing plan information by ID to get all relevant information about your pricing plan such as prices, intervals and splitting type.</p>
-<h3 id='get-2'>GET</h3>
+<h3 id='get-6'>GET</h3>
 <p><code>https://elopage.com/api/pricing_plans/:id</code></p>
-<h3 id='parameter-4'>Parameter</h3>
+<h3 id='parameter-12'>Parameter</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1341,7 +2992,7 @@
 <td>Pricing plan ID is sent with the get sales page request.</td>
 </tr>
 </tbody></table>
-<h3 id='success-200-4'>Success 200</h3>
+<h3 id='success-200-12'>Success 200</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1400,7 +3051,7 @@
 <td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - <b>One invoice for the entire amount will be issued</b>, &quot;limited_subscription&quot; - <b>For each payment a new invoice will be issued </b> <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
 </tr>
 </tbody></table>
-<h3 id='error-4xx-4'>Error 4xx</h3>
+<h3 id='error-4xx-12'>Error 4xx</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1478,9 +3129,9 @@
         "next_amount": "2.0"
     }
 }
-</code></pre><h3 id='post-2'>POST</h3>
+</code></pre><h3 id='post-5'>POST</h3>
 <p><code>https://elopage.com/api/pricing_plans</code></p>
-<h3 id='parameter-5'>Parameter</h3>
+<h3 id='parameter-13'>Parameter</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1544,7 +3195,7 @@
 <td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - <b>One invoice for the entire amount will be issued</b>, &quot;limited_subscription&quot; - <b>For each payment a new invoice will be issued</b> <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
 </tr>
 </tbody></table>
-<h3 id='success-200-5'>Success 200</h3>
+<h3 id='success-200-13'>Success 200</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1603,7 +3254,7 @@
 <td>splitting type (required for pricing plan form: split); notes: &quot;installment&quot; - <b>One invoice for the entire amount will be issued</b>, &quot;limited_subscription&quot; - <b>For each payment a new invoice will be issued</b> <br> Allowed values: <code>[&quot;installment&quot;, &quot;limited_subscription&quot;]</code></td>
 </tr>
 </tbody></table>
-<h3 id='error-4xx-5'>Error 4xx</h3>
+<h3 id='error-4xx-13'>Error 4xx</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1660,7 +3311,7 @@
 }
 </code></pre><h3 id='delete'>DELETE</h3>
 <p><code>https://elopage.com/api/pricing_plans/:id</code></p>
-<h3 id='parameter-6'>Parameter</h3>
+<h3 id='parameter-14'>Parameter</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1674,7 +3325,7 @@
 <td>ID of the pricing plan you want to delete</td>
 </tr>
 </tbody></table>
-<h3 id='success-200-6'>Success 200</h3>
+<h3 id='success-200-14'>Success 200</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1693,7 +3344,7 @@
 <td>response text</td>
 </tr>
 </tbody></table>
-<h3 id='error-4xx-6'>Error 4xx</h3>
+<h3 id='error-4xx-14'>Error 4xx</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1761,9 +3412,9 @@
 }
 </code></pre>
 <p>Getting the payment information by fetching the transaction or payment info is a critical use of the API. In the following you can find out which requests are needed to get the necessary information to deliver your content, product or service.</p>
-<h3 id='get-3'>GET</h3>
+<h3 id='get-7'>GET</h3>
 <p><code>https://elopage.com/api/payments/:id</code></p>
-<h3 id='parameter-7'>Parameter</h3>
+<h3 id='parameter-15'>Parameter</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1787,7 +3438,7 @@
 <td>Payment ID</td>
 </tr>
 </tbody></table>
-<h3 id='success-200-7'>Success 200</h3>
+<h3 id='success-200-15'>Success 200</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1941,7 +3592,7 @@
 <td>ID of payment to which commissions are connected</td>
 </tr>
 </tbody></table>
-<h3 id='error-4xx-7'>Error 4xx</h3>
+<h3 id='error-4xx-15'>Error 4xx</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2019,9 +3670,9 @@
         "payment_id": 542760
     }
 ]
-</code></pre><h3 id='post-3'>POST</h3>
+</code></pre><h3 id='post-6'>POST</h3>
 <p><code>https://elopage.com/api/payments/:id/refund</code></p>
-<h3 id='parameter-8'>Parameter</h3>
+<h3 id='parameter-16'>Parameter</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -2045,7 +3696,7 @@
 <td>Payment ID</td>
 </tr>
 </tbody></table>
-<h3 id='success-200-8'>Success 200</h3>
+<h3 id='success-200-16'>Success 200</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -2174,7 +3825,7 @@
 <td>ID of payment to which commissions are connected</td>
 </tr>
 </tbody></table>
-<h3 id='error-4xx-8'>Error 4xx</h3>
+<h3 id='error-4xx-16'>Error 4xx</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2237,9 +3888,9 @@
 
 </code></pre>
 <p>You can fetch refund transactions by IDs. Please use the following method and parameters.</p>
-<h3 id='get-4'>GET</h3>
+<h3 id='get-8'>GET</h3>
 <p><code>https://elopage.com/api/payments/:id</code></p>
-<h3 id='parameter-9'>Parameter</h3>
+<h3 id='parameter-17'>Parameter</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -2263,7 +3914,7 @@
 <td>Payment ID</td>
 </tr>
 </tbody></table>
-<h3 id='success-200-9'>Success 200</h3>
+<h3 id='success-200-17'>Success 200</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -2417,7 +4068,7 @@
 <td>ID of payment to which commissions are connected</td>
 </tr>
 </tbody></table>
-<h3 id='error-4xx-9'>Error 4xx</h3>
+<h3 id='error-4xx-17'>Error 4xx</h3>
 <table><thead>
 <tr>
 <th>Name</th>
