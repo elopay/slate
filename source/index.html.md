@@ -1653,41 +1653,71 @@ Net::HTTP.get(URI('https://elopage.com/api/payments/{id}?key={api_key}&secret={a
 
 ```
 {
-    "id": 540391,
+    "id": 1500173,
+    "action": "payment_processed",
     "payer": {
-        "email": "jonhdoe@doe.com",
-        "first_name": "John",
-        "last_name": "Done",
-        "country": "Berlin",
-        "city": "Germany",
-        "street": "Joachimsthaler Straße 21",
-        "zip": "10719",
+        "email": "12342@gmail.com",
+        "first_name": "Test",
+        "last_name": "Payer",
+        "country": "Germany",
+        "city": "Lviv",
+        "street": "hvylovoho",
+        "zip": "79059",
         "company": null,
-        "vat_id": null,
-        "phone": "+4930398204650"
+        "vat_no": null,
+        "phone": null
     },
-    "revenue": 199.9,
-    "amount": 194.1,
-    "fee": 5.8,
-    "recurring": false,
-    "recurring_form": "one_time",
+    "publisher": {
+        "id": 266,
+        "email": "myemail@ac.com",
+        "first_name": "Test",
+        "last_name": "Publisher",
+        "street": null,
+        "zip": null,
+        "city": null,
+        "country": "Germany",
+        "phone": null,
+        "company": null
+    },
+    "authors": [],
+    "product": {
+        "id": 1656,
+        "slug": "kopie-von-kopie-von-download-product",
+        "name": "Kopie von Kopie von Download product ",
+        "type": "product",
+        "price": 5
+    },
+    "pricing_plan": {
+        "name": ""
+    },
+    "events": [
+        {}
+    ],
+    "tickets": [
+        {
+            "count": null,
+            "codes": [],
+            "reserved_bills_count": null
+        }
+    ],
+    "revenue": 5,
+    "amount": 3.3,
+    "fee": 1.7,
+    "vat_rate": "19.0",
+    "vat_amount": "0.8",
+    "campaign_id": "testcampaign",
+    "recurring": "yes",
+    "recurring_form": "split",
     "payment_method": "paypal",
-    "payment_session_id": "1234",
-    "sales_page_id": "1087",
     "state": "successful",
-    "created_date": "2017-12-11T15:47Z",
-    "success_date": "2017-12-11T15:47Z",
-    "success_date_short": "2017-12-11",
-    "invoice_link": "https://elopage.com/common/invoices/2879?token=uVUai-84pyDhdz8K3nNd",
-    "success_link": "https://elopage.com/s/elopage/product-name-6/payment_success?token=uVUai-84pyDhdz8K3nNd"
-    "author_commissions": [
-      {
-          "id": 1,
-          "rate": "10.0",
-          "amount": "19.385",
-          "payment_id": 542711
-      }
-    ]
+    "payment_session_id": 18117,
+    "payment_session_token": "Rjsmaad8kyPhXZbR9eg3",
+    "created_date": "2018-11-05T16:14Z",
+    "success_date": "2018-11-05T16:14Z",
+    "success_date_short": "2018-11-05",
+    "invoice_link": "https://elopage.com/common/invoices/5608?token=zu9my5tzTjSErqKsDFqs",
+    "success_link": "https://elopage.com/s/testsellerregistration/payment/Rjsmaad8kyPhXZbR9eg3",
+    "opt_ins": []
 }
 ```
 Getting the payment information by fetching the transaction or payment info is a critical use of the API. In the following you can find out which requests are needed to get the necessary information to deliver your content, product or service.
@@ -1708,6 +1738,8 @@ id | Number | Payment ID
 
 Field | Type | Description
 ----- | ---- | -----------
+id    | Integer| Integer, seller or client ID
+action| String | Is always ‘‘payment_processed’’ in this case
 payer | Object | customer's object
 &nbsp;&nbsp;email | String | customer's email
 &nbsp;&nbsp;first_name | String | customer's first name
@@ -1719,19 +1751,89 @@ payer | Object | customer's object
 &nbsp;&nbsp;company | String | customer's company name
 &nbsp;&nbsp;vat_id | String | customer's vat ID
 &nbsp;&nbsp;phone | String | customer's phone number
+publisher | Object | publisher's object
+&nbsp;&nbsp;id | Integer | publisher's id
+&nbsp;&nbsp;email | String | publisher's email
+&nbsp;&nbsp;first_name | String | publisher's first name
+&nbsp;&nbsp;last_name | String | publisher's last name
+&nbsp;&nbsp;country | String | publisher's country
+&nbsp;&nbsp;city | String | publisher's city
+&nbsp;&nbsp;street | String | publisher's street
+&nbsp;&nbsp;zip | String | publisher's zip code
+&nbsp;&nbsp;company | String | publisher's company name
+&nbsp;&nbsp;vat_id | String | publisher's vat ID
+&nbsp;&nbsp;phone | String | publisher's phone number
+authors | Array | authors's array of objects
+&nbsp;&nbsp;id | Integer | authors's id
+&nbsp;&nbsp;email | String | authors email
+&nbsp;&nbsp;first_name | String | authors's first name
+&nbsp;&nbsp;last_name | String | authors's last name
+product | Object | product's object
+&nbsp;&nbsp;id | Integer | product's id
+&nbsp;&nbsp;slug | String | product's slug
+&nbsp;&nbsp;name | String | product's name
+&nbsp;&nbsp;type | String | product's type
+&nbsp;&nbsp;price | Decimal | product's price
+pricing_plan | Object | pricing plan's object
+&nbsp;&nbsp;name | String | pricing plan's name
+upsell | Object | upsell's object
+&nbsp;&nbsp;id | Integer | upsell's id
+&nbsp;&nbsp;name | String | upsell's name
+events | Array | event's array of objects
+&nbsp;&nbsp;id | Integer | event's id
+&nbsp;&nbsp;name | String | event's name
+&nbsp;&nbsp;price | Decimal | event's price
+&nbsp;&nbsp;location_short | String | event's location short name
+&nbsp;&nbsp;location_long | String | event's location long name
+&nbsp;&nbsp;current_code | String | event's current code
+&nbsp;&nbsp;code_prefix | String | event's code prefix
+&nbsp;&nbsp;date | String | event's date
+&nbsp;&nbsp;date_id | Integer | event's date ID
+tickets | Array | ticket's array of objects
+&nbsp;&nbsp;count | Integer | ticket's id
+&nbsp;&nbsp;codes | Array | ticket's codes
+gift_receiver | Object | gift_receiver's object
+&nbsp;&nbsp;id | Integer | gift_receiver's id
+&nbsp;&nbsp;email | String | gift_receiver's email
+&nbsp;&nbsp;first_name | String | gift_receiver's first name
+&nbsp;&nbsp;last_name | String | gift_receiver's last name
+&nbsp;&nbsp;country | String | gift_receiver's country
+&nbsp;&nbsp;city | String | gift_receiver's city
+&nbsp;&nbsp;street | String | gift_receiver's street
+&nbsp;&nbsp;zip | String | gift_receiver's zip code
+&nbsp;&nbsp;company | String | gift_receiver's company name
+&nbsp;&nbsp;vat_id | String | gift_receiver's vat ID
+&nbsp;&nbsp;phone | String | gift_receiver's phone number
+voucher_codes | String | voucher codes
+add_id_1      | String | The additional id, which can be passed to the checkout page as a parameter with attribute add_id_1, for example: /s/testaccount/test-product/payment?add_id_1=some-test-id
+add_id_2      | String | The additional id, which can be passed to the checkout page as a parameter with attribute add_id_2, for example: /s/testaccount/test-product/payment?add_id_2=some-test-id
+bill_number   | String | The bill number, which was paid by this transaction. Bills can be created and sent via dashboard
 revenue | Decimal | gross revenue
 amount | Decimal | net revenue
 fee | Decimal | fees
+vat_rate | Decimal | VAT rate for this purchase
+vat_amount | Decimal | VAT amount for this purchase
+campaign_id | String | Campaign_id, which can also be parsed as an URL parameter, for example: /s/testaccount/test-product/payment?campaign_id=some-test-campaign
+coupon_code | String | The code of coupon, which was applied to this transaction if it was applied
 recurring | Boolean | Returns true if it is a recurring type payment
 recurring_form | String | Returns the recurring type of the transaction. This value is being taken from the pricing plan form(`one_time, subscription, split`), which was chosen by customer during the checkout process.
 payment_method | String | card, bank_account, paypal, sofort, bank_wire
 payment_session_id | Integer | ID of payment session to which the payment belongs to. You should save it for the recurring payments as recurring payments (next or follow up payments) will have the same session.
+payment_session_token | String | The payment session token that this payment attached to. Use it for the payment session manage page
 sales_page_id | Integer | ID of sales page that is connected to this payment
 state | String | <b>Waiting:</b> shown when a payment is not yet successful. The status waiting can appear when:</br><ul><li>A bank wire was initiated</li><li>A Pay Later payment was initiated</li></ul><b>Successful:</b> Shown when a payment was initiated and successfully processed</br><b>Pending:</b> Shown only when a Paypal payment was initiated, but not yet processed. Once the payment is successfully processed, the status becomes successful</br><ul><li>A SEPA payment was initiated</li><li>A Paypal payment was initiated but not finished. Once the payment is successfully processed, the state becomes successful</li></ul><b>Canceled:</b> Shown when a payment has been initiated, but canceled before being successfully processed</br><b>Error:</b> Shown when an issue appeared, preventing the payment from being initiated. After 10 days without being processed, waiting payments state changes to error.
 created_date | String | Date of payment initiation
 success_date | String | Date and time of completed payment
 success_date_short | String | Date of completed payment
 invoice_link | String | This is the invoice URL for automatically generated invoices. Make sure to setup the invoice generation in your dashboard (Setting - Invoice generation) to get the invoice URLs.
+success_link | String | Link of the success page for the payment
+credit_memo_link | String | Link for credit memo for the refund. Is sent only for the refunds
+refunded_tansfer_id | Integer | ID of the transfer which being refunded. Is sent only for the refunds
+error_msg | String | Error message, which we received from payment provider in case of failed transaction
+opt_ins | Array | Opt ins that was attached to product
+&nbsp;&nbsp; question_id | Integer | If the opt in is attached to a product, we send its question id
+&nbsp;&nbsp; question | String | The question body of an opt in
+&nbsp;&nbsp; answer | String | The answer that payer have done for the opt in
 author_commissions | Array | Refunded commission that was previously paid to the author
 &nbsp;&nbsp; id | Integer | Author commission ID
 &nbsp;&nbsp; rate | Integer | Commission rate in percentage with which commission was calculated
@@ -1800,6 +1902,7 @@ puts response.read_body
   "id": 542652,
   "payment_method": "credit_card",
   "payment_session_id": 3913,
+  "payment_session_token": "Rjsmaad8kerSXZbR9eg3",
   "sales_page_id": "1087",
   "refunded_tansfer_id": 542180,
   "state": "successful"
@@ -1830,6 +1933,8 @@ id | Number | Payment ID
 
 Field | Type | Description
 ----- | ---- | -----------
+id    | Integer| Integer, seller or client ID
+action| String | Is always ‘‘payment_processed’’ in this case
 payer | Object | customer's object
 &nbsp;&nbsp;email | String | customer's email
 &nbsp;&nbsp;first_name | String | customer's first name
@@ -1840,19 +1945,94 @@ payer | Object | customer's object
 &nbsp;&nbsp;zip | String | customer's zip code
 &nbsp;&nbsp;company | String | customer's company name
 &nbsp;&nbsp;vat_id | String | customer's vat ID
-&nbsp;&nbsp;phone | String | pacustomeryer phone
-total | Decimal | brutto amount
-amount | Decimal | netto amount
+&nbsp;&nbsp;phone | String | customer's phone number
+publisher | Object | publisher's object
+&nbsp;&nbsp;id | Integer | publisher's id
+&nbsp;&nbsp;email | String | publisher's email
+&nbsp;&nbsp;first_name | String | publisher's first name
+&nbsp;&nbsp;last_name | String | publisher's last name
+&nbsp;&nbsp;country | String | publisher's country
+&nbsp;&nbsp;city | String | publisher's city
+&nbsp;&nbsp;street | String | publisher's street
+&nbsp;&nbsp;zip | String | publisher's zip code
+&nbsp;&nbsp;company | String | publisher's company name
+&nbsp;&nbsp;vat_id | String | publisher's vat ID
+&nbsp;&nbsp;phone | String | publisher's phone number
+authors | Array | authors's array of objects
+&nbsp;&nbsp;id | Integer | authors's id
+&nbsp;&nbsp;email | String | authors email
+&nbsp;&nbsp;first_name | String | authors's first name
+&nbsp;&nbsp;last_name | String | authors's last name
+product | Object | product's object
+&nbsp;&nbsp;id | Integer | product's id
+&nbsp;&nbsp;slug | String | product's slug
+&nbsp;&nbsp;name | String | product's name
+&nbsp;&nbsp;type | String | product's type
+&nbsp;&nbsp;price | Decimal | product's price
+pricing_plan | Object | pricing plan's object
+&nbsp;&nbsp;name | String | pricing plan's name
+upsell | Object | upsell's object
+&nbsp;&nbsp;id | Integer | upsell's id
+&nbsp;&nbsp;name | String | upsell's name
+events | Array | event's array of objects
+&nbsp;&nbsp;id | Integer | event's id
+&nbsp;&nbsp;name | String | event's name
+&nbsp;&nbsp;price | Decimal | event's price
+&nbsp;&nbsp;location_short | String | event's location short name
+&nbsp;&nbsp;location_long | String | event's location long name
+&nbsp;&nbsp;current_code | String | event's current code
+&nbsp;&nbsp;code_prefix | String | event's code prefix
+&nbsp;&nbsp;date | String | event's date
+&nbsp;&nbsp;date_id | Integer | event's date ID
+tickets | Array | ticket's array of objects
+&nbsp;&nbsp;count | Integer | ticket's id
+&nbsp;&nbsp;codes | Array | ticket's codes
+gift_receiver | Object | gift_receiver's object
+&nbsp;&nbsp;id | Integer | gift_receiver's id
+&nbsp;&nbsp;email | String | gift_receiver's email
+&nbsp;&nbsp;first_name | String | gift_receiver's first name
+&nbsp;&nbsp;last_name | String | gift_receiver's last name
+&nbsp;&nbsp;country | String | gift_receiver's country
+&nbsp;&nbsp;city | String | gift_receiver's city
+&nbsp;&nbsp;street | String | gift_receiver's street
+&nbsp;&nbsp;zip | String | gift_receiver's zip code
+&nbsp;&nbsp;company | String | gift_receiver's company name
+&nbsp;&nbsp;vat_id | String | gift_receiver's vat ID
+&nbsp;&nbsp;phone | String | gift_receiver's phone number
+voucher_codes | String | voucher codes
+add_id_1      | String | The additional id, which can be passed to the checkout page as a parameter with attribute add_id_1, for example: /s/testaccount/test-product/payment?add_id_1=some-test-id
+add_id_2      | String | The additional id, which can be passed to the checkout page as a parameter with attribute add_id_2, for example: /s/testaccount/test-product/payment?add_id_2=some-test-id
+bill_number   | String | The bill number, which was paid by this transaction. Bills can be created and sent via dashboard
+revenue | Decimal | gross revenue
+amount | Decimal | net revenue
 fee | Decimal | fees
+vat_rate | Decimal | VAT rate for this purchase
+vat_amount | Decimal | VAT amount for this purchase
+campaign_id | String | Campaign_id, which can also be parsed as an URL parameter, for example: /s/testaccount/test-product/payment?campaign_id=some-test-campaign
+coupon_code | String | The code of coupon, which was applied to this transaction if it was applied
+recurring | Boolean | Returns true if it is a recurring type payment
+recurring_form | String | Returns the recurring type of the transaction. This value is being taken from the pricing plan form(`one_time, subscription, split`), which was chosen by customer during the checkout process.
 payment_method | String | card, bank_account, paypal, sofort, bank_wire
 payment_session_id | Integer | ID of payment session to which the payment belongs to. You should save it for the recurring payments as recurring payments (next or follow up payments) will have the same session.
+payment_session_token | String | The payment session token that this payment attached to. Use it for the payment session manage page
 sales_page_id | Integer | ID of sales page that is connected to this payment
-refunded_transfer_id | Integer | ID of the transfer which is being refunded
 state | String | <b>Waiting:</b> shown when a payment is not yet successful. The status waiting can appear when:</br><ul><li>A bank wire was initiated</li><li>A Pay Later payment was initiated</li></ul><b>Successful:</b> Shown when a payment was initiated and successfully processed</br><b>Pending:</b> Shown only when a Paypal payment was initiated, but not yet processed. Once the payment is successfully processed, the status becomes successful</br><ul><li>A SEPA payment was initiated</li><li>A Paypal payment was initiated but not finished. Once the payment is successfully processed, the state becomes successful</li></ul><b>Canceled:</b> Shown when a payment has been initiated, but canceled before being successfully processed</br><b>Error:</b> Shown when an issue appeared, preventing the payment from being initiated. After 10 days without being processed, waiting payments state changes to error.
+created_date | String | Date of payment initiation
+success_date | String | Date and time of completed payment
+success_date_short | String | Date of completed payment
+invoice_link | String | This is the invoice URL for automatically generated invoices. Make sure to setup the invoice generation in your dashboard (Setting - Invoice generation) to get the invoice URLs.
+success_link | String | Link of the success page for the payment
+credit_memo_link | String | Link for credit memo for the refund. Is sent only for the refunds
+refunded_tansfer_id | Integer | ID of the transfer which being refunded. Is sent only for the refunds
+error_msg | String | Error message, which we received from payment provider in case of failed transaction
+opt_ins | Array | Opt ins that was attached to product
+&nbsp;&nbsp; question_id | Integer | If the opt in is attached to a product, we send its question id
+&nbsp;&nbsp; question | String | The question body of an opt in
+&nbsp;&nbsp; answer | String | The answer that payer have done for the opt in
 author_commissions | Array | Refunded commission that was previously paid to the author
 &nbsp;&nbsp; id | Integer | Author commission ID
 &nbsp;&nbsp; rate | Integer | Commission rate in percentage with which commission was calculated
-&nbsp;&nbsp; amount | Integer | Amount earned by author with this payment which is being refunded
+&nbsp;&nbsp; amount | Integer | Amount earned by author with this payment
 &nbsp;&nbsp; payment_id | Integer | ID of payment to which commissions are connected
 
 ### Error 4xx
@@ -1975,6 +2155,8 @@ Use webhooks to receive instant notification of events related to payments and s
 
 Field | Type | Description
 ----- | ---- | -----------
+id    | Integer| Integer, seller or client ID
+action| String | Is always ‘‘payment_processed’’ in this case
 payer | Object | customer's object
 &nbsp;&nbsp;email | String | customer's email
 &nbsp;&nbsp;first_name | String | customer's first name
@@ -1986,19 +2168,89 @@ payer | Object | customer's object
 &nbsp;&nbsp;company | String | customer's company name
 &nbsp;&nbsp;vat_id | String | customer's vat ID
 &nbsp;&nbsp;phone | String | customer's phone number
+publisher | Object | publisher's object
+&nbsp;&nbsp;id | Integer | publisher's id
+&nbsp;&nbsp;email | String | publisher's email
+&nbsp;&nbsp;first_name | String | publisher's first name
+&nbsp;&nbsp;last_name | String | publisher's last name
+&nbsp;&nbsp;country | String | publisher's country
+&nbsp;&nbsp;city | String | publisher's city
+&nbsp;&nbsp;street | String | publisher's street
+&nbsp;&nbsp;zip | String | publisher's zip code
+&nbsp;&nbsp;company | String | publisher's company name
+&nbsp;&nbsp;vat_id | String | publisher's vat ID
+&nbsp;&nbsp;phone | String | publisher's phone number
+authors | Array | authors's array of objects
+&nbsp;&nbsp;id | Integer | authors's id
+&nbsp;&nbsp;email | String | authors email
+&nbsp;&nbsp;first_name | String | authors's first name
+&nbsp;&nbsp;last_name | String | authors's last name
+product | Object | product's object
+&nbsp;&nbsp;id | Integer | product's id
+&nbsp;&nbsp;slug | String | product's slug
+&nbsp;&nbsp;name | String | product's name
+&nbsp;&nbsp;type | String | product's type
+&nbsp;&nbsp;price | Decimal | product's price
+pricing_plan | Object | pricing plan's object
+&nbsp;&nbsp;name | String | pricing plan's name
+upsell | Object | upsell's object
+&nbsp;&nbsp;id | Integer | upsell's id
+&nbsp;&nbsp;name | String | upsell's name
+events | Array | event's array of objects
+&nbsp;&nbsp;id | Integer | event's id
+&nbsp;&nbsp;name | String | event's name
+&nbsp;&nbsp;price | Decimal | event's price
+&nbsp;&nbsp;location_short | String | event's location short name
+&nbsp;&nbsp;location_long | String | event's location long name
+&nbsp;&nbsp;current_code | String | event's current code
+&nbsp;&nbsp;code_prefix | String | event's code prefix
+&nbsp;&nbsp;date | String | event's date
+&nbsp;&nbsp;date_id | Integer | event's date ID
+tickets | Array | ticket's array of objects
+&nbsp;&nbsp;count | Integer | ticket's id
+&nbsp;&nbsp;codes | Array | ticket's codes
+gift_receiver | Object | gift_receiver's object
+&nbsp;&nbsp;id | Integer | gift_receiver's id
+&nbsp;&nbsp;email | String | gift_receiver's email
+&nbsp;&nbsp;first_name | String | gift_receiver's first name
+&nbsp;&nbsp;last_name | String | gift_receiver's last name
+&nbsp;&nbsp;country | String | gift_receiver's country
+&nbsp;&nbsp;city | String | gift_receiver's city
+&nbsp;&nbsp;street | String | gift_receiver's street
+&nbsp;&nbsp;zip | String | gift_receiver's zip code
+&nbsp;&nbsp;company | String | gift_receiver's company name
+&nbsp;&nbsp;vat_id | String | gift_receiver's vat ID
+&nbsp;&nbsp;phone | String | gift_receiver's phone number
+voucher_codes | String | voucher codes
+add_id_1      | String | The additional id, which can be passed to the checkout page as a parameter with attribute add_id_1, for example: /s/testaccount/test-product/payment?add_id_1=some-test-id
+add_id_2      | String | The additional id, which can be passed to the checkout page as a parameter with attribute add_id_2, for example: /s/testaccount/test-product/payment?add_id_2=some-test-id
+bill_number   | String | The bill number, which was paid by this transaction. Bills can be created and sent via dashboard
 revenue | Decimal | gross revenue
 amount | Decimal | net revenue
 fee | Decimal | fees
+vat_rate | Decimal | VAT rate for this purchase
+vat_amount | Decimal | VAT amount for this purchase
+campaign_id | String | Campaign_id, which can also be parsed as an URL parameter, for example: /s/testaccount/test-product/payment?campaign_id=some-test-campaign
+coupon_code | String | The code of coupon, which was applied to this transaction if it was applied
 recurring | Boolean | Returns true if it is a recurring type payment
 recurring_form | String | Returns the recurring type of the transaction. This value is being taken from the pricing plan form(`one_time, subscription, split`), which was chosen by customer during the checkout process.
 payment_method | String | card, bank_account, paypal, sofort, bank_wire
 payment_session_id | Integer | ID of payment session to which the payment belongs to. You should save it for the recurring payments as recurring payments (next or follow up payments) will have the same session.
+payment_session_token | String | The payment session token that this payment attached to. Use it for the payment session manage page
 sales_page_id | Integer | ID of sales page that is connected to this payment
 state | String | <b>Waiting:</b> shown when a payment is not yet successful. The status waiting can appear when:</br><ul><li>A bank wire was initiated</li><li>A Pay Later payment was initiated</li></ul><b>Successful:</b> Shown when a payment was initiated and successfully processed</br><b>Pending:</b> Shown only when a Paypal payment was initiated, but not yet processed. Once the payment is successfully processed, the status becomes successful</br><ul><li>A SEPA payment was initiated</li><li>A Paypal payment was initiated but not finished. Once the payment is successfully processed, the state becomes successful</li></ul><b>Canceled:</b> Shown when a payment has been initiated, but canceled before being successfully processed</br><b>Error:</b> Shown when an issue appeared, preventing the payment from being initiated. After 10 days without being processed, waiting payments state changes to error.
 created_date | String | Date of payment initiation
 success_date | String | Date and time of completed payment
 success_date_short | String | Date of completed payment
 invoice_link | String | This is the invoice URL for automatically generated invoices. Make sure to setup the invoice generation in your dashboard (Setting - Invoice generation) to get the invoice URLs.
+success_link | String | Link of the success page for the payment
+credit_memo_link | String | Link for credit memo for the refund. Is sent only for the refunds
+refunded_tansfer_id | Integer | ID of the transfer which being refunded. Is sent only for the refunds
+error_msg | String | Error message, which we received from payment provider in case of failed transaction
+opt_ins | Array | Opt ins that was attached to product
+&nbsp;&nbsp; question_id | Integer | If the opt in is attached to a product, we send its question id
+&nbsp;&nbsp; question | String | The question body of an opt in
+&nbsp;&nbsp; answer | String | The answer that payer have done for the opt in
 author_commissions | Array | Refunded commission that was previously paid to the author
 &nbsp;&nbsp; id | Integer | Author commission ID
 &nbsp;&nbsp; rate | Integer | Commission rate in percentage with which commission was calculated
